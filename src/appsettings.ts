@@ -1,5 +1,7 @@
 export default {
     dataServiceApiRoot: "https://localhost:44385/applets/api/",
+    pageServiceApiRoot: "https://localhost:44385/applets/api/",
+    solrServiceApiRoot: "https://localhost:44385/api/",
     pageId: "846287a2-a951-4cd9-969d-7111fbc3e2a8",
     blockId: "d2a6189f-0db6-44ce-8d3f-b2e454cd27ba",
     dataAttributes: {

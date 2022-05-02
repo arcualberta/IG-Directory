@@ -1,19 +1,20 @@
 import { createStore } from 'vuex'
 
-import { Search } from '@arcualberta/catfish-ui';
+import { searchModule } from '@arcualberta/catfish-ui';
 
 export default createStore({
     state: {
-        ...Search.State.state
+        ...searchModule.state
     },
     getters: {
     },
     mutations: {
-        ...Search.Mutations.mutations
+        ...searchModule.mutatios
     },
     actions: {
-        ...Search.Actions.actions
+        ...searchModule.actions
     },
     modules: {
+        searchModule
     }
 })
