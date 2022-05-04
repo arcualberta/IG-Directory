@@ -10,23 +10,23 @@
     import { defineComponent } from 'vue';
     import { useStore } from 'vuex';
 
-    import { props/*, common*/ } from '@arcualberta/catfish-ui';
-    //import config from './appsettings';
+    import { props, common } from '@arcualberta/catfish-ui';
+    import config from './appsettings';
 
     export default defineComponent({
         name: 'App',
         modules: {
-        //    common
+            common
         },
         props,
         setup() {
             const store = useStore();
 
-        //    store.commit(common.Mutations.SET_PAGE_ID, config.pageId)
-        //    store.commit(common.Mutations.SET_BLOCK_ID, config.blockId)
-        //    store.commit(common.Mutations.SET_DATA_SERVICE_API_ROOT, config.dataServiceApiRoot)
-        //    store.commit(common.Mutations.SET_PAGE_SERVICE_API_ROOT, config.pageServiceApiRoot)
-        //    store.commit(common.Mutations.SET_SOLR_SERVICE_API_ROOT, config.solrServiceApiRoot)
+            store.commit(common.Mutations.SET_PAGE_ID, config.pageId)
+            store.commit(common.Mutations.SET_BLOCK_ID, config.blockId)
+            store.commit(common.Mutations.SET_DATA_SERVICE_API_ROOT, config.dataServiceApiRoot)
+            store.commit(common.Mutations.SET_PAGE_SERVICE_API_ROOT, config.pageServiceApiRoot)
+            store.commit(common.Mutations.SET_SOLR_SERVICE_API_ROOT, config.solrServiceApiRoot)
 
         },
     });
