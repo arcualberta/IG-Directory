@@ -10,7 +10,7 @@
     import { defineComponent } from 'vue';
     import { useStore } from 'vuex';
 
-    import { props, common } from '@arcualberta/catfish-ui';
+    import { common } from '@arcualberta/catfish-ui';
     import config from './appsettings';
 
     export default defineComponent({
@@ -18,7 +18,6 @@
         modules: {
             common
         },
-        props,
         setup() {
             const store = useStore();
 
