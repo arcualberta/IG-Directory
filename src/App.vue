@@ -11,11 +11,14 @@
     import { defineComponent, onMounted } from 'vue';
     import { useStore } from 'vuex';
 
-    import { props, Mutations, Actions } from '@arcualberta/catfish-ui';
+    import { props, search } from '@arcualberta/catfish-ui';
     import config from './appsettings';
 
     export default defineComponent({
         name: 'App',
+        modules: {
+            search
+        },
         props,
         setup() {
             const pageId = config.pageId as unknown as Guid;
@@ -28,11 +31,11 @@
 
             onMounted(() => {
                 if (pageId && blockId) {
-                    store.commit(Mutations.SET_SOURCE, { pageId: pageId, blockId: blockId });
-                    store.commit(Mutations.SET_DATA_SERVICE_API_ROOT, dataServiceApiRoot);
-                    store.commit(Mutations.SET_PAGE_SERVICE_API_ROOT, pageServiceApiRoot);
-                    store.commit(Mutations.SET_SOLR_SERVICE_API_ROOT, solrServiceApiRoot);
-                    store.dispatch(Actions.INIT_FILTER);
+                //    store.commit(Search.Mutations.SET_SOURCE, { pageId: pageId, blockId: blockId });
+                //    store.commit(Mutations.SET_DATA_SERVICE_API_ROOT, dataServiceApiRoot);
+                //    store.commit(Mutations.SET_PAGE_SERVICE_API_ROOT, pageServiceApiRoot);
+                //    store.commit(Mutations.SET_SOLR_SERVICE_API_ROOT, solrServiceApiRoot);
+                //    store.dispatch(Actions.INIT_FILTER);
                 }
             })
         },
