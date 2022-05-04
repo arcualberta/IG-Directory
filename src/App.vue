@@ -7,37 +7,27 @@
 </template>
 
 <script lang="ts">
-    import { Guid } from 'guid-typescript'
-    import { defineComponent, onMounted } from 'vue';
+    import { defineComponent } from 'vue';
     import { useStore } from 'vuex';
 
-    import { props, search } from '@arcualberta/catfish-ui';
-    import config from './appsettings';
+    import { props/*, common*/ } from '@arcualberta/catfish-ui';
+    //import config from './appsettings';
 
     export default defineComponent({
         name: 'App',
         modules: {
-            search
+        //    common
         },
         props,
         setup() {
-            const pageId = config.pageId as unknown as Guid;
-            const blockId = config.blockId as unknown as Guid;
-            const dataServiceApiRoot = config.dataServiceApiRoot;
-            const pageServiceApiRoot = config.pageServiceApiRoot;
-            const solrServiceApiRoot = config.solrServiceApiRoot;
-
             const store = useStore();
 
-            onMounted(() => {
-                if (pageId && blockId) {
-                //    store.commit(Search.Mutations.SET_SOURCE, { pageId: pageId, blockId: blockId });
-                //    store.commit(Mutations.SET_DATA_SERVICE_API_ROOT, dataServiceApiRoot);
-                //    store.commit(Mutations.SET_PAGE_SERVICE_API_ROOT, pageServiceApiRoot);
-                //    store.commit(Mutations.SET_SOLR_SERVICE_API_ROOT, solrServiceApiRoot);
-                //    store.dispatch(Actions.INIT_FILTER);
-                }
-            })
+        //    store.commit(common.Mutations.SET_PAGE_ID, config.pageId)
+        //    store.commit(common.Mutations.SET_BLOCK_ID, config.blockId)
+        //    store.commit(common.Mutations.SET_DATA_SERVICE_API_ROOT, config.dataServiceApiRoot)
+        //    store.commit(common.Mutations.SET_PAGE_SERVICE_API_ROOT, config.pageServiceApiRoot)
+        //    store.commit(common.Mutations.SET_SOLR_SERVICE_API_ROOT, config.solrServiceApiRoot)
+
         },
     });
 </script>

@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
 
-import { search } from '@arcualberta/catfish-ui';
+import { common, search } from '@arcualberta/catfish-ui';
 
 export default createStore({
     modules: {
+        common,
         search
     },
     state: {
