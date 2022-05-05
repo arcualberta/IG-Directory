@@ -1,7 +1,16 @@
 <template>
 <header>
     <div><a href="/"><img id="uaig-logo" src="./assets/ua-ig-logo.png"></a></div>
-    </header>
+   <div class="accessibility-dropdown">
+        <button class="accessibility-ddbtn">Accessibility Settings</button>
+        <div class="accessibility-ddcontent">
+            <a href="#">Increase font size</a>
+            <a href="#">Toggle Typeface</a>
+            <a href="#">High contrast</a>
+             <a href="#">Black & white</a>
+        </div>
+    </div>
+</header>
     <nav>
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>
