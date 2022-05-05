@@ -1,9 +1,14 @@
 <template>
+<header>
+    <div><a href="/"><img id="uaig-logo" src="./assets/ua-ig-logo.png"></a></div>
+    </header>
     <nav>
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>
     </nav>
-    <router-view />
+   
+
+ <router-view />
 </template>
 
 <script lang="ts">
@@ -38,7 +43,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
+        color: var(--grey)
     }
 
     nav {
