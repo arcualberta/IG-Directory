@@ -89,7 +89,7 @@ header{
 .footerLink:hover{
     text-decoration: none;
 }
-.footerLoginBtn{
+#footerLoginBtn{
     float: right;
     color:#fff;
 }
