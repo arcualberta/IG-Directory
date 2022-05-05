@@ -1,14 +1,14 @@
 export default {
-    dataServiceApiRoot: "https://localhost:44385/applets/api/",
-    pageServiceApiRoot: "https://localhost:44385/applets/api/",
-    solrServiceApiRoot: "https://localhost:44385/api/",
-    pageId: "846287a2-a951-4cd9-969d-7111fbc3e2a8",
-    blockId: "d2a6189f-0db6-44ce-8d3f-b2e454cd27ba",
+    dataServiceApiRoot: "https://catfish-test.artsrn.ualberta.ca/applets/api/",
+    pageServiceApiRoot: "https://catfish-test.artsrn.ualberta.ca/applets/api/",
+    solrServiceApiRoot: "https://catfish-test.artsrn.ualberta.ca",
+    pageId: "7738c46a-162f-4506-a4c4-fa8a05d3fe41",
+    blockId: "47b4a170-5fee-4505-b2d7-f87469d8ada3",
     dataAttributes: {
-        templateId: "94cdbd5f-7e74-4441-96ad-4d6b013a1deb",
-        formId: "56a419cf-6e43-4558-93d2-51de8e53005e",
-        collectionId: "8ed65277-6a9e-4a96-c86a-e6825889234a",
-        groupId: null
+        templateId: "bd35d406-3399-40af-bc72-c7b5813ee9b1",
+        formId: "49a7a1d3-0194-4703-b3d8-747acbf3bbfa",
+        collectionId: "79e652d7-bc9e-4a96-c76a-e8896825234a",
+        groupId: "08fd74b1-2207-4f7f-9a1c-8450ebc535c9"
     },
     queryParameters: {
     }
