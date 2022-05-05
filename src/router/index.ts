@@ -21,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/JoinView.vue')
     },
     {
-        path: '/profile',
+        path: '/profile/:id',
         name: 'profile',
         component: () => import('../views/ProfileView.vue')
     }
