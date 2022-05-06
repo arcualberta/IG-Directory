@@ -1,8 +1,8 @@
 <template>
 <header class="header">
-    <a href="/">
+    <router-link to="/">
         <img class="ua-logo" src="./assets/ua-ig-logo.png">
-    </a>
+    </router-link>
    <div class="accessibility-dropdown">
         <button class="accessibility-ddbtn">Accessibility<br> Settings</button>
         <div class="accessibility-ddcontent">
