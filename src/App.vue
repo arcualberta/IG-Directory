@@ -24,8 +24,10 @@
         </nav>
     </div>
 
-
     <router-view />
+
+    <h3>App State</h3>
+    {{JSON.stringify(state)}}
 </div>
  <footer>
      <div class="footerLinks">
@@ -37,7 +39,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue';
+    import { defineComponent, computed } from 'vue';
     import { useStore } from 'vuex';
 
     import { common } from '@arcualberta/catfish-ui';
@@ -57,6 +59,9 @@
             store.commit(common.Mutations.SET_PAGE_SERVICE_API_ROOT, config.pageServiceApiRoot)
             store.commit(common.Mutations.SET_SOLR_SERVICE_API_ROOT, config.solrServiceApiRoot)
 
+            return {
+                state: computed(() => store.state)
+            }
         },
     });
 </script>
