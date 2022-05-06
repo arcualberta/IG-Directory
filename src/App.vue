@@ -13,6 +13,7 @@
         </div>
     </div>
 </header>
+
 <div class="background-white">
     <div >
         <nav class="navigationalmenu">
@@ -22,6 +23,7 @@
             <!--<router-link to="/profile/:id">Profile</router-link>-->
         </nav>
     </div>
+
 
     <router-view />
 </div>
