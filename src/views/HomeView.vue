@@ -32,7 +32,7 @@
             store.dispatch(search.Actions.INIT_FILTER)
 
             return {
-                keywordQueryModel: computed(() => store.state.keywordQueryModel),
+                keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
             }
         }
     });
