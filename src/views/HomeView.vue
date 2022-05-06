@@ -1,7 +1,12 @@
 <template>
-    <div class="home">
-        <img alt="Vue logo" src="../assets/logo.png">
-        <FreeTextSearch />
+    <div class="home-body">
+        <h1 class="title">Explore our<br />Researcher Directory.</h1>
+        <p class="explore-text">
+            Search the Intersections of Gender Researcher Directory using the search bar, or scroll through our interactive keyword below.
+        </p>
+        <div class="searchbar-rectangle">
+            <FreeTextSearch />
+        </div>
         <h3>Keyword Query Model</h3>
         {{JSON.stringify(keywordQueryModel)}}
     </div>

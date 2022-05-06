@@ -1,8 +1,10 @@
 <template>
-<header>
-    <div><a href="/"><img id="uaig-logo" src="./assets/ua-ig-logo.png"></a></div>
+<header class="header">
+    <a href="/">
+        <img class="ua-logo" src="./assets/ua-ig-logo.png">
+    </a>
    <div class="accessibility-dropdown">
-        <button class="accessibility-ddbtn">Accessibility Settings</button>
+        <button class="accessibility-ddbtn">Accessibility<br> Settings</button>
         <div class="accessibility-ddcontent">
             <a href="#">Increase font size</a>
             <a href="#">Toggle Typeface</a>
@@ -11,16 +13,18 @@
         </div>
     </div>
 </header>
-    <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/explore">Explore</router-link>
-        <router-link to="/join">Join</router-link>
-        <router-link to="/profile/:id">Profile</router-link>
-    </nav>
-   
+<div class="background-white">
+    <div >
+        <nav class="navigationalmenu">
+            <router-link to="/" class="navigation-menu-box">Home</router-link> 
+            <router-link to="/explore" class="navigation-menu-box">Explore</router-link> 
+            <router-link to="/join" class="navigation-menu-box">Join our directory!</router-link>
+            <!--<router-link to="/profile/:id">Profile</router-link>-->
+        </nav>
+    </div>
 
- <router-view />
-
+    <router-view />
+</div>
  <footer>
      <div class="footerLinks">
          <a class="footerLink" href="https://www.ualberta.ca" target="_blank" rel="noopener">University of Alberta </a>
@@ -56,16 +60,16 @@
 </script>
 
 
-<style lang="scss">
-    #app {
+<!--<style lang="scss">
+    /*#app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: var(--grey)
-    }
+    }*/
 
-    nav {
+    /*nav {
         padding: 30px;
 
         a {
@@ -76,5 +80,5 @@
                 color: #42b983;
             }
         }
-    }
-</style>
+    }*/
+</style>-->
