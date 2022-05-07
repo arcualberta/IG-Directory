@@ -11,9 +11,6 @@
         <h3>Keyword Query Model</h3>
         {{JSON.stringify(keywordQueryModel)}}
 
-        <h3>Home View State</h3>
-        {{JSON.stringify(state)}}
-
     </div>
 </template>
 

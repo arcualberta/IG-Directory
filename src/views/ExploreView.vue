@@ -5,8 +5,8 @@
         <h2>Search</h2>
         <FreeTextSearch />
 
-        <h3>Explore View State</h3>
-        {{JSON.stringify(state)}}
+        <!--<h3>Explore View State</h3>
+        {{JSON.stringify(state)}}-->
 
         <h3>Search Results</h3>
         {{JSON.stringify(searchResults)}}
