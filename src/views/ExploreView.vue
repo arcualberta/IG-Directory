@@ -6,7 +6,11 @@
         <FreeTextSearch />
 
         <h3>Search Results</h3>
-        {{JSON.stringify(searchResults)}}
+        <div v-for="item in searchResults?.items" :key="item.id">
+            <div class="entry-title">{{item.title}}</div>
+            {{JSON.stringify(item)}}
+            <hr />
+        </div>
     </div>
 </template>
 
@@ -22,7 +26,7 @@
             search
         },
         components: {
-            FreeTextSearch
+            FreeTextSearch,
         },
         setup() {
             const store = useStore();
