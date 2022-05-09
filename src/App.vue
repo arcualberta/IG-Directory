@@ -26,8 +26,8 @@
 
     <router-view />
 
-    <h3>App State</h3>
-    {{JSON.stringify(state)}}
+   <!-- <h3>App State</h3>
+    {{JSON.stringify(state)}} -->
 </div>
  <footer>
      <div class="footerLinks">
