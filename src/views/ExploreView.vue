@@ -1,4 +1,6 @@
 <template>
+<h3>Search Results</h3>
+<div> {{JSON.stringify(searchResults)}}</div>
   <!--  <div class="Explore">
         <h1>This is an explore page</h1>
 
