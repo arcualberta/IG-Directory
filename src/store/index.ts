@@ -1,6 +1,6 @@
-import { createStore } from 'vuex'
-
+import { createStore} from 'vuex'
 import { common, search } from '@arcualberta/catfish-ui';
+import { SearchResultFieldMapping } from '../appsettings'
 
 export default createStore({
     modules: {
@@ -10,6 +10,9 @@ export default createStore({
     state: {
     },
     getters: {
+        getProfileUserName() {
+            return SearchResultFieldMapping.TITLE
+        }
     },
     mutations: {
     },
