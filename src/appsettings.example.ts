@@ -9,11 +9,10 @@ export default {
         formId: "49a7a1d3-0194-4703-b3d8-747acbf3bbfa",
         collectionId: "79e652d7-bc9e-4a96-c76a-e8896825234a",
         groupId: "08fd74b1-2207-4f7f-9a1c-8450ebc535c9",
-        permittedStatusIds:["E952E454-73F8-4C54-92D9-D11F84AC3985"] //submitted
+        permissibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985"]
     },
     queryParameters: {
-    },
-    hexColorList:"#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5"
+    }
 }
 export enum SearchResultFieldMapping {
     PRONOUNS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_69d866ae-94bc-4701-ab72-998a4d8bc070_ts",
