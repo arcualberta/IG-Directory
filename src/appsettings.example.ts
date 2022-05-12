@@ -8,7 +8,8 @@ export default {
         templateId: "bd35d406-3399-40af-bc72-c7b5813ee9b1",
         formId: "49a7a1d3-0194-4703-b3d8-747acbf3bbfa",
         collectionId: "79e652d7-bc9e-4a96-c76a-e8896825234a",
-        groupId: "08fd74b1-2207-4f7f-9a1c-8450ebc535c9"
+        groupId: "08fd74b1-2207-4f7f-9a1c-8450ebc535c9",
+        permissibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985"]
     },
     queryParameters: {
     }
