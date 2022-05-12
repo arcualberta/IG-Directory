@@ -11,7 +11,7 @@ export default createStore({
     },
     getters: {
         getProfileUserName() {
-            return SearchResultFieldMapping.TITLE
+           // return SearchResultFieldMapping.NAME
         }
     },
     mutations: {

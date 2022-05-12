@@ -7,8 +7,11 @@
         <div class="searchbar-rectangle">
             <FreeTextSearch />
         </div>
-        <KeywordList   :hexColorList="colorList" :listOfKeywords="['keyword1', 'keyword2', 'keyword4', 'keyword5']" />
+        <KeywordList   :hexColorList="colorList"  />
 
+        <!-- <KeywordList   :hexColorList="colorList" :listOfKeywords="['keyword1', 'keyword2', 'keyword4', 'keyword5']" />
+         -->
+         
         <h3>Keyword Query Model</h3>
         {{JSON.stringify(keywordQueryModel)}}
 
