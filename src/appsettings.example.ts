@@ -11,5 +11,6 @@ export default {
         groupId: "08fd74b1-2207-4f7f-9a1c-8450ebc535c9"
     },
     queryParameters: {
-    }
+    },
+    hexColorList:"#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5"
 }
