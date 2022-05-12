@@ -160,6 +160,135 @@ HOME BODY*/
     margin-top: 15px;
     padding: 12.5px;
 }
+
+/*RESEARCHER PAGE*/
+.background-grey-researcher {
+    background-color: var(--cararra);
+    border-radius: 30px;
+    position: relative;
+    width: 50%;
+    margin: 20px;
+    margin-bottom: 30px;
+    display: inline-block;
+    overflow-y: scroll;
+    float: left;
+}
+
+.right-content-researcher {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin-left: 20px;
+}
+
+.results {
+    display: inline-block;
+}
+
+.results-image {
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.results-name {
+    position: relative;
+    float: left;
+    text-decoration: underline;
+    margin-top: 20px;
+}
+
+.info-1 {
+    display: inline-block;
+    position: relative;
+    float: left;
+    line-height: 17px;
+    margin-top: 20px;
+}
+
+.info-2 {
+    display: inline-block;
+    position: relative;
+    float: right;
+    line-height: 17px;
+    margin-top: 20px;
+    padding: 17px;
+}
+
+.results-content {
+    position: relative;
+    display: block;
+    margin-left: 20px;
+    line-height: 17px;
+}
+
+.contact {
+    background-color: white;
+    border-radius: 50px;
+    position: relative;
+    padding: 12.5px;
+    margin: 20px;
+    float: right;
+}
+
+.back-to-search {
+    background-color: var(--cararra);
+    border-radius: 50px;
+    position: relative;
+    display: inline-block;
+    padding: 12.5px;
+    /*  margin: 20px;*/
+}
+
+.explore-related {
+    display: inline-block;
+    position: relative;
+    margin: 20px;
+    vertical-align: top;
+}
+
+.related-scroll {
+    background-color: var(--cararra);
+    border-radius: 30px;
+    padding: 20px;
+    width: 450px;
+    height: 150px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.related {
+    display: inline-block;
+}
+
+.related-results {
+    display: inline-block;
+    position: relative;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+.related-image {
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 100px;
+}
+
+.related-title {
+    background-color: var(--cararra);
+    font-weight: 700;
+    text-decoration: underline;
+    position: relative;
+    width: 230px;
+    padding: 15px;
+    margin-left: 30px;
+    border-radius: 20px 20px 0px 0px;
+}
   .accessibility-ddcontent a:hover {background-color:rgb(228,226,226);}
   
   .accessibility-dropdown:hover .accessibility-ddcontent {display: block;}

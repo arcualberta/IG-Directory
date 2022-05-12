@@ -59,9 +59,9 @@
             store.commit(common.Mutations.SET_PAGE_SERVICE_API_ROOT, config.pageServiceApiRoot)
             store.commit(common.Mutations.SET_SOLR_SERVICE_API_ROOT, config.solrServiceApiRoot)
             //Mr May 10 2022
-            store.commit(common.Mutations.SET_TEMPLATE_ID, config.dataAttributes.templateId)
-            store.commit(common.Mutations.SET_COLLECTION_ID, config.dataAttributes.collectionId)
-            store.commit(common.Mutations.SET_GROUP_ID, config.dataAttributes.groupId)
+            //store.commit(common.Mutations.SET_TEMPLATE_ID, config.dataAttributes.templateId)
+            //store.commit(common.Mutations.SET_COLLECTION_ID, config.dataAttributes.collectionId)
+            //store.commit(common.Mutations.SET_GROUP_ID, config.dataAttributes.groupId)
             return {
                 state: computed(() => store.state)
             }

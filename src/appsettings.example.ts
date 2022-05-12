@@ -13,3 +13,7 @@ export default {
     queryParameters: {
     }
 }
+export enum SearchResultFieldMapping {
+    TITLE = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_04e54156-f480-41e6-a76a-210456b66499_ts",
+    POSITION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_016caaba-a0c7-4acc-b0c2-813376b2f32c_ts"
+}
