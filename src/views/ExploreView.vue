@@ -1,5 +1,6 @@
 <template>
-  <!--  <div class="Explore">
+<!--
+    <div class="Explore">
         <h1>This is an explore page</h1>
 
         <h2>Search</h2>
@@ -11,21 +12,22 @@
             {{JSON.stringify(item)}}
             <hr />
         </div>
-    </div> -->
+    </div> 
+-->
      <div class="explore">
         <div class="items">
             <div class="selectedKeywords">
                 <b>Selected Keywords</b>
-                <!--
+               <!--
                 <div v-for="keyword in selectedKeywords" :key="keyword.index.containerIndex + '_' + keyword.index.valueIndex" >
                     <span class="selectedKeyword">{{keyword.value}}</span> 
                     <i class="fa fa-remove" @click="removeKeyword(keyword.index)"></i>
                 </div>
-                -->
+               -->
             </div>
 
             <div class="grey-BG contentList">
-                
+               
                 <div v-for="item in searchResults?.items" :key="item.id">
                     <div class="item">
                         <div class="itemProfile">
@@ -34,7 +36,7 @@
                             
                             <div class="profileInfo">
                                 <span class="item-title">
-                                    <a href="#">{{title(item)}}</a>
+                                    <a href="#">{{name(item)}}</a>
                                 </span>
                                 {{position(item)}}
                                 <div class="content">{{item.content}}</div>
@@ -48,10 +50,8 @@
         </div>
         <div class="searchSection">
           <FreeTextSearch />
-           
-            <!--
-            <KeywordPanel :hexColorList="hexColorList" :className="'keywordContainerSmall'" />
-        -->
+          <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+      
         </div> 
     </div>
 </template>
@@ -59,12 +59,12 @@
 <script lang="ts">
     import { defineComponent, computed, onMounted } from 'vue';
     import { useStore } from 'vuex';
-
-    //import { Guid } from 'guid-typescript'
-
+    import KeywordList from "../components/KeywordList.vue"
+    import config from '../appsettings';
+  
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
 
-    import { SearchResultFieldMapping } from '../appsettings'
+   // import {SearchResultFieldMapping } from '../appsettings'
 
     export default defineComponent({
         name: 'ExploreView',
@@ -73,19 +73,20 @@
         },
         components: {
             FreeTextSearch,
+            KeywordList
         },
         setup() {
             const store = useStore();
 
             onMounted(() => store.dispatch(search.Actions.FRESH_SEARCH))
-
+            
             return {
                 state: computed(() => store.state),
                 keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
                 searchResults: computed(() => store.state.search.searchResult),
-                title: (item: any) => store.getters.getTitle(item).join(", "),
+                name: (item: any) => store.getters.getName(item).join(", "),
                 position: (item: any) => store.getters.getPosition(item).join(", "),
-                
+                colorList:computed(()=>config.hexColorList)
             }
         }
     });
@@ -106,7 +107,7 @@
         float: left;
     }
     .searchSection{
-        width:15%;
+        width:30%;
         float: left;
         margin-top:20px;
     }

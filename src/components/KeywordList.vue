@@ -26,10 +26,6 @@
                 type: null as PropType<string> | null,
                 required: false,
                 default: null
-            },
-            rerouteTo:{
-                type: null as PropType<string> | null,
-                required: false
             }
         },
         setup(p) {
@@ -38,7 +34,25 @@
             let hexColors = p.hexColorList ? p.hexColorList?.split(',').map(function (c) {
                 return c.trim();
             }) : null;
-  
+            onMounted(()=>{ 
+                const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`)); 
+                let length = hexColors ? hexColors.length : 0;
+                let i = 0;
+                btns.forEach((b) => {
+                    if (hexColors !== null) {
+                        let color = hexColors ? hexColors[i] : "";
+                        b.setAttribute("style", "background-color: " + color);
+                        i++
+                        i = i <= length - 1 ? i : 0;
+
+                    } else {
+
+                        let color = "hsla(" + ~~(360 * Math.random()) + "," + "70%," + "80%,1)";
+                        b.setAttribute("style", "background-color: " + color);
+                    }
+
+                });  
+            })
             onUpdated(()=>{ 
                 const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`)); 
                 let length = hexColors ? hexColors.length : 0;
@@ -171,7 +185,7 @@
         white-space: nowrap;
         position: relative;
         display: inline-block;
-        height: 90px;
+        height: 75px;
         width: 100%;
         scroll-behavior: smooth;
         align-content: center;
