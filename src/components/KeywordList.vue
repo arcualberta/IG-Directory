@@ -12,25 +12,24 @@
             search
         },
         props: {
+            model:{
+                type: null as PropType<search.KeywordQueryModel> | null,
+                required: true
+            },
             hexColorList: {
                 type: null as PropType<string> | null,
                 required: false
             },
-            runAction: {
-                type: null as PropType<string> | null,
-                required: false
-            },
+           
             className: {
                 type: null as PropType<string> | null,
                 required: false,
                 default: null
             },
-            listOfKeywords:{
-                type: null as PropType<string[]> | null,
-                required: false,
-                default: null
+            rerouteTo:{
+                type: null as PropType<string> | null,
+                required: false
             }
-           
         },
         setup(p) {
             const store = useStore();
@@ -38,25 +37,6 @@
                 return c.trim();
             }) : null;
   
-  onMounted(()=>{ 
-                const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`)); 
-                let length = hexColors ? hexColors.length : 0;
-                let i = 0;
-                btns.forEach((b) => {
-                    if (hexColors !== null) {
-                        let color = hexColors ? hexColors[i] : "";
-                        b.setAttribute("style", "background-color: " + color);
-                        i++
-                        i = i <= length - 1 ? i : 0;
-
-                    } else {
-
-                        let color = "hsla(" + ~~(360 * Math.random()) + "," + "70%," + "80%,1)";
-                        b.setAttribute("style", "background-color: " + color);
-                    }
-
-                });  
-            })
             onUpdated(()=>{ 
                 const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`)); 
                 let length = hexColors ? hexColors.length : 0;
@@ -80,45 +60,33 @@
             return {
                 filterByKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
                     store.commit(search.Mutations.CLEAR_KEYWORD_SELECTIONS);
-                    store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);
-                    
+                    store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);  
+                    //reroute to ?? page   
+                    //p.rerouteTo
+                   // this.router.push({ name: "explore"}) 
                 },
-                keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
-                addKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
-                    if (!store.getters.isKeywordSelected(cIndex, fIndex, vIndex)) {
-                       store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);
-                        store.dispatch(search.Actions.FRESH_SEARCH);
-                    }
-                },
-                //className: p.className
-                keywords: p.listOfKeywords
+                keywordQueryModel:computed(()=>p.model), //computed(() => store.state.search.keywordQueryModel),
+               // addKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
+               //     if (!store.getters.isKeywordSelected(cIndex, fIndex, vIndex)) {
+               //        store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);
+               //         store.dispatch(search.Actions.FRESH_SEARCH);
+              //      }
+              //  },
+               
             }
         },
     });
 </script>
 
 <template>
-<div>prop list of keyword : {{keywords}}</div>
-   <div v-if="keywords == null || keywords?.length == 0">
-     
         <div v-for="(container, cIdx) in keywordQueryModel?.containers" :key="container">
             <div v-for="(field, fIdx) in container.fields" :key="field"   :class="className? 'row ' + className : 'row keywordContainer'">
                 <span v-for="(value, vIdx) in field.values" :key="value" class="dir-keyword">
-                    <button  @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
-                   
+                    <button  @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button> 
                 </span>
             </div>
         </div>
-    </div>
-    <div v-else>
-      <div> 
-        <div :class="className? 'row ' + className : 'row keywordContainer'">        
-                <span v-for="(field) in keywords" :key="field" class="dir-keyword">
-                    <button  class="dir-keyword-button" ref="dirBtn">{{ field }}</button>  
-                </span>
-            </div>
-            </div>
-    </div>
+    
 </template>
 
 <style scoped>
@@ -128,7 +96,7 @@
         white-space: nowrap;
         position: relative;
         display: inline-block;
-        height: 150px;
+        height: 120px;
         width: 100%;
         scroll-behavior: smooth;
         align-content: center;
