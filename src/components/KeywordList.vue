@@ -2,6 +2,7 @@
    // import { Guid } from 'guid-typescript'
     import { defineComponent, onMounted, computed, PropType, onUpdated} from "vue";
     import { useStore } from 'vuex';
+    import {useRouter} from 'vue-router'
     
     import { search} from '@arcualberta/catfish-ui';
     
@@ -33,6 +34,7 @@
         },
         setup(p) {
             const store = useStore();
+            const router = useRouter();
             let hexColors = p.hexColorList ? p.hexColorList?.split(',').map(function (c) {
                 return c.trim();
             }) : null;
@@ -58,12 +60,13 @@
             })
 
             return {
+                router,
                 filterByKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
                     store.commit(search.Mutations.CLEAR_KEYWORD_SELECTIONS);
                     store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);  
                     //reroute to ?? page   
-                    //p.rerouteTo
-                   // this.router.push({ name: "explore"}) 
+                    router.push("/explore")
+                   
                 },
                 keywordQueryModel:computed(()=>p.model), //computed(() => store.state.search.keywordQueryModel),
                // addKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
