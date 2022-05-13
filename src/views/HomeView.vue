@@ -7,7 +7,11 @@
         <div class="searchbar-rectangle">
             <FreeTextSearch />
         </div>
+        <KeywordList   :hexColorList="colorList"  />
 
+        <!-- <KeywordList   :hexColorList="colorList" :listOfKeywords="['keyword1', 'keyword2', 'keyword4', 'keyword5']" />
+         -->
+         
         <h3>Keyword Query Model</h3>
         {{JSON.stringify(keywordQueryModel)}}
 
@@ -19,6 +23,8 @@
     import { useStore } from 'vuex';
 
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
+     import KeywordList from "../components/KeywordList.vue"
+      import config from '../appsettings';
 
     export default defineComponent({
         name: 'HomeView',
@@ -26,16 +32,18 @@
             search
         },
         components: {
-            FreeTextSearch
+            FreeTextSearch,
+            KeywordList
         },
         setup() {
             const store = useStore();
 
             store.dispatch(search.Actions.INIT_FILTER)
-
+            const colorList = config.hexColorList;
             return {
                 state: computed(() => store.state),
                 keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
+                colorList
             }
         }
     });
