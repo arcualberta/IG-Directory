@@ -178,7 +178,10 @@ HOME BODY*/
     display: inline-block;
     position: relative;
     vertical-align: top;
-    margin-left: 20px;
+   /* margin-left: 20px;*/
+    width:40%;
+    margin-top: 20px;
+    float: right;
 }
 
 .results {
