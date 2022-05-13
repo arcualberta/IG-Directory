@@ -381,3 +381,9 @@ HOME BODY*/
     float: right;
     margin-right: 100px;
 }
+
+xremove{
+    font-size: small;
+    font-family: sans-serif;
+    font-weight: bold;
+}

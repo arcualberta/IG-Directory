@@ -21,7 +21,10 @@
                 type: null as PropType<string> | null,
                 required: false
             },
-           
+             runAction: {
+                type: null as PropType<string> | null,
+                required: false
+            },
             className: {
                 type: null as PropType<string> | null,
                 required: false,
@@ -73,6 +76,13 @@
                 });  
             })
 
+             const isKeywordSelected = (containerIndex: number, fieldIndex: number, valueIndex: number) => {
+            return store.state.search.keywordQueryModel?.
+                containers[containerIndex]
+                .fields[fieldIndex]
+                .selected[valueIndex];
+              };
+
             return {
                 router,
                 filterByKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
@@ -82,13 +92,15 @@
                     router.push("/explore")
                    
                 },
+               
                 keywordQueryModel:computed(()=>p.model), //computed(() => store.state.search.keywordQueryModel),
-               // addKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
-               //     if (!store.getters.isKeywordSelected(cIndex, fIndex, vIndex)) {
-               //        store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);
-               //         store.dispatch(search.Actions.FRESH_SEARCH);
-              //      }
-              //  },
+                isKeywordSelected,
+                addKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
+                    if (!isKeywordSelected(cIndex, fIndex, vIndex)) {
+                      store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);
+                      store.dispatch(search.Actions.FRESH_SEARCH);
+                   }
+                },
                
             }
         },
@@ -99,7 +111,8 @@
         <div v-for="(container, cIdx) in keywordQueryModel?.containers" :key="container">
             <div v-for="(field, fIdx) in container.fields" :key="field"   :class="className? 'row ' + className : 'row keywordContainer'">
                 <span v-for="(value, vIdx) in field.values" :key="value" class="dir-keyword">
-                    <button  @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button> 
+                    <button v-if="runAction === null" @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
+                    <button v-else @click="addKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button> 
                 </span>
             </div>
         </div>

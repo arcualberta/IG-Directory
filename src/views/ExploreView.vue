@@ -18,12 +18,14 @@
         <div class="items">
             <div class="selectedKeywords">
                 <b>Selected Keywords</b>
-               <!--
+                 
                 <div v-for="keyword in selectedKeywords" :key="keyword.index.containerIndex + '_' + keyword.index.valueIndex" >
+                   
                     <span class="selectedKeyword">{{keyword.value}}</span> 
-                    <i class="fa fa-remove" @click="removeKeyword(keyword.index)"></i>
+                    <!--  <span class="xremove" @click="removeKeyword(keyword.index)">X</span> -->
+                    <span class="xremove" @click="removeKeyword(keyword.index)">X</span>
                 </div>
-               -->
+               
             </div>
 
             <div class="grey-BG contentList">
@@ -50,7 +52,7 @@
         </div>
         <div class="searchSection">
           <FreeTextSearch />
-          <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+          <KeywordList :model="keywordQueryModel" runAction="addKeyword" :hexColorList="colorList" :className="'keywordContainerSmall'" />
       
         </div> 
     </div>
@@ -79,14 +81,41 @@
             const store = useStore();
               store.dispatch(search.Actions.INIT_FILTER)
             onMounted(() => store.dispatch(search.Actions.FRESH_SEARCH))
+            const keywordQueryModel= computed(() => store.state.search.keywordQueryModel);
             
+            const isKeywordSelected = (containerIndex: number, fieldIndex: number, valueIndex: number) => {
+            return store.state.search.keywordQueryModel?.
+                containers[containerIndex]
+                .fields[fieldIndex]
+                .selected[valueIndex];
+              };
+             
+               const selectedKeywords= computed(() => {
+                   const ret = [] as search.Keyword[];
+                    store.state.search.keywordQueryModel?.containers.forEach((cont: { fields: any[]; }, cIdx:number) =>
+                        cont.fields.forEach((field, fIdx: number) =>
+                            field.values.forEach((val: any, vIdx: number) => {
+                                if (isKeywordSelected(cIdx, fIdx, vIdx))
+                                    ret.push({ index: { containerIndex: cIdx, fieldIndex: fIdx, valueIndex: vIdx }, value: val } as search.Keyword);
+                            })
+                        )
+                    )
+                    return ret;
+                })
+
             return {
                 state: computed(() => store.state),
-                keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
+                keywordQueryModel,
+                selectedKeywords,
                 searchResults: computed(() => store.state.search.searchResult),
                 name: (item: any) => store.getters.getName(item).join(", "),
                 position: (item: any) => store.getters.getPosition(item).join(", "),
-                colorList:computed(()=>config.hexColorList)
+                colorList:computed(()=>config.hexColorList),
+                removeKeyword: (index: search.KeywordIndex) => {
+                    store.commit(search.Mutations.CLEAR_KEYWORD, index);
+                    store.dispatch(search.Actions.FRESH_SEARCH);
+                },
+                
             }
         }
     });

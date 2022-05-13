@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import { createStore, storeKey } from 'vuex'
 
 import { common, search } from '@arcualberta/catfish-ui';
 import { SearchResultFieldMapping } from '../appsettings'
@@ -27,6 +27,13 @@ export default createStore({
         getDescription: () => (item: any) => item?.solrFields[SearchResultFieldMapping.DESCRIPTION],
         getExternalLinks: () => (item: any) => item?.solrFields[SearchResultFieldMapping.EXTERNAL_LINKS],
         getConsent: () => (item: any) => item?.solrFields[SearchResultFieldMapping.CONSENT],
+        
+        /*isKeywordSelected: (state) => (containerIndex: number, fieldIndex: number, valueIndex: number) => {
+            return search.keywordQueryModel?.
+                containers[containerIndex]
+                .fields[fieldIndex]
+                .selected[valueIndex];
+        },*/
     },
     mutations: {
     },
