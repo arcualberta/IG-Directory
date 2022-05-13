@@ -12,7 +12,8 @@ export default {
         permissibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985"]
     },
     queryParameters: {
-    }
+    },
+    hexColorList:"#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5"
 }
 export enum SearchResultFieldMapping {
     PRONOUNS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_69d866ae-94bc-4701-ab72-998a4d8bc070_ts",
