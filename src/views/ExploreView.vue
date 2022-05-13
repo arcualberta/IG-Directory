@@ -1,6 +1,4 @@
 <template>
-<h3>Search Results</h3>
-<div> {{JSON.stringify(searchResults)}}</div>
   <!--  <div class="Explore">
         <h1>This is an explore page</h1>
 
@@ -29,17 +27,16 @@
             <div class="grey-BG contentList">
                 
                 <div v-for="item in searchResults?.items" :key="item.id">
-
                     <div class="item">
                         <div class="itemProfile">
                            
                             <img class="profileImg" src="../assets/user-profile-icon.jpg" />
                             
-                             <div class="profileInfo">
+                            <div class="profileInfo">
                                 <span class="item-title">
-                                    <a href="#">{{item.title}}</a>
+                                    <a href="#">{{title(item)}}</a>
                                 </span>
-                                {{item.subtitle}}
+                                {{position(item)}}
                                 <div class="content">{{item.content}}</div>
                             </div>
                            
@@ -47,6 +44,7 @@
                     </div>
                 </div>
             </div>
+            <!--{{JSON.stringify(state)}}-->
         </div>
         <div class="searchSection">
           <FreeTextSearch />
@@ -62,7 +60,11 @@
     import { defineComponent, computed, onMounted } from 'vue';
     import { useStore } from 'vuex';
 
+    //import { Guid } from 'guid-typescript'
+
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
+
+    import { SearchResultFieldMapping } from '../appsettings'
 
     export default defineComponent({
         name: 'ExploreView',
@@ -81,6 +83,8 @@
                 state: computed(() => store.state),
                 keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
                 searchResults: computed(() => store.state.search.searchResult),
+                title: (item: any) => store.getters.getTitle(item).join(", "),
+                position: (item: any) => store.getters.getPosition(item).join(", "),
                 
             }
         }
