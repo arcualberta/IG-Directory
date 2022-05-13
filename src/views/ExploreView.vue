@@ -34,7 +34,7 @@
                             
                             <div class="profileInfo">
                                 <span class="item-title">
-                                    <a href="#">{{title(item)}}</a>
+                                    <a href="#">{{name(item)}}</a>
                                 </span>
                                 {{position(item)}}
                                 <div class="content">{{item.content}}</div>
@@ -83,7 +83,7 @@
                 state: computed(() => store.state),
                 keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
                 searchResults: computed(() => store.state.search.searchResult),
-                title: (item: any) => store.getters.getTitle(item).join(", "),
+                name: (item: any) => store.getters.getName(item).join(", "),
                 position: (item: any) => store.getters.getPosition(item).join(", "),
                 
             }
