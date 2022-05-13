@@ -77,7 +77,7 @@
         },
         setup() {
             const store = useStore();
-
+              store.dispatch(search.Actions.INIT_FILTER)
             onMounted(() => store.dispatch(search.Actions.FRESH_SEARCH))
             
             return {
