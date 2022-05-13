@@ -9,8 +9,6 @@ export default createStore({
         search
     },
     state: {
-        common: common.state,
-        search: search.state
     },
     getters: {
         getTitle: () => (item: any) => item?.solrFields[SearchResultFieldMapping.TITLE],
