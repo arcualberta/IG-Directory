@@ -23,7 +23,8 @@
             },
              runAction: {
                 type: null as PropType<string> | null,
-                required: false
+                required: false,
+                default: null
             },
             className: {
                 type: null as PropType<string> | null,
@@ -34,6 +35,7 @@
         setup(p) {
             const store = useStore();
             const router = useRouter();
+           
             let hexColors = p.hexColorList ? p.hexColorList?.split(',').map(function (c) {
                 return c.trim();
             }) : null;
@@ -108,6 +110,7 @@
 </script>
 
 <template>
+RunAction:{{runAction}}
         <div v-for="(container, cIdx) in keywordQueryModel?.containers" :key="container">
             <div v-for="(field, fIdx) in container.fields" :key="field"   :class="className? 'row ' + className : 'row keywordContainer'">
                 <span v-for="(value, vIdx) in field.values" :key="value" class="dir-keyword">
