@@ -1,6 +1,7 @@
 
 export { useSearchStore } from './SearchStore';
 export { useProfileStore } from './ProfileStore';
+//export { useKeywordStore } from './KeywordStore';
 
 /***** DEPRECATED VUEX *****/
 import { createStore } from 'vuex'
