@@ -7,10 +7,18 @@
         <div class="searchbar-rectangle">
             <FreeTextSearch />
         </div>
-        <KeywordList :model="keywordQueryModel"  :hexColorList="colorList"   />
+        <KeywordList :model="keywordQueryModel" :hexColorList="colorList" />
 
         <h3>Keyword Query Model</h3>
-        {{JSON.stringify(keywordQueryModel)}}
+        {{JSON.stringify(keywordQueryModel)}} <br />
+        Result count: {{searchStore.resultCount}} of {{searchStore.searchResult.count}}
+
+
+        <h3>Search Store</h3>
+        {{JSON.stringify(searchStore)}}
+
+        <h3>Profile Store</h3>
+        {{JSON.stringify(profileStore)}}
 
     </div>
 </template>
@@ -18,6 +26,9 @@
 <script lang="ts">
     import { defineComponent, computed, onMounted } from 'vue';
     import { useStore } from 'vuex';
+
+    import { useSearchStore, useProfileStore } from '../store'
+
 
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
     import KeywordList from "../components/KeywordList.vue"
@@ -33,11 +44,16 @@
             KeywordList
         },
         setup() {
+            const searchStore = useSearchStore();
+            const profileStore = useProfileStore();
+
             const store = useStore();
 
             store.dispatch(search.Actions.INIT_FILTER)
            
             return {
+                searchStore,
+                profileStore,
                 state: computed(() => store.state),
                 keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
                 colorList: computed(()=>config.hexColorList)

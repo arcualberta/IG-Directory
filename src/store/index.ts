@@ -1,4 +1,9 @@
-import { createStore, storeKey } from 'vuex'
+
+export { useSearchStore } from './SearchStore';
+export { useProfileStore } from './ProfileStore';
+
+/***** DEPRECATED VUEX *****/
+import { createStore } from 'vuex'
 
 import { common, search } from '@arcualberta/catfish-ui';
 import { SearchResultFieldMapping } from '../appsettings'

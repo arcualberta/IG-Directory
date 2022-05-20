@@ -15,10 +15,10 @@
 </header>
 
 <div class="background-white">
-    <div >
+    <div>
         <nav class="navigationalmenu">
-            <router-link to="/" class="navigation-menu-box">Home</router-link> 
-            <router-link to="/explore" class="navigation-menu-box">Explore</router-link> 
+            <router-link to="/" class="navigation-menu-box">Home</router-link>
+            <router-link to="/explore" class="navigation-menu-box">Explore</router-link>
             <router-link to="/join" class="navigation-menu-box">Join our directory!</router-link>
             <!--<router-link to="/profile/:id">Profile</router-link>-->
         </nav>
@@ -27,7 +27,7 @@
     <router-view />
 
     <!--<h3>App State</h3>
-    {{JSON.stringify(state)}}--> 
+    {{JSON.stringify(state)}}-->
 </div>
  <footer>
      <div class="footerLinks">
@@ -45,12 +45,21 @@
     import { common } from '@arcualberta/catfish-ui';
     import config from './appsettings';
 
+    import { useSearchStore, useProfileStore } from './store'
+
     export default defineComponent({
         name: 'App',
         modules: {
             common
         },
         setup() {
+
+            const searchStore = useSearchStore();
+            searchStore.queryModelRetrieverApiUrl = config.dataServiceApiRoot + `keywordsearch/keywords/page/${config.pageId}/block/${config.blockId}`;
+            searchStore.fetchQueryModel();
+
+            const profiletore = useProfileStore();
+
             const store = useStore();
 
             store.commit(common.Mutations.SET_PAGE_ID, config.pageId)
@@ -63,6 +72,8 @@
             store.commit(common.Mutations.SET_COLLECTION_ID, config.dataAttributes.collectionId)
             store.commit(common.Mutations.SET_GROUP_ID, config.dataAttributes.groupId)
             return {
+                searchStore,
+                profiletore,
                 state: computed(() => store.state)
             }
         },

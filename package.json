@@ -10,6 +10,7 @@
   "dependencies": {
     "@arcualberta/catfish-ui": "file:../Catfish-2.0/Catfish/Areas/Applets/UI.Lib/arcualberta-catfish-ui-1.0.0.tgz",
     "core-js": "^3.8.3",
+    "pinia": "^2.0.0-rc.10",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"

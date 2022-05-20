@@ -4,6 +4,8 @@ export default {
     solrServiceApiRoot: "https://catfish-test.artsrn.ualberta.ca",
     pageId: "7738c46a-162f-4506-a4c4-fa8a05d3fe41",
     blockId: "47b4a170-5fee-4505-b2d7-f87469d8ada3",
+    textAggregatorField: "_all__ts",
+    keywordAggregatorField: "_keywords__ss",
     dataAttributes: {
         templateId: "bd35d406-3399-40af-bc72-c7b5813ee9b1",
         formId: "49a7a1d3-0194-4703-b3d8-747acbf3bbfa",
