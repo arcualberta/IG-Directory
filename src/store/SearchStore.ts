@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { Guid } from 'guid-typescript';
 
 import { search } from '@arcualberta/catfish-ui';
+import { SearchResultFieldMapping } from '../appsettings'
 
 export const useSearchStore = defineStore('SearchStore', {
     state: () => ({
@@ -24,7 +25,8 @@ export const useSearchStore = defineStore('SearchStore', {
         } as search.SearchOutput,
     }),
     getters: {
-        resultCount: state => state.searchResult?.items?.length
+        resultCount: state => state.searchResult?.items?.length,
+        getName: () => (item: search.ResultItem) => item?.solrFields?.find(x => x.solrFieldId === SearchResultFieldMapping.NAME)?.fieldContent
     },
     actions: {
         fetchQueryModel() {
@@ -36,39 +38,40 @@ export const useSearchStore = defineStore('SearchStore', {
                     });
         },
         fetchData() {
-            const api = this.queryApiUrl + 'keywordsearch';
-            console.log("Item Load API: ", api)
+            if (this.queryApiUrl) {
+                console.log("Item Load API: ", this.queryApiUrl)
 
-            const formData = new FormData();
+                const formData = new FormData();
 
-            if (this.templateId)
-                formData.append("templateId", this.templateId.toString());
+                if (this.templateId)
+                    formData.append("templateId", this.templateId.toString());
 
-            if (this.collectionId)
-                formData.append("collectionId", this.collectionId.toString());
+                if (this.collectionId)
+                    formData.append("collectionId", this.collectionId.toString());
 
-            if (this.groupId)
-                formData.append("groupId", this.groupId.toString())
+                if (this.groupId)
+                    formData.append("groupId", this.groupId.toString())
 
-            if (this.searchText)
-                formData.append("searchText", this.searchText as string);
+                if (this.searchText)
+                    formData.append("searchText", this.searchText as string);
 
-            formData.append("offset", this.offset.toString());
-            formData.append("max", this.pageSize.toString());
-            formData.append("queryParams", JSON.stringify(this.keywordQueryModel));
+                formData.append("offset", this.offset.toString());
+                formData.append("max", this.pageSize.toString());
+                formData.append("queryParams", JSON.stringify(this.keywordQueryModel));
 
 
-            fetch(api, {
-                method: 'POST', // or 'PUT'
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    this.searchResult = data;
+                fetch(this.queryApiUrl, {
+                    method: 'POST', // or 'PUT'
+                    body: formData
                 })
-                .catch((error) => {
-                    console.error('Item Load API Error:', error);
-                });
+                    .then(response => response.json())
+                    .then(data => {
+                        this.searchResult = data;
+                    })
+                    .catch((error) => {
+                        console.error('Item Load API Error:', error);
+                    });
+            }
         }
     }
 });

@@ -40,12 +40,17 @@
 
 <script lang="ts">
     import { defineComponent, computed } from 'vue';
+    import { Guid } from 'guid-typescript';
+
+
+    import { useSearchStore, useProfileStore } from './store'
+
+
     import { useStore } from 'vuex';
 
     import { common } from '@arcualberta/catfish-ui';
     import config from './appsettings';
 
-    import { useSearchStore, useProfileStore } from './store'
 
     export default defineComponent({
         name: 'App',
@@ -55,8 +60,14 @@
         setup() {
 
             const searchStore = useSearchStore();
+            searchStore.templateId = Guid.parse(config.dataAttributes.templateId)
+            searchStore.collectionId = Guid.parse(config.dataAttributes.collectionId)
+            searchStore.groupId = Guid.parse(config.dataAttributes.groupId)
+
             searchStore.queryModelRetrieverApiUrl = config.dataServiceApiRoot + `keywordsearch/keywords/page/${config.pageId}/block/${config.blockId}`;
             searchStore.fetchQueryModel();
+
+            searchStore.queryApiUrl = config.dataServiceApiRoot + 'keywordsearch';
 
             const profiletore = useProfileStore();
 
