@@ -15,7 +15,7 @@
 <script lang="ts">
     import { defineComponent, computed } from 'vue';
 
-    import { useSearchStore, useProfileStore } from '../store'
+    import { useSearchStore } from '../store'
 
 
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
@@ -33,11 +33,9 @@
         },
         setup() {
             const searchStore = useSearchStore();
-            const profileStore = useProfileStore();
            
             return {
                 searchStore,
-                profileStore,
                 keywordQueryModel: computed(() => searchStore.keywordQueryModel),
                 colorList: computed(()=>config.hexColorList)
             }

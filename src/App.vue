@@ -60,7 +60,7 @@
         setup() {
 
             const searchStore = useSearchStore();
-            searchStore.templateId = Guid.parse(config.dataAttributes.templateId)
+            searchStore.templateId = config.dataAttributes.templateId as unknown as Guid,
             searchStore.collectionId = Guid.parse(config.dataAttributes.collectionId)
             searchStore.groupId = Guid.parse(config.dataAttributes.groupId)
 

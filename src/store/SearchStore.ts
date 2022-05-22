@@ -44,21 +44,25 @@ export const useSearchStore = defineStore('SearchStore', {
                 const formData = new FormData();
 
                 if (this.templateId)
-                    formData.append("templateId", this.templateId.toString());
+                    formData.append("templateId", this.templateId as any as string);
 
                 if (this.collectionId)
-                    formData.append("collectionId", this.collectionId.toString());
+                    formData.append("collectionId", this.collectionId as any as string);
 
                 if (this.groupId)
-                    formData.append("groupId", this.groupId.toString())
+                    formData.append("groupId", this.groupId as any as string)
+
+                if (this.keywordQueryModel)
+                    formData.append("queryParams", JSON.stringify(this.keywordQueryModel));
 
                 if (this.searchText)
-                    formData.append("searchText", this.searchText as string);
+                    formData.append("searchText", this.searchText);
 
                 formData.append("offset", this.offset.toString());
                 formData.append("max", this.pageSize.toString());
-                formData.append("queryParams", JSON.stringify(this.keywordQueryModel));
 
+                console.log("Store:\n", JSON.stringify(this))
+                console.log("FormData:\n", formData)
 
                 fetch(this.queryApiUrl, {
                     method: 'POST', // or 'PUT'
@@ -66,6 +70,7 @@ export const useSearchStore = defineStore('SearchStore', {
                 })
                     .then(response => response.json())
                     .then(data => {
+                        console.log("Search Results:\n", JSON.stringify(data));
                         this.searchResult = data;
                     })
                     .catch((error) => {

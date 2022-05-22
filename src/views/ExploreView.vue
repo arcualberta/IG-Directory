@@ -83,7 +83,7 @@
         setup() {
             const searchStore = useSearchStore();
 
-            searchStore.fetchData();
+            onMounted(() => searchStore.fetchData())
 
             ////const store = useStore();
             ////  store.dispatch(search.Actions.INIT_FILTER)
