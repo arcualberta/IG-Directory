@@ -15,39 +15,41 @@
     </div> 
 -->
      <div class="explore">
-         <div class="items">
-             <div class="selectedKeywords">
-                 <b>Selected Keywords</b>
+        <div class="items">
+            <div class="selectedKeywords">
+                <b>Selected Keywords</b>
+               
+                <div v-for="keyword in selectedKeywords" :key="keyword.index.valueIndex" >
+                   
+                    <span class="selectedKeyword">{{keyword.value}}</span> 
+                    <!--  <span class="xremove" @click="removeKeyword(keyword.index)">X</span> -->
+                    <span class="xremove" @click="searchStore.removeKeyword(keyword.index)">X</span>
+                </div>
+               
+            </div>
 
-                 <!--<div v-for="keyword in selectedKeywords" :key="keyword.index.containerIndex + '_' + keyword.index.valueIndex" >
-            <span class="selectedKeyword">{{keyword.value}}</span>
-            <span class="xremove" @click="removeKeyword(keyword.index)">X</span>
-        </div>-->
-
-             </div>
-
-             <div class="grey-BG contentList">
-
-                 <div v-for="item in searchResults?.items" :key="item.id">
-                     <div class="item">
-                         <div class="itemProfile">
-
-                             <img class="profileImg" src="../assets/user-profile-icon.jpg" />
-
-                             <div class="profileInfo">
-                                 <span class="item-title">
-                                     <a href="#">{{name(item)}}</a>
-                                 </span>
-                                 {{position(item)}}
-                                 <div class="content">{{item.content}}</div>
-                             </div>
-
-                         </div>
-                     </div>
-                 </div>
-             </div>
-             {{JSON.stringify(searchStore)}}
-         </div>
+            <div class="grey-BG contentList">
+               
+                <div v-for="item in searchResults?.items" :key="item.id">
+                    <div class="item">
+                        <div class="itemProfile">
+                           
+                            <img class="profileImg" src="../assets/user-profile-icon.jpg" />
+                            
+                            <div class="profileInfo">
+                                <span class="item-title">
+                                    <a href="#">{{name(item)}}</a>
+                                </span>
+                                {{position(item)}}
+                                <div class="content">{{item.content}}</div>
+                            </div>
+                           
+                        </div>   
+                    </div>
+                </div>
+            </div>
+            <!--{{JSON.stringify(state)}}-->
+        </div>
         <div class="searchSection">
           <FreeTextSearch />
           <KeywordList :model="keywordQueryModel" runAction="addKeyword" :hexColorList="colorList" :className="'keywordContainerSmall'" />
@@ -58,17 +60,13 @@
 
 <script lang="ts">
     import { defineComponent, computed, onMounted } from 'vue';
-
     import { useSearchStore } from '../store'
-
-
 
     import { useStore } from 'vuex';
     import KeywordList from "../components/KeywordList.vue"
     import config from '../appsettings';
   
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
-    //import { ResultItem } from '@arcualberta/catfish-ui/dist/types/src/lib-components/search';
 
 
     export default defineComponent({
@@ -83,44 +81,16 @@
         setup() {
             const searchStore = useSearchStore();
 
-            onMounted(() => searchStore.fetchData())
-
-            ////const store = useStore();
-            ////  store.dispatch(search.Actions.INIT_FILTER)
-            ////onMounted(() => store.dispatch(search.Actions.FRESH_SEARCH))
-            ////const keywordQueryModel= computed(() => store.state.search.keywordQueryModel);
-            
-            const isKeywordSelected = (containerIndex: number, fieldIndex: number, valueIndex: number) => {
-                return searchStore.keywordQueryModel?.
-                    containers[containerIndex]
-                    .fields[fieldIndex]
-                    .selected[valueIndex];
-            };
-             
-               const selectedKeywords= computed(() => {
-                   const ret = [] as search.Keyword[];
-                   searchStore.keywordQueryModel?.containers.forEach((cont: { fields: any[]; }, cIdx:number) =>
-                        cont.fields.forEach((field, fIdx: number) =>
-                            field.values.forEach((val: any, vIdx: number) => {
-                                if (isKeywordSelected(cIdx, fIdx, vIdx))
-                                    ret.push({ index: { containerIndex: cIdx, fieldIndex: fIdx, valueIndex: vIdx }, value: val } as search.Keyword);
-                            })
-                        )
-                    )
-                    return ret;
-                })
+            onMounted(() => {
+                if (searchStore.keywordQueryModel)
+                    searchStore.fetchData();
+            })
 
             return {
                 searchStore,
                 keywordQueryModel: computed(() => searchStore.keywordQueryModel),
-                searchResults: computed(() => searchStore.searchResult),
-                name: (item: search.ResultItem) => searchStore.getName(item),
-                colorList:computed(()=>config.hexColorList),
-            //    removeKeyword: (index: search.KeywordIndex) => {
-            //        store.commit(search.Mutations.CLEAR_KEYWORD, index);
-            //        store.dispatch(search.Actions.FRESH_SEARCH);
-            //    },
-                
+                selectedKeywords: computed(() => searchStore.selectedKeywords),
+                colorList: computed(() => config.hexColorList),
             }
         }
     });

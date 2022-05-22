@@ -16,6 +16,7 @@ export const useSearchStore = defineStore('SearchStore', {
         queryModelRetrieverApiUrl: null as null | string,
         queryApiUrl: null as null | string,
         keywordQueryModel: null as null | search.KeywordQueryModel,
+        selectedKeywords:[] as search.Keyword[],
         searchText: null as null | string,
         searchResult: {
             first: 0,
@@ -77,6 +78,51 @@ export const useSearchStore = defineStore('SearchStore', {
                         console.error('Item Load API Error:', error);
                     });
             }
-        }
-    }
+        },
+        selectKeyword(payload: search.KeywordIndex) {
+            if(this.keywordQueryModel)
+                this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = true;
+        },
+        clearKeywordSelection() {
+            this.keywordQueryModel?.containers.forEach(cont => cont.fields.forEach(field => field.selected = new Array(field.values.length).fill(false)))
+        },
+        setSelectedKeywords(){
+            this.selectedKeywords=[] as search.Keyword[];
+            this.keywordQueryModel?.containers.forEach((cont: { fields: any[]; }, cIdx:number) =>
+                cont.fields.forEach((field, fIdx: number) =>
+                    field.values.forEach((val: any, vIdx: number) => {
+                        if (this.keywordQueryModel?.
+                            containers[cIdx]
+                            .fields[fIdx]
+                            .selected[vIdx])
+                           
+                            this.selectedKeywords.push({ index: { containerIndex: cIdx, fieldIndex: fIdx, valueIndex: vIdx }, value: val } as search.Keyword);
+                    })
+                )
+            )  
+      },
+      addKeyword(cIdx: number, fIdx: number, vIdx: number){
+        if (!this.keywordQueryModel?.
+            containers[cIdx]
+            .fields[fIdx]
+            .selected[vIdx]) {
+            this.selectKeyword({ containerIndex: cIdx, fieldIndex: fIdx, valueIndex: vIdx } as search.KeywordIndex)
+            this.setSelectedKeywords();
+            //TO DO 
+             //store.dispatch(search.Actions.FRESH_SEARCH);
+       }
+    },
+    removeKeyword(payload: search.KeywordIndex){
+        //store.commit(search.Mutations.CLEAR_KEYWORD, index);
+        console.log("remove selected keyword: ")
+        console.log(JSON.stringify(payload))
+        if (this.keywordQueryModel)
+            this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = false; 
+
+        this.setSelectedKeywords();
+
+        //TO DO 
+             //store.dispatch(search.Actions.FRESH_SEARCH);
+    },
+  }
 });
