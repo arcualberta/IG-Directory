@@ -7,7 +7,7 @@
         <div class="searchbar-rectangle">
             <FreeTextSearch />
         </div>
-        <KeywordList :model="keywordQueryModel" :hexColorList="colorList" />
+        <KeywordList :action-link="'explore'" :model="keywordQueryModel" :hexColorList="colorList" />
 
     </div>
 </template>
@@ -16,7 +16,6 @@
     import { defineComponent, computed } from 'vue';
 
     import { useSearchStore } from '../store'
-
 
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
     import KeywordList from "../components/KeywordList.vue"

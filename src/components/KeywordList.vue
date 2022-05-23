@@ -1,15 +1,11 @@
 <script lang="ts">
    // import { Guid } from 'guid-typescript'
     import { defineComponent, onMounted, computed, PropType, onUpdated} from "vue";
-    import { useStore } from 'vuex';
     import {useRouter} from 'vue-router'
     
     import { search} from '@arcualberta/catfish-ui';
     import { useSearchStore } from '../store'
 
-
-  
-    
     export default defineComponent({
         name: "KeywordList",
         modules: {
@@ -24,7 +20,7 @@
                 type: null as PropType<string> | null,
                 required: false
             },
-             runAction: {
+             actionLink: {
                 type: null as PropType<string> | null,
                 required: false,
                 default: null
@@ -36,9 +32,7 @@
             }
         },
         setup(p) {
-            const store = useStore();
             const router = useRouter();
-           // const keywordStore=useKeywordStore();
             const searchStore=useSearchStore();
 
             let hexColors = p.hexColorList ? p.hexColorList?.split(',').map(function (c) {
@@ -79,39 +73,21 @@
                         let color = "hsla(" + ~~(360 * Math.random()) + "," + "70%," + "80%,1)";
                         b.setAttribute("style", "background-color: " + color);
                     }
-
                 });  
             })
 
-          /*   const isKeywordSelected = (containerIndex: number, fieldIndex: number, valueIndex: number) => {
-            return store.state.search.keywordQueryModel?.
-                containers[containerIndex]
-                .fields[fieldIndex]
-                .selected[valueIndex];
-              };
-*/
             return {
                 router,
+                searchStore,
                 filterByKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
-                    //store.commit(search.Mutations.CLEAR_KEYWORD_SELECTIONS);
-                    //store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);  
-                    searchStore.clearKeywordSelection();
                     searchStore.selectKeyword({ containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex)
-                    //searchStore.setSelectedKeywords();
-                    //reroute to ?? page   
-                    router.push("/explore")
-                   
+
+                    console.log("Action Link: ", p.actionLink)
+                    if (p.actionLink)
+                        router.push("/" + p.actionLink);
                 },
                
-                keywordQueryModel:computed(()=>p.model), //computed(() => store.state.search.keywordQueryModel),
-               // isKeywordSelected,
-               // addKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
-               //     if (!isKeywordSelected(cIndex, fIndex, vIndex)) {
-               //       store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);
-               //       store.dispatch(search.Actions.FRESH_SEARCH);
-               //    }
-               // },
-               searchStore
+                keywordQueryModel: computed(() => searchStore.keywordQueryModel),
             }
         },
     });
@@ -122,8 +98,9 @@
         <div v-for="(container, cIdx) in keywordQueryModel?.containers" :key="container">
             <div v-for="(field, fIdx) in container.fields" :key="field"   :class="className? 'row ' + className : 'row keywordContainer'">
                 <span v-for="(value, vIdx) in field.values" :key="value" class="dir-keyword">
-                    <button v-if="runAction === null" @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
-                    <button v-else @click="searchStore.addKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button> 
+                    <button @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
+                    <!--<button v-if="runAction === null" @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
+                    <button v-else @click="searchStore.selectKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>--> 
                 </span>
             </div>
         </div>
