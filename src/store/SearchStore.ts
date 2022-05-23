@@ -2,7 +2,6 @@ import { defineStore } from 'pinia';
 import { Guid } from 'guid-typescript';
 
 import { search } from '@arcualberta/catfish-ui';
-import { SearchResultFieldMapping } from '../appsettings'
 
 export const useSearchStore = defineStore('SearchStore', {
     state: () => ({
@@ -16,7 +15,6 @@ export const useSearchStore = defineStore('SearchStore', {
         queryModelRetrieverApiUrl: null as null | string,
         queryApiUrl: null as null | string,
         keywordQueryModel: null as null | search.KeywordQueryModel,
-        selectedKeywords:[] as search.Keyword[],
         searchText: null as null | string,
         searchResult: {
             first: 0,
@@ -27,6 +25,27 @@ export const useSearchStore = defineStore('SearchStore', {
     }),
     getters: {
         resultCount: state => state.searchResult?.items?.length,
+        selectedKeywords(state): search.Keyword[] {
+            const flattenedList: search.Keyword[] = [];
+            state.keywordQueryModel?.containers.forEach((container, cIndex) => {
+                container.fields.forEach((field, fIndex) => {
+                    field.selected.forEach((flag, vIndex) => {
+                        if (flag) {
+                            flattenedList.push({
+                                index: {
+                                    containerIndex: cIndex,
+                                    fieldIndex: fIndex,
+                                    valueIndex: vIndex
+                                },
+                                value: field.values[vIndex]
+                            })
+                        }
+                    })
+                })
+            });
+
+            return flattenedList;
+        },
 
         /**
          * Returns the value of the solr field with the name specified by the 
@@ -101,49 +120,20 @@ export const useSearchStore = defineStore('SearchStore', {
             }
         },
         selectKeyword(payload: search.KeywordIndex) {
-            if(this.keywordQueryModel)
+            if (this.keywordQueryModel) {
                 this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = true;
+                this.fetchData();
+            }
+        },
+        unselectKeyword(payload: search.KeywordIndex) {
+            if (this.keywordQueryModel) {
+                this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = false;
+                this.fetchData();
+            }
         },
         clearKeywordSelection() {
             this.keywordQueryModel?.containers.forEach(cont => cont.fields.forEach(field => field.selected = new Array(field.values.length).fill(false)))
+            this.fetchData();
         },
-        setSelectedKeywords(){
-            this.selectedKeywords=[] as search.Keyword[];
-            this.keywordQueryModel?.containers.forEach((cont: { fields: any[]; }, cIdx:number) =>
-                cont.fields.forEach((field, fIdx: number) =>
-                    field.values.forEach((val: any, vIdx: number) => {
-                        if (this.keywordQueryModel?.
-                            containers[cIdx]
-                            .fields[fIdx]
-                            .selected[vIdx])
-                           
-                            this.selectedKeywords.push({ index: { containerIndex: cIdx, fieldIndex: fIdx, valueIndex: vIdx }, value: val } as search.Keyword);
-                    })
-                )
-            )  
-      },
-      addKeyword(cIdx: number, fIdx: number, vIdx: number){
-        if (!this.keywordQueryModel?.
-            containers[cIdx]
-            .fields[fIdx]
-            .selected[vIdx]) {
-            this.selectKeyword({ containerIndex: cIdx, fieldIndex: fIdx, valueIndex: vIdx } as search.KeywordIndex)
-            this.setSelectedKeywords();
-            //TO DO 
-             //store.dispatch(search.Actions.FRESH_SEARCH);
-       }
-    },
-    removeKeyword(payload: search.KeywordIndex){
-        //store.commit(search.Mutations.CLEAR_KEYWORD, index);
-        console.log("remove selected keyword: ")
-        console.log(JSON.stringify(payload))
-        if (this.keywordQueryModel)
-            this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = false; 
-
-        this.setSelectedKeywords();
-
-        //TO DO 
-             //store.dispatch(search.Actions.FRESH_SEARCH);
-    },
-  }
+    }
 });

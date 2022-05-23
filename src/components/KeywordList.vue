@@ -97,7 +97,7 @@
                     //store.commit(search.Mutations.SELECT_KEYWORD, { containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex);  
                     searchStore.clearKeywordSelection();
                     searchStore.selectKeyword({ containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex)
-                    searchStore.setSelectedKeywords();
+                    //searchStore.setSelectedKeywords();
                     //reroute to ?? page   
                     router.push("/explore")
                    

@@ -8,7 +8,7 @@
                    
                     <span class="selectedKeyword">{{keyword.value}}</span> 
                     <!--  <span class="xremove" @click="removeKeyword(keyword.index)">X</span> -->
-                    <span class="xremove" @click="searchStore.removeKeyword(keyword.index)">X</span>
+                    <span class="xremove" @click="searchStore.unselectKeyword(keyword.index)">X</span>
                 </div>
                
             </div>
@@ -19,7 +19,7 @@
         </div>
         <div class="searchSection">
           <FreeTextSearch />
-          <KeywordList :model="keywordQueryModel" runAction="addKeyword" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+          <KeywordList :model="keywordQueryModel" runAction="selectKeyword" :hexColorList="colorList" :className="'keywordContainerSmall'" />
       
         </div> 
     </div>
