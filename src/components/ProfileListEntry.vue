@@ -33,7 +33,7 @@
             <img class="profileImg" src="../assets/user-profile-icon.jpg" />
 
             <div class="profileInfo">
-                <div class="item-title">]<a href="#">{{name}}</a></div>
+                <div class="item-title"><a href="#">{{name}}</a></div>
                 <div>{{position}}</div>
                 <div>Keywords: {{keywords.join(", ")}}</div>
                 <!--<div style="border:dashed 1px #808080;margin:4px;">{{JSON.stringify(model)}}</div>-->
