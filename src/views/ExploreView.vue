@@ -19,7 +19,7 @@
         </div>
         <div class="searchSection">
           <FreeTextSearch />
-          <KeywordList :model="keywordQueryModel" runAction="selectKeyword" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+          <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
       
         </div> 
     </div>

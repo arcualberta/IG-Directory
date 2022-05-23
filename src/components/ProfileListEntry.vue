@@ -1,7 +1,7 @@
 <script lang="ts">
     import { defineComponent, computed, PropType } from "vue";
     import {useRouter} from 'vue-router'
-    
+
     import { search} from '@arcualberta/catfish-ui';
     import * as itemHelper from '../helpers/itemHelper';
 
@@ -21,6 +21,9 @@
                 name: computed(() => itemHelper.getName(p.model)),
                 position: computed(() => itemHelper.getPosition(p.model)),
                 keywords: computed(() => itemHelper.getKeywords(p.model)),
+                gotoProfile: () => {
+                    router.push("/profile/" + p.model.id)
+                }
             }
         },
     });
@@ -33,7 +36,7 @@
             <img class="profileImg" src="../assets/user-profile-icon.jpg" />
 
             <div class="profileInfo">
-                <div class="item-title"><a href="#">{{name}}</a></div>
+                <div class="item-title"><a href="#" @click="gotoProfile">{{name}}</a></div>
                 <div>{{position}}</div>
                 <div>Keywords: {{keywords.join(", ")}}</div>
                 <!--<div style="border:dashed 1px #808080;margin:4px;">{{JSON.stringify(model)}}</div>-->

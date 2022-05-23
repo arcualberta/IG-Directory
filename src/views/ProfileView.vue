@@ -1,9 +1,11 @@
 <script lang="ts">
-    import { defineComponent, computed, onMounted } from 'vue';
-    import { useStore } from 'vuex';
+    import { defineComponent, computed } from 'vue';
+    import { useRoute } from 'vue-router'
+
     import KeywordList from "../components/KeywordList.vue"
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
     import config from '../appsettings';
+    import { useSearchStore } from '../store'
 
     export default defineComponent({
         name: 'ProfileView',
@@ -15,15 +17,17 @@
             KeywordList
         },
         setup() {
-            const store = useStore();
-             store.dispatch(search.Actions.INIT_FILTER);
-            onMounted(() => store.dispatch(search.Actions.FRESH_SEARCH))
+
+            const searchStore = useSearchStore();
+            const keywordQueryModel = computed(() => searchStore.keywordQueryModel);
+
+            const route = useRoute();
+            const id = route.params.id;
 
             return {
-                state: computed(() => store.state),
-                keywordQueryModel: computed(() => store.state.search.keywordQueryModel),
-                searchResults: computed(() => store.state.search.searchResult),
-                 colorList:computed(()=>config.hexColorList)
+                id,
+                keywordQueryModel,
+                colorList: computed(() => config.hexColorList)
             }
         }
     });
@@ -31,6 +35,7 @@
 <template>
     
     <div class="Profile">
+        Profile ID: {{id}}
         <div class="background-grey-researcher">
             <div class="results">
                 <img class="results-image" />
