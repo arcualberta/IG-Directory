@@ -1,19 +1,4 @@
 <template>
-<!--
-    <div class="Explore">
-        <h1>This is an explore page</h1>
-
-        <h2>Search</h2>
-        <FreeTextSearch />
-
-        <h3>Search Results</h3>
-        <div v-for="item in searchResults?.items" :key="item.id">
-            <div class="entry-title">{{item.title}}</div>
-            {{JSON.stringify(item)}}
-            <hr />
-        </div>
-    </div> 
--->
      <div class="explore">
         <div class="items">
             <div class="selectedKeywords">
@@ -29,26 +14,8 @@
             </div>
 
             <div class="grey-BG contentList">
-               
-                <div v-for="item in searchResults?.items" :key="item.id">
-                    <div class="item">
-                        <div class="itemProfile">
-                           
-                            <img class="profileImg" src="../assets/user-profile-icon.jpg" />
-                            
-                            <div class="profileInfo">
-                                <span class="item-title">
-                                    <a href="#">{{name(item)}}</a>
-                                </span>
-                                {{position(item)}}
-                                <div class="content">{{item.content}}</div>
-                            </div>
-                           
-                        </div>   
-                    </div>
-                </div>
+                <ProfileListEntry v-for="item in searchResults?.items" :key="item.id" :model="item" />
             </div>
-            <!--{{JSON.stringify(state)}}-->
         </div>
         <div class="searchSection">
           <FreeTextSearch />
@@ -59,11 +26,12 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed, onMounted } from 'vue';
+    import { defineComponent, computed, onMounted, watch } from 'vue';
     import { useSearchStore } from '../store'
 
     import { useStore } from 'vuex';
     import KeywordList from "../components/KeywordList.vue"
+    import ProfileListEntry from '../components/ProfileListEntry.vue'
     import config from '../appsettings';
   
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
@@ -76,19 +44,30 @@
         },
         components: {
             FreeTextSearch,
-            KeywordList
+            KeywordList,
+            ProfileListEntry
         },
         setup() {
             const searchStore = useSearchStore();
 
+            const keywordQueryModel = computed(() => searchStore.keywordQueryModel);
+
+            watch(() => keywordQueryModel.value, (newValue) => {
+                //console.log(newValue, " watch value changed")
+                if (newValue)
+                    searchStore.fetchData();
+            });
+
             onMounted(() => {
+                //console.log("ExploreView.onMounted")
                 if (searchStore.keywordQueryModel)
                     searchStore.fetchData();
             })
 
             return {
                 searchStore,
-                keywordQueryModel: computed(() => searchStore.keywordQueryModel),
+                searchResults: computed(() => searchStore.searchResult),
+                keywordQueryModel,
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
                 colorList: computed(() => config.hexColorList),
             }
@@ -97,9 +76,6 @@
 </script>
 
 <style scoped>
-    .item{
-        padding: 15px;
-    }
     #app{
         background-color:#fff !important;
     }
@@ -120,23 +96,6 @@
        float: left;
         margin-top: 50px;
         padding:5px;
-    }
-    
-    .item_rofile{
-        width: 80%;
-    }
-    .profileInfo {
-        margin-left: 10px;
-        display: inline-block;
-       
-        width:70%;
-        float: right;
-    }
-
-    .profileImg {
-        width: 120px;
-        height: 120px;
-        margin-left: 5px;
     }
 
     .grey-BG {

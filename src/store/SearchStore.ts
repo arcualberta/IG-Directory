@@ -27,14 +27,35 @@ export const useSearchStore = defineStore('SearchStore', {
     }),
     getters: {
         resultCount: state => state.searchResult?.items?.length,
-        getName: () => (item: search.ResultItem) => item?.solrFields?.find(x => x.solrFieldId === SearchResultFieldMapping.NAME)?.fieldContent
+
+        /**
+         * Returns the value of the solr field with the name specified by the 
+         * second input parameter "solrFieldName" from the item specified by the
+         * first input parameter. If the firts input parameter is a number, then
+         * retrieves the item at that index from the search reslts stored at the
+         * store state */
+        getSolrFieldValue: state => (itemOrIndex: search.ResultItem | number, solrFieldName: string) => {
+
+            const item = (typeof itemOrIndex === "number")
+                ? state.searchResult?.items[itemOrIndex]
+                : itemOrIndex;
+
+            if (item?.solrFields) {
+                const index = Object.keys(item.solrFields).indexOf(solrFieldName);
+                if (index >= 0)
+                    return Object.values(item.solrFields)[index]
+            }
+            return null;
+        },
     },
     actions: {
         fetchQueryModel() {
+            console.log("fetchQueryModel");
             if (this.queryModelRetrieverApiUrl)
                 fetch(this.queryModelRetrieverApiUrl)
                     .then(response => response.json())
                     .then(data => {
+                        //console.log("keywordQueryModel:\n", data);
                         this.keywordQueryModel = data;
                     });
         },
@@ -71,8 +92,8 @@ export const useSearchStore = defineStore('SearchStore', {
                 })
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Search Results:\n", JSON.stringify(data));
-                        this.searchResult = data;
+                        //console.log("Search Results:\n", JSON.stringify(data));
+                        this.searchResult = JSON.parse(JSON.stringify(data));
                     })
                     .catch((error) => {
                         console.error('Item Load API Error:', error);
