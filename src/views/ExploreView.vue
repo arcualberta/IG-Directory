@@ -29,7 +29,6 @@
     import { defineComponent, computed, onMounted, watch } from 'vue';
     import { useSearchStore } from '../store'
 
-    import { useStore } from 'vuex';
     import KeywordList from "../components/KeywordList.vue"
     import ProfileListEntry from '../components/ProfileListEntry.vue'
     import config from '../appsettings';
