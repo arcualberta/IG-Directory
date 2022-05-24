@@ -1,11 +1,13 @@
 <script lang="ts">
     import { defineComponent, computed } from 'vue';
     import { useRoute } from 'vue-router'
+    import { Guid } from 'guid-typescript';
 
     import KeywordList from "../components/KeywordList.vue"
     import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
     import config from '../appsettings';
     import { useSearchStore } from '../store'
+    import * as itemHelper from '../helpers/itemHelper';
 
     export default defineComponent({
         name: 'ProfileView',
@@ -22,10 +24,16 @@
             const keywordQueryModel = computed(() => searchStore.keywordQueryModel);
 
             const route = useRoute();
-            const id = route.params.id;
+            const id = route.params.id as unknown as Guid;
+            searchStore.setActiveProfile(id);
+            const profile = computed(() => searchStore.activeProfile as search.ResultItem);
 
             return {
-                id,
+                searchStore,
+                profile,
+                name: computed(() => itemHelper.getName(profile.value)),
+                position: computed(() => itemHelper.getPosition(profile.value)),
+                keywords: computed(() => itemHelper.getKeywords(profile.value)),
                 keywordQueryModel,
                 colorList: computed(() => config.hexColorList)
             }
@@ -35,15 +43,14 @@
 <template>
     
     <div class="Profile">
-        Profile ID: {{id}}
         <div class="background-grey-researcher">
             <div class="results">
                 <img class="results-image" />
                 <p class="info-1">
-                    <u>Dia Da Costa (she/her)</u>
-                    <br>Professor
-                    <br>Faculty of Education
-                    <br>ddacosta@ualberta.ca
+                    <u>{{name}}</u>
+                    <br>{{position}}
+                    <br>xxxx
+                    <br>xxxx
                 </p>
                 <p>
                     Self-identification
@@ -54,7 +61,7 @@
         </div>
         <div class="right-content-researcher">
             <FreeTextSearch />
-             <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+            <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>
         <div class="explore-related">
 

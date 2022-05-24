@@ -22,6 +22,7 @@ export const useSearchStore = defineStore('SearchStore', {
             count: 0,
             items: [] as search.ResultItem[]
         } as search.SearchOutput,
+        activeProfile: null as search.ResultItem | null,
     }),
     getters: {
         resultCount: state => state.searchResult?.items?.length,
@@ -135,5 +136,12 @@ export const useSearchStore = defineStore('SearchStore', {
             this.keywordQueryModel?.containers.forEach(cont => cont.fields.forEach(field => field.selected = new Array(field.values.length).fill(false)))
             this.fetchData();
         },
+        setActiveProfile(profileId: Guid) {
+            this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
+            if (!this.activeProfile) {
+                //TODO: Make a GET call to keyword search controller's get method to retrieve the item and then 
+                //set it to the this.acrtiveProfile property.
+            }
+        }
     }
 });

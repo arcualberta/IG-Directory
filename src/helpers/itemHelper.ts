@@ -9,7 +9,7 @@ import { SearchResultFieldMapping } from '../appsettings';
  */
 export function getSolrFieldValue(item: search.ResultItem, solrFieldName: string) {
 
-    if (item.solrFields) {
+    if (item?.solrFields) {
         const index = Object.keys(item.solrFields).indexOf(solrFieldName);
         if (index >= 0)
             return Object.values(item.solrFields)[index]
