@@ -41,6 +41,7 @@
                 genderIdentity: computed(() => itemHelper.getGenderIdentity(profile.value)),
                 researchQuestion: computed(() => itemHelper.getResearchQuestion(profile.value)),
                 additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
+                communityProjects: computed(() => itemHelper.communityProjects(profile.value)),
                 keywordQueryModel,
                 colorList: computed(() => config.hexColorList)
             }
@@ -72,7 +73,11 @@
                 </p>
                 <br>
                 <p>
-                    <u>Research keywords:</u> {{keywords}},{{additionalKeywords}}
+                    <u>Research keywords:</u> {{keywords}}, {{additionalKeywords}}
+                </p>
+                <br>
+                <p>
+                    <u>Community Projects:</u> {{communityProjects}}
                 </p>
             </div>
         </div>

@@ -54,6 +54,9 @@ export function getResearchQuestion(item: search.ResultItem) {
     return getStringArrayValue(item, SearchResultFieldMapping.RESEARCH_QUESTION).join(", ")
 }
 export function getAdditionalKeywords(item: search.ResultItem) {
-    return getConcatenatedStringValue(item, SearchResultFieldMapping.ADDITIONAL_KEYWORDS)
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.ADDITIONAL_KEYWORDS)?.replaceAll(";",", ")
+}
+export function communityProjects(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.COMMUNITY_BASED_PROJECTS)
 }
 
