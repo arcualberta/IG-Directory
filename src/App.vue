@@ -45,9 +45,6 @@
 
     import { useSearchStore, useProfileStore } from './store'
 
-
-    import { useStore } from 'vuex';
-
     import { common } from '@arcualberta/catfish-ui';
     import config from './appsettings';
 
@@ -71,22 +68,10 @@
             searchStore.queryApiUrl = config.dataServiceApiRoot + 'keywordsearch';
 
             const profiletore = useProfileStore();
-
-            const store = useStore();
-
-            store.commit(common.Mutations.SET_PAGE_ID, config.pageId)
-            store.commit(common.Mutations.SET_BLOCK_ID, config.blockId)
-            store.commit(common.Mutations.SET_DATA_SERVICE_API_ROOT, config.dataServiceApiRoot)
-            store.commit(common.Mutations.SET_PAGE_SERVICE_API_ROOT, config.pageServiceApiRoot)
-            store.commit(common.Mutations.SET_SOLR_SERVICE_API_ROOT, config.solrServiceApiRoot)
             
-            store.commit(common.Mutations.SET_TEMPLATE_ID, config.dataAttributes.templateId)
-            store.commit(common.Mutations.SET_COLLECTION_ID, config.dataAttributes.collectionId)
-            store.commit(common.Mutations.SET_GROUP_ID, config.dataAttributes.groupId)
             return {
                 searchStore,
                 profiletore,
-                state: computed(() => store.state)
             }
         },
     });
