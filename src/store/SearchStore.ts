@@ -26,9 +26,9 @@ export const useSearchStore = defineStore('SearchStore', {
     }),
     getters: {
         resultCount: state => state.searchResult?.items?.length,
-        selectedKeywords(state): search.Keyword[] {
+        selectedKeywords(): search.Keyword[] {
             const flattenedList: search.Keyword[] = [];
-            state.keywordQueryModel?.containers.forEach((container, cIndex) => {
+            this.keywordQueryModel?.containers.forEach((container, cIndex) => {
                 container.fields.forEach((field, fIndex) => {
                     field.selected.forEach((flag, vIndex) => {
                         if (flag) {
@@ -46,26 +46,6 @@ export const useSearchStore = defineStore('SearchStore', {
             });
 
             return flattenedList;
-        },
-
-        /**
-         * Returns the value of the solr field with the name specified by the 
-         * second input parameter "solrFieldName" from the item specified by the
-         * first input parameter. If the firts input parameter is a number, then
-         * retrieves the item at that index from the search reslts stored at the
-         * store state */
-        getSolrFieldValue: state => (itemOrIndex: search.ResultItem | number, solrFieldName: string) => {
-
-            const item = (typeof itemOrIndex === "number")
-                ? state.searchResult?.items[itemOrIndex]
-                : itemOrIndex;
-
-            if (item?.solrFields) {
-                const index = Object.keys(item.solrFields).indexOf(solrFieldName);
-                if (index >= 0)
-                    return Object.values(item.solrFields)[index]
-            }
-            return null;
         },
     },
     actions: {

@@ -38,3 +38,9 @@ export enum SearchResultFieldMapping {
     KEYWORDS = "_keywords__ss",
 
 }
+
+export type CategoryOptions = {
+    Position: ["Assistant Professor", "Associate Professor", "Associate Clinical Professor", "Professor"],
+    Faculty: [],
+    SelfIdentification: []
+}
