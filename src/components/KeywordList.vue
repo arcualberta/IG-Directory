@@ -138,6 +138,7 @@
         padding-right: 10px;
         max-width: 150px;
         white-space: normal;
+        border: none;
     }
 
         .dir-keyword-button:focus {

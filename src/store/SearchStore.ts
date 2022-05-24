@@ -119,8 +119,13 @@ export const useSearchStore = defineStore('SearchStore', {
         setActiveProfile(profileId: Guid) {
             this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
             if (!this.activeProfile) {
-                //TODO: Make a GET call to keyword search controller's get method to retrieve the item and then 
-                //set it to the this.acrtiveProfile property.
+                
+                const apiUrl=this.queryApiUrl+ '/' + profileId;
+                fetch(apiUrl)
+                .then(response => response.json())
+                    .then(data => 
+                        this.activeProfile= data
+                    );
             }
         }
     }
