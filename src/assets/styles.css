@@ -387,3 +387,21 @@ xremove{
     font-family: sans-serif;
     font-weight: bold;
 }
+
+/* SEARCH TEXT */
+.dir-text-search > input{
+    background-image: url(icon-search.png);
+    background-color: var(--grey);
+    border-radius: 50px;
+    cursor: pointer;
+    
+    position: relative;
+    width:275px;
+    display: inline-block;
+    /*margin-top: 15px;*/
+    padding: 12.5px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 5%;
+    border: none;
+}
