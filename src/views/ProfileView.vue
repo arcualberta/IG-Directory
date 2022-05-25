@@ -41,7 +41,8 @@
                 genderIdentity: computed(() => itemHelper.getGenderIdentity(profile.value)),
                 researchQuestion: computed(() => itemHelper.getResearchQuestion(profile.value)),
                 additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
-                communityProjects: computed(() => itemHelper.communityProjects(profile.value)),
+                communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
+                externalLinks: computed(() => itemHelper.getLinks(profile.value)),
                 keywordQueryModel,
                 colorList: computed(() => config.hexColorList)
             }
@@ -55,7 +56,7 @@
             <div class="results">
                 <img class="results-image" />
                 <p class="info-1">
-                    <u>{{name}}</u>
+                    <u>{{name}} ({{genderIdentity}})</u>
                     <br>{{position}}
                     <br>{{organization}}
                     <br>{{email}}
@@ -64,7 +65,7 @@
                     Self-identification
                     <br>Disability: <span>{{disability}}</span>
                     <br>Race: {{personOfColor}}
-                    <br>Gender: {{genderIdentity}}
+                    <br>Gender: 
                 </p>
             </div>
             <div class="results-content">
@@ -73,15 +74,26 @@
                 </p>
                 <br>
                 <p>
-                    <u>Research keywords:</u> {{keywords}}, {{additionalKeywords}}
+                    <u>Research keywords:</u> {{additionalKeywords}}
                 </p>
                 <br>
                 <p>
                     <u>Community Projects:</u> {{communityProjects}}
                 </p>
+                <br>
+                <p>
+                    <u>Links:</u> {{externalLinks}}
+                </p>
+            </div>
+            <div>
+                <button class="contact">Contact me!</button>
             </div>
         </div>
         <div class="right-content-researcher">
+            <div>
+                <button class="back-to-search">Back to search results</button>
+            </div>
+            <br>
             <FreeTextSearch />
             <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>

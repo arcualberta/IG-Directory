@@ -33,7 +33,7 @@ export function getPosition(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.POSITION)
 }
 export function getKeywords(item: search.ResultItem) {
-    return getConcatenatedStringValue(item, SearchResultFieldMapping.KEYWORDS)
+    return getStringArrayValue(item, SearchResultFieldMapping.KEYWORDS)
 }
 export function getOrganization(item: search.ResultItem) {
     return getStringArrayValue(item, SearchResultFieldMapping.ORGANIZATION).join(", ")
@@ -56,7 +56,11 @@ export function getResearchQuestion(item: search.ResultItem) {
 export function getAdditionalKeywords(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.ADDITIONAL_KEYWORDS)?.replaceAll(";",", ")
 }
-export function communityProjects(item: search.ResultItem) {
+export function getCommunityProjects(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.COMMUNITY_BASED_PROJECTS)
 }
+export function getLinks(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.EXTERNAL_LINKS)
+}
+
 
