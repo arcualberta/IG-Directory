@@ -16,11 +16,6 @@ export default {
     queryParameters: {
     },
     hexColorList:"#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5",
-    keywordList: ["Activism", "Age", "Black Studies", "Body", "Canada", "Class", "Colonialism", "Culture", " Decolonization", "Disability",
-        "Diversity", "Environment", "Ethics", "Family", "Feminism", "Feminist Theory", "Film", "Gender", "Genderqueer", "Government",
-        "Health", "History", "Human Rights", "Identity", "Immigration", "Indigenous", "Inequality", " International", "Intersectionality", "Language", "Law", "Literature", "Marginalized population", "Masculinities", "Media", "Mental health", " Mothering",
-        "Pedagogy", "Policy", "Politics", "Qualitative", "Research", " Queer", "Quare", "Race", "Relation", "Religion", "Sex", "Sexuality",
-        "Science", "Sport", "Social justice", "Transgender", " Two-spirit", "Violence", "Work"]
 }
 
 export enum SearchResultFieldMapping {
@@ -38,10 +33,10 @@ export enum SearchResultFieldMapping {
     KEYWORDS_REFERENCE = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_fb7a7395-969b-458e-898b-7cb07efabf33_ts",
     ADDITIONAL_KEYWORDS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_d860b5ef-93c2-4c88-a213-7746873fe104_ts",
     RESEARCH_QUESTION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_0774a8bf-bcf0-4733-8480-85a3b9e1451e_ts",
+    DESCRIPTION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_0774a8bf-bcf0-4733-8480-85a3b9e1451e_ts",
     EXTERNAL_LINKS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_44f39fe7-f3af-47da-a2b6-f610c2f0eda3_ts",
     CONSENT = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_84f22416-34ac-4451-bc59-e403bcd684fa_ts",
     KEYWORDS = "_keywords__ss",
-
 }
 
 export enum QueryCategories {
@@ -52,7 +47,7 @@ export enum QueryCategories {
 }
 
 export const QueryCategoryValues = {
-    Keywords: ["Activism", "Age", "Black Studies", "Body", "Canada", "Class", "Colonialism", "Culture", " Decolonization", "Disability",
+    Keywords: ["Activism", "Age", "Black studies", "Body", "Canada", "Class", "Colonialism", "Culture", " Decolonization", "Disability",
         "Diversity", "Environment", "Ethics", "Family", "Feminism", "Feminist Theory", "Film", "Gender", "Genderqueer", "Government",
         "Health", "History", "Human Rights", "Identity", "Immigration", "Indigenous", "Inequality", " International", "Intersectionality", "Language", "Law", "Literature", "Marginalized population", "Masculinities", "Media", "Mental health", " Mothering",
         "Pedagogy", "Policy", "Politics", "Qualitative", "Research", " Queer", "Quare", "Race", "Relation", "Religion", "Sex", "Sexuality",
