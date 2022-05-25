@@ -11,6 +11,13 @@ export const createQueryModel = () => {
         search.SolrQuery.AggregationOperator.AND,
         "keywords");
 
+    //Free-text search field
+    queryModel.appendNewFieldConstraint(
+        config.SearchResultFieldMapping.FREE_TEXT,
+        [],
+        search.SolrQuery.AggregationOperator.AND,
+        "freetext");
+
     //Position constraint
     queryModel.appendNewFieldConstraint(
         config.SearchResultFieldMapping.POSITION,

@@ -1,6 +1,6 @@
 <script lang="ts">
    // import { Guid } from 'guid-typescript'
-    import { defineComponent, onMounted, computed, PropType, onUpdated} from "vue";
+    import { defineComponent, onMounted, computed, PropType, onUpdated, ref} from "vue";
     import {useRouter} from 'vue-router'
     
     import { search} from '@arcualberta/catfish-ui';
@@ -39,8 +39,9 @@
             let hexColors = p.hexColorList ? p.hexColorList?.split(',').map(function (c) {
                 return c.trim();
             }) : null;
-            onMounted(()=>{ 
-                const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`)); 
+
+            onMounted(() => {
+                const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`));
                 let length = hexColors ? hexColors.length : 0;
                 let i = 0;
                 btns.forEach((b) => {
@@ -56,10 +57,11 @@
                         b.setAttribute("style", "background-color: " + color);
                     }
 
-                });  
-            })
-            onUpdated(()=>{ 
-                const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`)); 
+                });
+            });
+
+            onUpdated(() => {
+                const btns = Array.from(document.getElementsByClassName(`dir-keyword-button`));
                 let length = hexColors ? hexColors.length : 0;
                 let i = 0;
                 btns.forEach((b) => {
@@ -74,8 +76,15 @@
                         let color = "hsla(" + ~~(360 * Math.random()) + "," + "70%," + "80%,1)";
                         b.setAttribute("style", "background-color: " + color);
                     }
-                });  
-            })
+                });
+            });
+
+            const freeTextSearchValue = ref("");
+
+            const runFreeTextSearch = () => {
+                searchStore.setFreeTextSearchValue(freeTextSearchValue.value);
+
+            }
 
             return {
                 router,
@@ -93,6 +102,8 @@
                     if (p.actionLink)
                         router.push("/" + p.actionLink);
                 },
+                freeTextSearchValue,
+                runFreeTextSearch,
 
                 keywordQueryModel: computed(() => searchStore.keywordQueryModel),
                 keywords: computed(() => p.model),
@@ -110,7 +121,7 @@
         </div>
     </div>-->
     <div class="input-group dir-text-search">
-        <input type="text" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
+        <input type="text" v-model="freeTextSearchValue" @blur="runFreeTextSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
     </div>
     <div class="row keywordContainer">
         <span v-for="(keyword, index) in keywords" :key="keyword" class="dir-keyword">

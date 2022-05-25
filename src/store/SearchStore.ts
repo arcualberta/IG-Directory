@@ -52,7 +52,14 @@ export const useSearchStore = defineStore('SearchStore', {
         //},
         selectedKeywords(): search.SolrQuery.ValueConstraint[] {
             return this.keywords.filter(keyword => keyword.selected)
-        }
+        },
+        freeTextField(): search.SolrQuery.ValueConstraint {
+            const fieldConstraint = this.solrQueryModel.queryConstraints.find(qc => qc.internalId === "freetext") as search.SolrQuery.FieldConstraint;
+            if (fieldConstraint.valueConstraints.length === 0)
+                fieldConstraint.valueConstraints.push({} as search.SolrQuery.ValueConstraint);
+
+            return fieldConstraint.valueConstraints[0];
+        },
     },
     actions: {
         fetchQueryModel() {
@@ -121,6 +128,21 @@ export const useSearchStore = defineStore('SearchStore', {
             this.selectedKeywords[index].selected = false;
             this.fetchData();
         },
+        clearKeywordSelection() {
+            this.selectedKeywords.forEach(keyword => keyword.selected = false);
+            this.fetchData();
+        },
+        setFreeTextSearchValue(text: string) {
+            if (text?.length > 0) {
+                this.freeTextField.selected = true;
+                this.freeTextField.value = text;
+            }
+            else {
+                this.freeTextField.selected = false;
+                this.freeTextField.value = "";
+            }
+            this.fetchData();
+        },
         //selectKeyword(payload: search.KeywordIndex) {
         //    if (this.keywordQueryModel) {
         //        this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = true;
@@ -133,10 +155,10 @@ export const useSearchStore = defineStore('SearchStore', {
         //        this.fetchData();
         //    }
         //},
-        clearKeywordSelection() {
-            this.keywordQueryModel?.containers.forEach(cont => cont.fields.forEach(field => field.selected = new Array(field.values.length).fill(false)))
-            this.fetchData();
-        },
+        //clearKeywordSelection() {
+        //    this.keywordQueryModel?.containers.forEach(cont => cont.fields.forEach(field => field.selected = new Array(field.values.length).fill(false)))
+        //    this.fetchData();
+        //},
 
         setActiveProfile(profileId: Guid) {
             this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
