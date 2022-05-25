@@ -7,8 +7,7 @@
         <div class="searchbar-rectangle">
             <FreeTextSearch />
         </div>
-        <KeywordList :action-link="'explore'" :model="keywordQueryModel" :hexColorList="colorList" />
-
+        <KeywordList :action-link="'explore'" :model="searchStore.keywords" :hexColorList="colorList" />
     </div>
 </template>
 

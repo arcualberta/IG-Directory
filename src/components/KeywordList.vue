@@ -13,7 +13,8 @@
         },
         props: {
             model:{
-                type: null as PropType<search.KeywordQueryModel> | null,
+                //type: null as PropType<search.KeywordQueryModel> | null,
+                type: null as PropType<search.SolrQuery.FieldConstraint> | null,
                 required: true
             },
             hexColorList: {
@@ -79,32 +80,42 @@
             return {
                 router,
                 searchStore,
-                filterByKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
-                    searchStore.selectKeyword({ containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex)
+                //filterByKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
+                //    searchStore.selectKeyword({ containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex)
+
+                //    console.log("Action Link: ", p.actionLink)
+                //    if (p.actionLink)
+                //        router.push("/" + p.actionLink);
+                //},
+                filterByKeyword: (keyword: search.SolrQuery.ValueConstraint) => {
+                    keyword.selected = true;
 
                     console.log("Action Link: ", p.actionLink)
                     if (p.actionLink)
                         router.push("/" + p.actionLink);
                 },
-               
+
                 keywordQueryModel: computed(() => searchStore.keywordQueryModel),
+                keywords: computed(() => p.model),
             }
         },
     });
 </script>
 
 <template>
-
-        <div v-for="(container, cIdx) in keywordQueryModel?.containers" :key="container">
-            <div v-for="(field, fIdx) in container.fields" :key="field"   :class="className? 'row ' + className : 'row keywordContainer'">
-                <span v-for="(value, vIdx) in field.values" :key="value" class="dir-keyword">
-                    <button @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
-                    <!--<button v-if="runAction === null" @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
-                    <button v-else @click="searchStore.selectKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>--> 
-                </span>
-            </div>
+    <!--<div v-for="(container, cIdx) in keywordQueryModel?.containers" :key="container">
+        <div v-for="(field, fIdx) in container.fields" :key="field"   :class="className? 'row ' + className : 'row keywordContainer'">
+            <span v-for="(value, vIdx) in field.values" :key="value" class="dir-keyword">
+                <button @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
+            </span>
         </div>
-    
+    </div>-->
+    <div class="row keywordContainer">
+        <span v-for="(keyword) in keywords?.valueConstraints" :key="keyword" class="dir-keyword">
+            <button @click="filterByKeyword(keyword)" class="dir-keyword-button" ref="dirBtn">{{ keyword.value }}</button>
+        </span>
+    </div>
+
 </template>
 
 <style scoped>

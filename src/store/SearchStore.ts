@@ -27,6 +27,7 @@ export const useSearchStore = defineStore('SearchStore', {
         activeProfile: null as search.ResultItem | null,
     }),
     getters: {
+        keywords(): search.SolrQuery.FieldConstraint { return this.solrQueryModel.queryConstraints.find(qc => qc.internalId === "keywords") as search.SolrQuery.FieldConstraint },
         resultCount: state => state.searchResult?.items?.length,
         selectedKeywords(): search.Keyword[] {
             const flattenedList: search.Keyword[] = [];
@@ -102,12 +103,12 @@ export const useSearchStore = defineStore('SearchStore', {
                     });
             }
         },
-        selectKeyword(payload: search.KeywordIndex) {
-            if (this.keywordQueryModel) {
-                this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = true;
-                this.fetchData();
-            }
-        },
+        //selectKeyword(payload: search.KeywordIndex) {
+        //    if (this.keywordQueryModel) {
+        //        this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = true;
+        //        this.fetchData();
+        //    }
+        //},
         unselectKeyword(payload: search.KeywordIndex) {
             if (this.keywordQueryModel) {
                 this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = false;
@@ -118,6 +119,7 @@ export const useSearchStore = defineStore('SearchStore', {
             this.keywordQueryModel?.containers.forEach(cont => cont.fields.forEach(field => field.selected = new Array(field.values.length).fill(false)))
             this.fetchData();
         },
+
         setActiveProfile(profileId: Guid) {
             this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
             if (!this.activeProfile) {
