@@ -33,6 +33,30 @@ export function getPosition(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.POSITION)
 }
 export function getKeywords(item: search.ResultItem) {
-    return getStringArrayValue(item, SearchResultFieldMapping.KEYWORDS)
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.KEYWORDS)
+}
+export function getOrganization(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.ORGANIZATION).join(", ")
+}
+export function getEmail(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.EMAIL).join(", ")
+}
+export function getDisability(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.DISABILITY).join(", ")
+}
+export function getPersonOfColor(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.PERSON_OF_COLOR).join(", ")
+}
+export function getGenderIdentity(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.GENDER_IDENTITY).join(", ")
+}
+export function getResearchQuestion(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.RESEARCH_QUESTION).join(", ")
+}
+export function getAdditionalKeywords(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.ADDITIONAL_KEYWORDS)?.replaceAll(";",", ")
+}
+export function communityProjects(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.COMMUNITY_BASED_PROJECTS)
 }
 

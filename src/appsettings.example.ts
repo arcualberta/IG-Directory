@@ -32,7 +32,7 @@ export enum SearchResultFieldMapping {
     DISPLAY_ON_PROFILE = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_172f88ff-7c1e-4a81-aaca-0a5483af8d51_ts",
     KEYWORDS_REFERENCE = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_fb7a7395-969b-458e-898b-7cb07efabf33_ts",
     ADDITIONAL_KEYWORDS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_d860b5ef-93c2-4c88-a213-7746873fe104_ts",
-    DESCRIPTION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_0774a8bf-bcf0-4733-8480-85a3b9e1451e_ts",
+    RESEARCH_QUESTION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_0774a8bf-bcf0-4733-8480-85a3b9e1451e_ts",
     EXTERNAL_LINKS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_44f39fe7-f3af-47da-a2b6-f610c2f0eda3_ts",
     CONSENT = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_84f22416-34ac-4451-bc59-e403bcd684fa_ts",
     KEYWORDS = "_keywords__ss",

@@ -34,6 +34,14 @@
                 name: computed(() => itemHelper.getName(profile.value)),
                 position: computed(() => itemHelper.getPosition(profile.value)),
                 keywords: computed(() => itemHelper.getKeywords(profile.value)),
+                organization: computed(() => itemHelper.getOrganization(profile.value)),
+                email: computed(() => itemHelper.getEmail(profile.value)),
+                disability: computed(() => itemHelper.getDisability(profile.value)),
+                personOfColor: computed(() => itemHelper.getPersonOfColor(profile.value)),
+                genderIdentity: computed(() => itemHelper.getGenderIdentity(profile.value)),
+                researchQuestion: computed(() => itemHelper.getResearchQuestion(profile.value)),
+                additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
+                communityProjects: computed(() => itemHelper.communityProjects(profile.value)),
                 keywordQueryModel,
                 colorList: computed(() => config.hexColorList)
             }
@@ -49,13 +57,27 @@
                 <p class="info-1">
                     <u>{{name}}</u>
                     <br>{{position}}
-                    <br>xxxx
-                    <br>xxxx
+                    <br>{{organization}}
+                    <br>{{email}}
                 </p>
-                <p>
+                <p class="info-2">
                     Self-identification
-                    <br>
-                    Disability: -
+                    <br>Disability: <span>{{disability}}</span>
+                    <br>Race: {{personOfColor}}
+                    <br>Gender: {{genderIdentity}}
+                </p>
+            </div>
+            <div class="results-content">
+                <p>
+                    <u>Research question:</u> {{researchQuestion}}
+                </p>
+                <br>
+                <p>
+                    <u>Research keywords:</u> {{keywords}}, {{additionalKeywords}}
+                </p>
+                <br>
+                <p>
+                    <u>Community Projects:</u> {{communityProjects}}
                 </p>
             </div>
         </div>
