@@ -83,6 +83,11 @@ export const useSearchStore = defineStore('SearchStore', {
                 if (this.keywordQueryModel)
                     formData.append("queryParams", JSON.stringify(this.keywordQueryModel));
 
+                if (this.solrQueryModel) {
+                    const queryString = this.solrQueryModel.buildQueryString();
+                    formData.append("query", queryString);
+                }
+
                 if (this.searchText)
                     formData.append("searchText", this.searchText);
 
@@ -113,10 +118,8 @@ export const useSearchStore = defineStore('SearchStore', {
             }
         },
         unselectKeyword(index: number) {
-            if (this.keywords[index].selected) {
-                this.keywords[index].selected = false;
-                this.fetchData();
-            }
+            this.selectedKeywords[index].selected = false;
+            this.fetchData();
         },
         //selectKeyword(payload: search.KeywordIndex) {
         //    if (this.keywordQueryModel) {

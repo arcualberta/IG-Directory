@@ -54,15 +54,17 @@
             //        searchStore.fetchData();
             //});
 
-            //onMounted(() => {
-            //    //console.log("ExploreView.onMounted")
-            //    if (searchStore.keywordQueryModel)
-            //        searchStore.fetchData();
-            //})
+            const searchResults = computed(() => searchStore.searchResult)
+
+            onMounted(() => {
+                //console.log("ExploreView.onMounted")
+                if (searchResults.value?.items?.length === 0)
+                    searchStore.fetchData();
+            })
 
             return {
                 searchStore,
-                searchResults: computed(() => searchStore.searchResult),
+                searchResults,
                 //keywordQueryModel,
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
                 colorList: computed(() => config.hexColorList),
@@ -126,8 +128,13 @@
         font-size: medium;
     }
 
-   
-    
+    .xremove{
+        font-size:smaller;
+        cursor: pointer;
+    }
+    .xremove:hover{
+        color: red;
+    }
 
     .contentList::-webkit-scrollbar {
         width: 7px;
