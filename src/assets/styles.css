@@ -163,7 +163,7 @@ HOME BODY*/
 
 /*RESEARCHER PAGE*/
 .background-grey-researcher {
-    background-color: var(--cararra);
+    background-color: #ececec;
     border-radius: 30px;
     position: relative;
     width: 50%;
@@ -207,6 +207,8 @@ HOME BODY*/
     display: inline-block;
     position: relative;
     float: left;
+    font-size: 18px;
+    font-family: Arial-Bold;
     line-height: 17px;
     margin-top: 20px;
 }
@@ -215,6 +217,8 @@ HOME BODY*/
     display: inline-block;
     position: relative;
     float: right;
+    font-size: 18px;
+    font-family: Arial-Bold;
     line-height: 17px;
     margin-top: 20px;
     padding: 17px;
@@ -223,6 +227,8 @@ HOME BODY*/
 .results-content {
     position: relative;
     display: block;
+    font-size: 18px;
+    font-family: Arial-Bold;
     margin-left: 20px;
     line-height: 17px;
 }
@@ -230,6 +236,7 @@ HOME BODY*/
 .contact {
     background-color: white;
     border-radius: 50px;
+    border: none;
     position: relative;
     padding: 12.5px;
     margin: 20px;
@@ -237,8 +244,9 @@ HOME BODY*/
 }
 
 .back-to-search {
-    background-color: var(--cararra);
+    background-color: #ececec;
     border-radius: 50px;
+    border:none;
     position: relative;
     display: inline-block;
     padding: 12.5px;
