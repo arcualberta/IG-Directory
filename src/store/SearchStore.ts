@@ -141,7 +141,6 @@ export const useSearchStore = defineStore('SearchStore', {
                 this.freeTextField.selected = false;
                 this.freeTextField.value = "";
             }
-            this.fetchData();
         },
         //selectKeyword(payload: search.KeywordIndex) {
         //    if (this.keywordQueryModel) {

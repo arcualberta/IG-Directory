@@ -1,6 +1,6 @@
 <script lang="ts">
    // import { Guid } from 'guid-typescript'
-    import { defineComponent, onMounted, computed, PropType, onUpdated, ref} from "vue";
+    import { defineComponent, onMounted, computed, PropType, onUpdated } from "vue";
     import {useRouter} from 'vue-router'
     
     import { search} from '@arcualberta/catfish-ui';
@@ -79,33 +79,31 @@
                 });
             });
 
-            const freeTextSearchValue = ref("");
+            const freeTextSearchValue = computed({
+                get: () => searchStore.freeTextField.selected ? searchStore.freeTextField.value : "",
+                set: val =>  searchStore.setFreeTextSearchValue(val),
+            });
 
-            const runFreeTextSearch = () => {
-                searchStore.setFreeTextSearchValue(freeTextSearchValue.value);
+            const runSearch = () => {
+                searchStore.fetchData();
 
+                if (p.actionLink)
+                    router.push("/" + p.actionLink);
+            }
+
+            const filterByKeyword = (index: number) => {
+                searchStore.selectKeyword(index)
+                //console.log("Action Link: ", p.actionLink)
+                if (p.actionLink)
+                    router.push("/" + p.actionLink);
             }
 
             return {
                 router,
                 searchStore,
-                //filterByKeyword: (cIndex: number, fIndex: number, vIndex: number) => {
-                //    searchStore.selectKeyword({ containerIndex: cIndex, fieldIndex: fIndex, valueIndex: vIndex } as search.KeywordIndex)
-
-                //    console.log("Action Link: ", p.actionLink)
-                //    if (p.actionLink)
-                //        router.push("/" + p.actionLink);
-                //},
-                filterByKeyword: (index: number) => {
-                    searchStore.selectKeyword(index)
-                    console.log("Action Link: ", p.actionLink)
-                    if (p.actionLink)
-                        router.push("/" + p.actionLink);
-                },
+                filterByKeyword,
                 freeTextSearchValue,
-                runFreeTextSearch,
-
-                keywordQueryModel: computed(() => searchStore.keywordQueryModel),
+                runSearch,
                 keywords: computed(() => p.model),
             }
         },
@@ -121,7 +119,7 @@
         </div>
     </div>-->
     <div class="input-group dir-text-search">
-        <input type="text" v-model="freeTextSearchValue" @blur="runFreeTextSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
+        <input type="text" v-model="freeTextSearchValue" @blur="runSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
     </div>
     <div class="row keywordContainer">
         <span v-for="(keyword, index) in keywords" :key="keyword" class="dir-keyword">
