@@ -4,11 +4,10 @@
             <div class="selectedKeywords">
                 <b>Selected Keywords</b>
                
-                <div v-for="keyword in selectedKeywords" :key="keyword.index.valueIndex" >
+                <div v-for="(keyword, index) in selectedKeywords" :key="keyword" >
                    
                     <span class="selectedKeyword">{{keyword.value}}</span> 
-                    <!--  <span class="xremove" @click="removeKeyword(keyword.index)">X</span> -->
-                    <span class="xremove" @click="searchStore.unselectKeyword(keyword.index)">X</span>
+                    <span class="xremove" @click="searchStore.unselectKeyword(index)">X</span>
                 </div>
                
             </div>
@@ -18,9 +17,8 @@
             </div>
         </div>
         <div class="searchSection">
-          <FreeTextSearch />
-          <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
-      
+            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+
         </div> 
     </div>
 </template>
@@ -33,7 +31,7 @@
     import ProfileListEntry from '../components/ProfileListEntry.vue'
     import config from '../appsettings';
   
-    import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
+    import { search } from '@arcualberta/catfish-ui';
 
 
     export default defineComponent({
@@ -42,31 +40,30 @@
             search
         },
         components: {
-            FreeTextSearch,
             KeywordList,
             ProfileListEntry
         },
         setup() {
             const searchStore = useSearchStore();
 
-            const keywordQueryModel = computed(() => searchStore.keywordQueryModel);
+            //const keywordQueryModel = computed(() => searchStore.keywordQueryModel);
 
-            watch(() => keywordQueryModel.value, (newValue) => {
-                //console.log(newValue, " watch value changed")
-                if (newValue)
-                    searchStore.fetchData();
-            });
+            //watch(() => keywordQueryModel.value, (newValue) => {
+            //    //console.log(newValue, " watch value changed")
+            //    if (newValue)
+            //        searchStore.fetchData();
+            //});
 
-            onMounted(() => {
-                //console.log("ExploreView.onMounted")
-                if (searchStore.keywordQueryModel)
-                    searchStore.fetchData();
-            })
+            //onMounted(() => {
+            //    //console.log("ExploreView.onMounted")
+            //    if (searchStore.keywordQueryModel)
+            //        searchStore.fetchData();
+            //})
 
             return {
                 searchStore,
                 searchResults: computed(() => searchStore.searchResult),
-                keywordQueryModel,
+                //keywordQueryModel,
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
                 colorList: computed(() => config.hexColorList),
             }

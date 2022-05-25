@@ -4,9 +4,6 @@
         <p class="explore-text">
             Search the Intersections of Gender Researcher Directory using the search bar, or scroll through our interactive keyword below.
         </p>
-        <div class="searchbar-rectangle">
-            <FreeTextSearch />
-        </div>
         <KeywordList :action-link="'explore'" :model="searchStore.keywords" :hexColorList="colorList" />
     </div>
 </template>
@@ -16,7 +13,7 @@
 
     import { useSearchStore } from '../store'
 
-    import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
+    import { search } from '@arcualberta/catfish-ui';
     import KeywordList from "../components/KeywordList.vue"
     import config from '../appsettings';
 
@@ -26,7 +23,6 @@
             search
         },
         components: {
-            FreeTextSearch,
             KeywordList
         },
         setup() {
@@ -34,7 +30,7 @@
            
             return {
                 searchStore,
-                keywordQueryModel: computed(() => searchStore.keywordQueryModel),
+                //keywordQueryModel: computed(() => searchStore.keywordQueryModel),
                 colorList: computed(()=>config.hexColorList)
             }
         }

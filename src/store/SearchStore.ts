@@ -27,29 +27,32 @@ export const useSearchStore = defineStore('SearchStore', {
         activeProfile: null as search.ResultItem | null,
     }),
     getters: {
-        keywords(): search.SolrQuery.FieldConstraint { return this.solrQueryModel.queryConstraints.find(qc => qc.internalId === "keywords") as search.SolrQuery.FieldConstraint },
+        keywords(): search.SolrQuery.ValueConstraint[] { return (this.solrQueryModel.queryConstraints.find(qc => qc.internalId === "keywords") as search.SolrQuery.FieldConstraint).valueConstraints },
         resultCount: state => state.searchResult?.items?.length,
-        selectedKeywords(): search.Keyword[] {
-            const flattenedList: search.Keyword[] = [];
-            this.keywordQueryModel?.containers.forEach((container, cIndex) => {
-                container.fields.forEach((field, fIndex) => {
-                    field.selected.forEach((flag, vIndex) => {
-                        if (flag) {
-                            flattenedList.push({
-                                index: {
-                                    containerIndex: cIndex,
-                                    fieldIndex: fIndex,
-                                    valueIndex: vIndex
-                                },
-                                value: field.values[vIndex]
-                            })
-                        }
-                    })
-                })
-            });
+        //selectedKeywords(): search.Keyword[] {
+        //    const flattenedList: search.Keyword[] = [];
+        //    this.keywordQueryModel?.containers.forEach((container, cIndex) => {
+        //        container.fields.forEach((field, fIndex) => {
+        //            field.selected.forEach((flag, vIndex) => {
+        //                if (flag) {
+        //                    flattenedList.push({
+        //                        index: {
+        //                            containerIndex: cIndex,
+        //                            fieldIndex: fIndex,
+        //                            valueIndex: vIndex
+        //                        },
+        //                        value: field.values[vIndex]
+        //                    })
+        //                }
+        //            })
+        //        })
+        //    });
 
-            return flattenedList;
-        },
+        //    return flattenedList;
+        //},
+        selectedKeywords(): search.SolrQuery.ValueConstraint[] {
+            return this.keywords.filter(keyword => keyword.selected)
+        }
     },
     actions: {
         fetchQueryModel() {
@@ -86,8 +89,8 @@ export const useSearchStore = defineStore('SearchStore', {
                 formData.append("offset", this.offset.toString());
                 formData.append("max", this.pageSize.toString());
 
-                console.log("Store:\n", JSON.stringify(this))
-                console.log("FormData:\n", formData)
+                //console.log("Store:\n", JSON.stringify(this))
+                //console.log("FormData:\n", formData)
 
                 fetch(this.queryApiUrl, {
                     method: 'POST', // or 'PUT'
@@ -103,18 +106,30 @@ export const useSearchStore = defineStore('SearchStore', {
                     });
             }
         },
+        selectKeyword(index: number) {
+            if (!this.keywords[index].selected) {
+                this.keywords[index].selected = true;
+                this.fetchData();
+            }
+        },
+        unselectKeyword(index: number) {
+            if (this.keywords[index].selected) {
+                this.keywords[index].selected = false;
+                this.fetchData();
+            }
+        },
         //selectKeyword(payload: search.KeywordIndex) {
         //    if (this.keywordQueryModel) {
         //        this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = true;
         //        this.fetchData();
         //    }
         //},
-        unselectKeyword(payload: search.KeywordIndex) {
-            if (this.keywordQueryModel) {
-                this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = false;
-                this.fetchData();
-            }
-        },
+        //unselectKeyword(payload: search.KeywordIndex) {
+        //    if (this.keywordQueryModel) {
+        //        this.keywordQueryModel.containers[payload.containerIndex].fields[payload.fieldIndex].selected[payload.valueIndex] = false;
+        //        this.fetchData();
+        //    }
+        //},
         clearKeywordSelection() {
             this.keywordQueryModel?.containers.forEach(cont => cont.fields.forEach(field => field.selected = new Array(field.values.length).fill(false)))
             this.fetchData();

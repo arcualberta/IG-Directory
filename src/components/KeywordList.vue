@@ -87,9 +87,8 @@
                 //    if (p.actionLink)
                 //        router.push("/" + p.actionLink);
                 //},
-                filterByKeyword: (keyword: search.SolrQuery.ValueConstraint) => {
-                    keyword.selected = true;
-
+                filterByKeyword: (index: number) => {
+                    searchStore.selectKeyword(index)
                     console.log("Action Link: ", p.actionLink)
                     if (p.actionLink)
                         router.push("/" + p.actionLink);
@@ -110,9 +109,12 @@
             </span>
         </div>
     </div>-->
+    <div class="input-group dir-text-search">
+        <input type="text" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
+    </div>
     <div class="row keywordContainer">
-        <span v-for="(keyword) in keywords?.valueConstraints" :key="keyword" class="dir-keyword">
-            <button @click="filterByKeyword(keyword)" class="dir-keyword-button" ref="dirBtn">{{ keyword.value }}</button>
+        <span v-for="(keyword, index) in keywords" :key="keyword" class="dir-keyword">
+            <button @click="filterByKeyword(index)" class="dir-keyword-button" ref="dirBtn">{{ keyword.value }}</button>
         </span>
     </div>
 
