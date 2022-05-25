@@ -4,7 +4,7 @@
     import { Guid } from 'guid-typescript';
 
     import KeywordList from "../components/KeywordList.vue"
-    import { search, FreeTextSearch } from '@arcualberta/catfish-ui';
+    import { search } from '@arcualberta/catfish-ui';
     import config from '../appsettings';
     import { useSearchStore } from '../store'
     import * as itemHelper from '../helpers/itemHelper';
@@ -15,7 +15,6 @@
             search
         },
         components: {
-            FreeTextSearch,
             KeywordList
         },
         setup() {
@@ -94,8 +93,7 @@
                 <button class="back-to-search">Back to search results</button>
             </div>
             <br>
-            <FreeTextSearch />
-            <KeywordList :model="keywordQueryModel" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>
         <div class="explore-related">
 
