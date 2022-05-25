@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { Guid } from 'guid-typescript';
 
 import { search } from '@arcualberta/catfish-ui';
+import { createQueryModel } from '../helpers/solrQueryBuilder';
 
 export const useSearchStore = defineStore('SearchStore', {
     state: () => ({
@@ -15,6 +16,7 @@ export const useSearchStore = defineStore('SearchStore', {
         queryModelRetrieverApiUrl: null as null | string,
         queryApiUrl: null as null | string,
         keywordQueryModel: null as null | search.KeywordQueryModel,
+        solrQueryModel: createQueryModel(),
         searchText: null as null | string,
         searchResult: {
             first: 0,

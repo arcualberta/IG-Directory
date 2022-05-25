@@ -15,7 +15,12 @@ export default {
     },
     queryParameters: {
     },
-    hexColorList:"#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5"
+    hexColorList:"#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5",
+    keywordList: ["Activism", "Age", "Black Studies", "Body", "Canada", "Class", "Colonialism", "Culture", " Decolonization", "Disability",
+        "Diversity", "Environment", "Ethics", "Family", "Feminism", "Feminist Theory", "Film", "Gender", "Genderqueer", "Government",
+        "Health", "History", "Human Rights", "Identity", "Immigration", "Indigenous", "Inequality", " International", "Intersectionality", "Language", "Law", "Literature", "Marginalized population", "Masculinities", "Media", "Mental health", " Mothering",
+        "Pedagogy", "Policy", "Politics", "Qualitative", "Research", " Queer", "Quare", "Race", "Relation", "Religion", "Sex", "Sexuality",
+        "Science", "Sport", "Social justice", "Transgender", " Two-spirit", "Violence", "Work"]
 }
 
 export enum SearchResultFieldMapping {
@@ -39,8 +44,25 @@ export enum SearchResultFieldMapping {
 
 }
 
-export type CategoryOptions = {
-    Position: ["Assistant Professor", "Associate Professor", "Associate Clinical Professor", "Professor"],
-    Faculty: [],
-    SelfIdentification: []
+export enum QueryCategories {
+    KEYWORDS = "KEYWORDS",
+    POSITION = "POSITION",
+    FACULTY = "FACULTY",
+    SELF_IDENTIFICATION = "SELF_IDENTIFICATION"
+}
+
+export const QueryCategoryValues = {
+    Keywords: ["Activism", "Age", "Black Studies", "Body", "Canada", "Class", "Colonialism", "Culture", " Decolonization", "Disability",
+        "Diversity", "Environment", "Ethics", "Family", "Feminism", "Feminist Theory", "Film", "Gender", "Genderqueer", "Government",
+        "Health", "History", "Human Rights", "Identity", "Immigration", "Indigenous", "Inequality", " International", "Intersectionality", "Language", "Law", "Literature", "Marginalized population", "Masculinities", "Media", "Mental health", " Mothering",
+        "Pedagogy", "Policy", "Politics", "Qualitative", "Research", " Queer", "Quare", "Race", "Relation", "Religion", "Sex", "Sexuality",
+        "Science", "Sport", "Social justice", "Transgender", " Two-spirit", "Violence", "Work"],
+    Positions: ["Assistant Professor", "Assistant Clinical Professor", "Associate Professor", "Professor"],
+    Faculties: ["Faculty of Arts", "Faculty of Education", "Faculty of Native Studies"],
+    SelfIdentification: {
+        Disability: ["Deaf", "Neurodivergent", "Experiencing disability", "Not living with a disability", "Another"],
+        Race: ["Indigenous", "Black", "Person of Colour", "White", "Another"],
+        Ethnicity: [],
+        GenderIdentity: ["Two-Spirit", "Gender non-binary", "Genderfluid", "Transgender", "Woman", "Man", "Another"]
+    }
 }
