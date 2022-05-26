@@ -17,6 +17,11 @@
         components: {
             KeywordList
         },
+        methods: {
+            goToExplore() {
+                this.$router.push('/explore');
+            }
+        },
         setup() {
 
             const profileStore = useProfileStore();
@@ -97,12 +102,14 @@
                 </p>
             </div>
             <div>
-                <button class="contact">Contact me!</button>
+                <!--<a class="contact" href="mailto:{{email}}">Contact me!</a>-->
+                <div class="contact" onclick="location.href ='mailto:{{email}}';">Contact me!</div>
             </div>
         </div>
         <div class="right-content-researcher">
             <div>
-                <button class="back-to-search">Back to search results</button>
+                <button class="back-to-search" @click="goToExplore()">Back to search results</button>
+                
             </div>
             <br>
             <KeywordList :model="profileStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />

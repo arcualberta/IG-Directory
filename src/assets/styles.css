@@ -261,6 +261,7 @@ HOME BODY*/
 }
 
 .contact {
+    display:block;
     background-color: white;
     border-radius: 50px;
     border: none;
@@ -269,6 +270,9 @@ HOME BODY*/
     margin: 20px;
     float: right;
 }
+    .contact:hover {
+        background-color: #B2AFAF;
+    }
 
 .back-to-search {
     background-color: #ececec;
@@ -279,6 +283,9 @@ HOME BODY*/
     padding: 12.5px;
     /*  margin: 20px;*/
 }
+    .back-to-search:hover {
+        background-color: #B2AFAF;
+    }
 
 .explore-related {
     display: inline-block;

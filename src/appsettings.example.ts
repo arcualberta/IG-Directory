@@ -21,7 +21,7 @@ export default {
 export enum SearchResultFieldMapping {
     PRONOUNS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_69d866ae-94bc-4701-ab72-998a4d8bc070_ts",
     NAME = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_04e54156-f480-41e6-a76a-210456b66499_ts",
-    EMAIL = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_4fa650bc-a20b-4a39-b7d6-40728f2461dd_ts",
+    EMAIL = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_4fa650bc-a20b-4a39-b7d6-40728f2461dd_ss",
     POSITION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_016caaba-a0c7-4acc-b0c2-813376b2f32c_ts",
     ORGANIZATION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_98b5b06d-b4e8-4a48-ad2c-7a36b9857064_ts",
     PERSON_OF_COLOR = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_d13046af-fe79-49f8-9eda-77fc5525a611_ts",
