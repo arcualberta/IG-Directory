@@ -35,6 +35,7 @@ export enum SearchResultFieldMapping {
     RESEARCH_QUESTION = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_0774a8bf-bcf0-4733-8480-85a3b9e1451e_ts",
     EXTERNAL_LINKS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_44f39fe7-f3af-47da-a2b6-f610c2f0eda3_ts",
     CONSENT = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_84f22416-34ac-4451-bc59-e403bcd684fa_ts",
+    COLLABORATORS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_afb2a6b5-e6ba-406c-90b3-7c10bf4faa73_ts",
     KEYWORDS = "_keywords__ss",
     FREE_TEXT = "_all__ts",
     SIMILARITY_SOURCE = "_similarity_source__ts",

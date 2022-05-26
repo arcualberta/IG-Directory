@@ -50,6 +50,7 @@
                 communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
                 pronouns: computed(() => itemHelper.getPronouns(profile.value)),
+                collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
                 colorList: computed(() => config.hexColorList)
             }
         }
@@ -89,6 +90,10 @@
                 <br>
                 <p>
                     <u>Links:</u> <span v-if="externalLinks">{{externalLinks}}</span><span v-else> -</span>
+                </p>
+                <br>
+                <p>
+                    <u>Collaborators:</u> <span v-if="collaborators">{{collaborators}}</span><span v-else> -</span>
                 </p>
             </div>
             <div>

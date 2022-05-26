@@ -65,5 +65,8 @@ export function getLinks(item: search.ResultItem) {
 export function getPronouns(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.PRONOUNS)
 }
+export function getCollaborators(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.COLLABORATORS)
+}
 
 
