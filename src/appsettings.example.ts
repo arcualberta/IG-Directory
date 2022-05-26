@@ -37,6 +37,7 @@ export enum SearchResultFieldMapping {
     CONSENT = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_84f22416-34ac-4451-bc59-e403bcd684fa_ts",
     KEYWORDS = "_keywords__ss",
     FREE_TEXT = "_all__ts",
+    SIMILARITY_SOURCE = "_similarity_source__ts",
 }
 
 export enum QueryCategories {
