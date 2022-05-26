@@ -12,7 +12,7 @@
                
             </div>
 
-            <div class="grey-BG contentList">
+            <div class="background-grey">
                 <ProfileListEntry v-for="item in searchResults?.items" :key="item.id" :model="item" />
             </div>
         </div>
@@ -73,7 +73,7 @@
         width: 100%;
     }
     .items{
-        width: 67%;
+        width: 50%;
         float: left;
     }
     .searchSection{
