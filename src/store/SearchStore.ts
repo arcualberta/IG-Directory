@@ -13,7 +13,6 @@ export const useSearchStore = defineStore('SearchStore', {
         queryParams: null as null | string,
         offset: 0,
         pageSize: 25,
-        queryModelRetrieverApiUrl: null as null | string,
         queryApiUrl: null as null | string,
         keywordQueryModel: null as null | search.KeywordQueryModel,
         solrQueryModel: createQueryModel(),
@@ -29,27 +28,6 @@ export const useSearchStore = defineStore('SearchStore', {
     getters: {
         keywords(): search.SolrQuery.ValueConstraint[] { return (this.solrQueryModel.queryConstraints.find(qc => qc.internalId === "keywords") as search.SolrQuery.FieldConstraint).valueConstraints },
         resultCount: state => state.searchResult?.items?.length,
-        //selectedKeywords(): search.Keyword[] {
-        //    const flattenedList: search.Keyword[] = [];
-        //    this.keywordQueryModel?.containers.forEach((container, cIndex) => {
-        //        container.fields.forEach((field, fIndex) => {
-        //            field.selected.forEach((flag, vIndex) => {
-        //                if (flag) {
-        //                    flattenedList.push({
-        //                        index: {
-        //                            containerIndex: cIndex,
-        //                            fieldIndex: fIndex,
-        //                            valueIndex: vIndex
-        //                        },
-        //                        value: field.values[vIndex]
-        //                    })
-        //                }
-        //            })
-        //        })
-        //    });
-
-        //    return flattenedList;
-        //},
         selectedKeywords(): search.SolrQuery.ValueConstraint[] {
             return this.keywords.filter(keyword => keyword.selected)
         },
@@ -62,16 +40,6 @@ export const useSearchStore = defineStore('SearchStore', {
         },
     },
     actions: {
-        fetchQueryModel() {
-            console.log("fetchQueryModel");
-            if (this.queryModelRetrieverApiUrl)
-                fetch(this.queryModelRetrieverApiUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log("keywordQueryModel:\n", data);
-                        this.keywordQueryModel = data;
-                    });
-        },
         fetchData() {
             if (this.queryApiUrl) {
                 console.log("Item Load API: ", this.queryApiUrl)

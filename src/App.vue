@@ -61,10 +61,6 @@
             searchStore.collectionId = Guid.parse(config.dataAttributes.collectionId)
             searchStore.groupId = Guid.parse(config.dataAttributes.groupId)
 
-            searchStore.queryModelRetrieverApiUrl = config.dataServiceApiRoot + `keywordsearch/keywords/page/${config.pageId}/block/${config.blockId}`;
-            console.log("App.setup")
-            searchStore.fetchQueryModel();
-
             searchStore.queryApiUrl = config.dataServiceApiRoot + 'keywordsearch';
 
             const profiletore = useProfileStore();
