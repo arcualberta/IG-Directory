@@ -2,28 +2,15 @@ import { defineStore } from 'pinia';
 import { Guid } from 'guid-typescript';
 
 import { search } from '@arcualberta/catfish-ui';
-import { createQueryModel } from '../helpers/solrQueryBuilder';
+
+import { stateCommon } from './stateCommon';
+import { createSearchQueryModel } from '../helpers/createSearchQueryModel';
 
 export const useSearchStore = defineStore('SearchStore', {
     state: () => ({
-        templateId: null as null | Guid,
-        collectionId: null as null | Guid,
-        groupId: null as null | Guid,
-        stateIdRestrictions: [] as Guid[],
-        queryParams: null as null | string,
-        offset: 0,
-        pageSize: 25,
-        queryApiUrl: null as null | string,
-        keywordQueryModel: null as null | search.KeywordQueryModel,
-        solrQueryModel: createQueryModel(),
-        searchText: null as null | string,
-        searchResult: {
-            first: 0,
-            last: 0,
-            count: 0,
-            items: [] as search.ResultItem[]
-        } as search.SearchOutput,
-        activeProfile: null as search.ResultItem | null,
+        ...stateCommon,
+        solrQueryModel: createSearchQueryModel(),
+    //    activeProfile: null as search.ResultItem | null,
     }),
     getters: {
         keywords(): search.SolrQuery.ValueConstraint[] { return (this.solrQueryModel.queryConstraints.find(qc => qc.internalId === "keywords") as search.SolrQuery.FieldConstraint).valueConstraints },
@@ -54,9 +41,6 @@ export const useSearchStore = defineStore('SearchStore', {
 
                 if (this.groupId)
                     formData.append("groupId", this.groupId as any as string)
-
-                if (this.keywordQueryModel)
-                    formData.append("queryParams", JSON.stringify(this.keywordQueryModel));
 
                 if (this.solrQueryModel) {
                     const queryString = this.solrQueryModel.buildQueryString();
@@ -127,17 +111,17 @@ export const useSearchStore = defineStore('SearchStore', {
         //    this.fetchData();
         //},
 
-        setActiveProfile(profileId: Guid) {
-            this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
-            if (!this.activeProfile) {
+    //    setActiveProfile(profileId: Guid) {
+    //        this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
+    //        if (!this.activeProfile) {
                 
-                const apiUrl=this.queryApiUrl+ '/' + profileId;
-                fetch(apiUrl)
-                .then(response => response.json())
-                    .then(data => 
-                        this.activeProfile= data
-                    );
-            }
-        }
+    //            const apiUrl=this.queryApiUrl+ '/' + profileId;
+    //            fetch(apiUrl)
+    //            .then(response => response.json())
+    //                .then(data => 
+    //                    this.activeProfile= data
+    //                );
+    //        }
+    //    }
     }
 });

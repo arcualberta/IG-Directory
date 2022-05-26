@@ -46,14 +46,6 @@
         setup() {
             const searchStore = useSearchStore();
 
-            //const keywordQueryModel = computed(() => searchStore.keywordQueryModel);
-
-            //watch(() => keywordQueryModel.value, (newValue) => {
-            //    //console.log(newValue, " watch value changed")
-            //    if (newValue)
-            //        searchStore.fetchData();
-            //});
-
             const searchResults = computed(() => searchStore.searchResult)
 
             onMounted(() => {

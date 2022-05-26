@@ -1,7 +1,7 @@
 import { search } from '@arcualberta/catfish-ui';
 import * as config from '../appsettings';
 
-export const createQueryModel = () => {
+export const createSearchQueryModel = () => {
     const queryModel = new search.SolrQuery.QueryModel(search.SolrQuery.AggregationOperator.AND);
 
     //Keyword constraint

@@ -57,17 +57,18 @@
         setup() {
 
             const searchStore = useSearchStore();
-            searchStore.templateId = config.dataAttributes.templateId as unknown as Guid,
-            searchStore.collectionId = Guid.parse(config.dataAttributes.collectionId)
-            searchStore.groupId = Guid.parse(config.dataAttributes.groupId)
+            const profileStore = useProfileStore();
 
-            searchStore.queryApiUrl = config.dataServiceApiRoot + 'keywordsearch';
+            searchStore.templateId = profileStore.templateId = config.dataAttributes.templateId as unknown as Guid;
+            searchStore.collectionId = profileStore.collectionId = Guid.parse(config.dataAttributes.collectionId);
+            searchStore.groupId = profileStore.groupId = Guid.parse(config.dataAttributes.groupId);
 
-            const profiletore = useProfileStore();
+            searchStore.queryApiUrl = profileStore.queryApiUrl = config.dataServiceApiRoot + 'keywordsearch';
+
             
             return {
                 searchStore,
-                profiletore,
+                profileStore,
             }
         },
     });

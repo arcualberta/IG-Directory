@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { defineComponent, computed } from 'vue';
+    import { defineComponent, computed, watch, ref } from 'vue';
     import { useRoute } from 'vue-router'
     import { Guid } from 'guid-typescript';
 
     import KeywordList from "../components/KeywordList.vue"
     import { search } from '@arcualberta/catfish-ui';
-    import config from '../appsettings';
-    import { useSearchStore } from '../store'
+    import { default as config, SearchResultFieldMapping } from '../appsettings';
+    import { useProfileStore } from '../store'
     import * as itemHelper from '../helpers/itemHelper';
 
     export default defineComponent({
@@ -19,16 +19,20 @@
         },
         setup() {
 
-            const searchStore = useSearchStore();
-            const keywordQueryModel = computed(() => searchStore.keywordQueryModel);
+            const profileStore = useProfileStore();
 
             const route = useRoute();
             const id = route.params.id as unknown as Guid;
-            searchStore.setActiveProfile(id);
-            const profile = computed(() => searchStore.activeProfile as search.ResultItem);
+            profileStore.setActiveProfile(id);
+            const profile = computed(() => profileStore.activeProfile as search.ResultItem);
+
+            watch(() => profile, (oldValue, newValue) => {
+                const keywordValues = itemHelper.getStringArrayValue(newValue.value, SearchResultFieldMapping.SIMILARITY_SOURCE);
+                profileStore.setKeywords(keywordValues);
+            },{ deep: true });
 
             return {
-                searchStore,
+                profileStore,
                 profile,
                 name: computed(() => itemHelper.getName(profile.value)),
                 position: computed(() => itemHelper.getPosition(profile.value)),
@@ -42,7 +46,6 @@
                 additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
                 communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
-                keywordQueryModel,
                 colorList: computed(() => config.hexColorList)
             }
         }
@@ -93,10 +96,10 @@
                 <button class="back-to-search">Back to search results</button>
             </div>
             <br>
-            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+            <KeywordList :model="profileStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>
         <div class="explore-related">
-
+            {{JSON.stringify(profile)}}
         </div>
 
     </div>
