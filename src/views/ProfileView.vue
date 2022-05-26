@@ -49,6 +49,7 @@
                 additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
                 communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
+                pronouns: computed(() => itemHelper.getPronouns(profile.value)),
                 colorList: computed(() => config.hexColorList)
             }
         }
@@ -61,33 +62,33 @@
             <div class="results">
                 <img class="results-image" />
                 <p class="info-1">
-                    <u>{{name}} ({{genderIdentity}})</u>
+                    <u>{{name}} <span v-if="pronouns">({{pronouns}})</span></u>
                     <br>{{position}}
                     <br>{{organization}}
                     <br>{{email}}
                 </p>
                 <p class="info-2">
                     Self-identification
-                    <br>Disability: <span>{{disability}}</span>
-                    <br>Race: {{personOfColor}}
-                    <br>Gender: 
+                    <br>Disability: <span v-if="disability">{{disability}}</span><span v-else> -</span>
+                    <br>Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span>
+                    <br>Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span>
                 </p>
             </div>
             <div class="results-content">
                 <p>
-                    <u>Research question:</u> {{researchQuestion}}
+                    <u>Research question:</u> <span v-if="researchQuestion">{{researchQuestion}}</span><span v-else> -</span>
                 </p>
                 <br>
                 <p>
-                    <u>Research keywords:</u> {{additionalKeywords}}
+                    <u>Research keywords:</u> <span v-if="additionalKeywords">{{additionalKeywords}}</span><span v-else> -</span>
                 </p>
                 <br>
                 <p>
-                    <u>Community Projects:</u> {{communityProjects}}
+                    <u>Community Projects:</u> <span v-if="communityProjects">{{communityProjects}}</span><span v-else> -</span>
                 </p>
                 <br>
                 <p>
-                    <u>Links:</u> {{externalLinks}}
+                    <u>Links:</u> <span v-if="externalLinks">{{externalLinks}}</span><span v-else> -</span>
                 </p>
             </div>
             <div>

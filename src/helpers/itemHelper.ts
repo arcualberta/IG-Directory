@@ -62,5 +62,8 @@ export function getCommunityProjects(item: search.ResultItem) {
 export function getLinks(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.EXTERNAL_LINKS)
 }
+export function getPronouns(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.PRONOUNS)
+}
 
 
