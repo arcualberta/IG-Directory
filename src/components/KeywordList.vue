@@ -1,6 +1,6 @@
 <script lang="ts">
    // import { Guid } from 'guid-typescript'
-    import { defineComponent, onMounted, computed, PropType, onUpdated } from "vue";
+    import { defineComponent, onMounted, computed, PropType, onUpdated, ref } from "vue";
     import {useRouter} from 'vue-router'
     
     import { search} from '@arcualberta/catfish-ui';
@@ -16,6 +16,15 @@
                 //type: null as PropType<search.KeywordQueryModel> | null,
                 type: null as PropType<search.SolrQuery.FieldConstraint> | null,
                 required: true
+            },
+            customStore: {
+                type: null as PropType<any> | null,
+                required: false
+            },
+            toggle: {
+                type: null as PropType<boolean> | null,
+                required: false,
+                default: false
             },
             hexColorList: {
                 type: null as PropType<string> | null,
@@ -34,7 +43,7 @@
         },
         setup(p) {
             const router = useRouter();
-            const searchStore=useSearchStore();
+            const store = p.customStore ? p.customStore : useSearchStore();
 
             let hexColors = p.hexColorList ? p.hexColorList?.split(',').map(function (c) {
                 return c.trim();
@@ -79,32 +88,66 @@
                 });
             });
 
+            const getFreeTextField = (): search.SolrQuery.ValueConstraint => {
+                const fieldConstraint = (store.solrQueryModel.queryConstraints as search.SolrQuery.FieldConstraint[]).find(qc => qc.internalId === "freetext") as search.SolrQuery.FieldConstraint;
+                if (fieldConstraint.valueConstraints.length === 0)
+                    fieldConstraint.valueConstraints.push({} as search.SolrQuery.ValueConstraint);
+
+                return fieldConstraint.valueConstraints[0];
+            }
             const freeTextSearchValue = computed({
-                get: () => searchStore.freeTextField.selected ? searchStore.freeTextField.value : "",
-                set: val =>  searchStore.setFreeTextSearchValue(val),
+                get: () => {
+                    const txtField = getFreeTextField();
+                    return txtField.selected ? txtField.value : ""
+                },
+                set: val => {
+                    const txtField = getFreeTextField();
+                    if (val?.length > 0) {
+                        txtField.selected = true;
+                        txtField.value = val;
+                    }
+                    else {
+                        txtField.selected = false;
+                        txtField.value = "";
+                    }
+                },
             });
 
             const runSearch = () => {
-                searchStore.fetchData();
+                store.fetchData();
 
                 if (p.actionLink)
                     router.push("/" + p.actionLink);
             }
 
             const filterByKeyword = (index: number) => {
-                searchStore.selectKeyword(index)
+                store.selectKeyword(index)
                 //console.log("Action Link: ", p.actionLink)
                 if (p.actionLink)
                     router.push("/" + p.actionLink);
             }
 
+            const onClickKeyword = (keyword: search.SolrQuery.ValueConstraint) => {
+                if (p.toggle || !keyword.selected) {
+                    keyword.selected = !keyword.selected;
+                    store.fetchData();
+
+                    if (p.actionLink)
+                        router.push("/" + p.actionLink);
+                }
+            }
+
+            const borderClass = (keywordSelected: boolean) => { return (p.toggle && keywordSelected) ? "highlight" : ""; }
+
             return {
                 router,
-                searchStore,
+                store,
+                onClickKeyword,
                 filterByKeyword,
                 freeTextSearchValue,
                 runSearch,
                 keywords: computed(() => p.model),
+                borderClass,
             }
         },
     });
@@ -122,8 +165,8 @@
         <input type="text" v-model="freeTextSearchValue" @blur="runSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
     </div>
     <div class="row keywordContainer">
-        <span v-for="(keyword, index) in keywords" :key="keyword" class="dir-keyword">
-            <button @click="filterByKeyword(index)" class="dir-keyword-button" ref="dirBtn">{{ keyword.value }}</button>
+        <span v-for="(keyword) in keywords" :key="keyword" class="dir-keyword">
+            <button @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>
         </span>
     </div>
 
@@ -173,7 +216,9 @@
             opacity: 90%;
             text-decoration: underline;
         }
-
+        .dir-keyword-button.highlight{
+            border: solid 2px black;
+        }
 
     /* Works on Chrome, Edge, and Safari */
     .keywordContainer::-webkit-scrollbar, .keywordContainerSmall::-webkit-scrollbar {

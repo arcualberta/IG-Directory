@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { defineComponent, computed, watch, ref } from 'vue';
+    import { defineComponent, computed, watch, onMounted } from 'vue';
     import { useRoute } from 'vue-router'
     import { Guid } from 'guid-typescript';
 
@@ -26,11 +26,14 @@
             profileStore.setActiveProfile(id);
             const profile = computed(() => profileStore.activeProfile as search.ResultItem);
 
-            watch(() => profile, (oldValue, newValue) => {
-                const keywordValues = itemHelper.getStringArrayValue(newValue.value, SearchResultFieldMapping.SIMILARITY_SOURCE);
+            const loadKeywords = (profileEntry: search.ResultItem) => {
+                const keywordValues = itemHelper.getStringArrayValue(profileEntry, SearchResultFieldMapping.SIMILARITY_SOURCE);
                 profileStore.setKeywords(keywordValues);
                 profileStore.fetchData();
-            },{ deep: true });
+            }
+
+            watch(() => profile, (oldValue, newValue) => { loadKeywords(newValue.value) }, { deep: true });
+            onMounted(() => { loadKeywords(profile.value) });
 
             return {
                 profileStore,
@@ -99,7 +102,7 @@
                 <button class="back-to-search">Back to search results</button>
             </div>
             <br>
-            <KeywordList :model="profileStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+            <KeywordList :model="profileStore.keywords" :custom-store="profileStore" :toggle="true" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>
         <div class="explore-related">
             <h3>Explore related researchers </h3>

@@ -21,6 +21,7 @@ export const useProfileStore = defineStore('ProfileStore', {
     },
     actions: {
         fetchData() {
+            console.log("ProfileStore.fetchData called")
             fetchQuery(
                 this.templateId as Guid,
                 this.collectionId as Guid,
@@ -51,8 +52,12 @@ export const useProfileStore = defineStore('ProfileStore', {
                 selected: false,
                 value: val
             }))
-        }
-
-
+        },
+        selectKeyword(index: number) {
+            if (!this.keywords[index].selected) {
+                this.keywords[index].selected = true;
+                this.fetchData();
+            }
+        },
     }
 });

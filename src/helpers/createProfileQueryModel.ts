@@ -8,8 +8,18 @@ export const createProfileQueryModel = () => {
     queryModel.appendNewFieldConstraint(
         config.SearchResultFieldMapping.SIMILARITY_SOURCE,
         [],
-        search.SolrQuery.AggregationOperator.OR,
+        search.SolrQuery.AggregationOperator.AND,
         "keywords");
+
+    //Excluding the active entry from the related list
+
+    //Free-text search field
+    queryModel.appendNewFieldConstraint(
+        config.SearchResultFieldMapping.FREE_TEXT,
+        [],
+        search.SolrQuery.AggregationOperator.AND,
+        "freetext");
+
 
     return queryModel;
 }
