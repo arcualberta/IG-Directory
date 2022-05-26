@@ -3,12 +3,12 @@ import { Guid } from 'guid-typescript';
 
 import { search } from '@arcualberta/catfish-ui';
 
-import { stateCommon } from './stateCommon';
+import { baseState, fetchQuery } from './common';
 import { createSearchQueryModel } from '../helpers/createSearchQueryModel';
 
 export const useSearchStore = defineStore('SearchStore', {
     state: () => ({
-        ...stateCommon,
+        ...baseState,
         solrQueryModel: createSearchQueryModel(),
     //    activeProfile: null as search.ResultItem | null,
     }),
@@ -28,48 +28,61 @@ export const useSearchStore = defineStore('SearchStore', {
     },
     actions: {
         fetchData() {
-            if (this.queryApiUrl) {
-                console.log("Item Load API: ", this.queryApiUrl)
-
-                const formData = new FormData();
-
-                if (this.templateId)
-                    formData.append("templateId", this.templateId as any as string);
-
-                if (this.collectionId)
-                    formData.append("collectionId", this.collectionId as any as string);
-
-                if (this.groupId)
-                    formData.append("groupId", this.groupId as any as string)
-
-                if (this.solrQueryModel) {
-                    const queryString = this.solrQueryModel.buildQueryString();
-                    formData.append("query", queryString);
-                }
-
-                if (this.searchText)
-                    formData.append("searchText", this.searchText);
-
-                formData.append("offset", this.offset.toString());
-                formData.append("max", this.pageSize.toString());
-
-                //console.log("Store:\n", JSON.stringify(this))
-                //console.log("FormData:\n", formData)
-
-                fetch(this.queryApiUrl, {
-                    method: 'POST', // or 'PUT'
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log("Search Results:\n", JSON.stringify(data));
-                        this.searchResult = JSON.parse(JSON.stringify(data));
-                    })
-                    .catch((error) => {
-                        console.error('Item Load API Error:', error);
-                    });
-            }
+            fetchQuery(
+                this.templateId as Guid,
+                this.collectionId as Guid,
+                this.groupId as Guid,
+                this.solrQueryModel,
+                this.searchText as string,
+                this.offset,
+                this.pageSize,
+                this.queryApiUrl as string,
+                (result: search.SearchOutput) => { this.searchResult = result; }
+            )
         },
+        //fetchData() {
+        //    if (this.queryApiUrl) {
+        //        console.log("Item Load API: ", this.queryApiUrl)
+
+        //        const formData = new FormData();
+
+        //        if (this.templateId)
+        //            formData.append("templateId", this.templateId as any as string);
+
+        //        if (this.collectionId)
+        //            formData.append("collectionId", this.collectionId as any as string);
+
+        //        if (this.groupId)
+        //            formData.append("groupId", this.groupId as any as string)
+
+        //        if (this.solrQueryModel) {
+        //            const queryString = this.solrQueryModel.buildQueryString();
+        //            formData.append("query", queryString);
+        //        }
+
+        //        if (this.searchText)
+        //            formData.append("searchText", this.searchText);
+
+        //        formData.append("offset", this.offset.toString());
+        //        formData.append("max", this.pageSize.toString());
+
+        //        //console.log("Store:\n", JSON.stringify(this))
+        //        //console.log("FormData:\n", formData)
+
+        //        fetch(this.queryApiUrl, {
+        //            method: 'POST', // or 'PUT'
+        //            body: formData
+        //        })
+        //            .then(response => response.json())
+        //            .then(data => {
+        //                //console.log("Search Results:\n", JSON.stringify(data));
+        //                this.searchResult = JSON.parse(JSON.stringify(data));
+        //            })
+        //            .catch((error) => {
+        //                console.error('Item Load API Error:', error);
+        //            });
+        //    }
+        //},
         selectKeyword(index: number) {
             if (!this.keywords[index].selected) {
                 this.keywords[index].selected = true;

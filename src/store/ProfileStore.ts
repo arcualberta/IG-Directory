@@ -3,13 +3,12 @@ import { defineStore } from 'pinia';
 
 import { search } from '@arcualberta/catfish-ui';
 
-import { SearchResultFieldMapping } from '../appsettings';
-import { stateCommon } from './stateCommon';
+import { baseState, fetchQuery } from './common';
 import { createProfileQueryModel } from '../helpers/createProfileQueryModel';
 
 export const useProfileStore = defineStore('ProfileStore', {
     state: () => ({
-        ...stateCommon,
+        ...baseState,
         solrQueryModel: createProfileQueryModel(),
         activeProfile: null as search.ResultItem | null,
     }),
@@ -21,6 +20,19 @@ export const useProfileStore = defineStore('ProfileStore', {
 
     },
     actions: {
+        fetchData() {
+            fetchQuery(
+                this.templateId as Guid,
+                this.collectionId as Guid,
+                this.groupId as Guid,
+                this.solrQueryModel,
+                this.searchText as string,
+                this.offset,
+                this.pageSize,
+                this.queryApiUrl as string,
+                (result: search.SearchOutput) => { this.searchResult = result; }
+            )
+        },
         setActiveProfile(profileId: Guid) {
             this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
             if (!this.activeProfile) {

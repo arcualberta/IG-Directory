@@ -29,11 +29,14 @@
             watch(() => profile, (oldValue, newValue) => {
                 const keywordValues = itemHelper.getStringArrayValue(newValue.value, SearchResultFieldMapping.SIMILARITY_SOURCE);
                 profileStore.setKeywords(keywordValues);
+                profileStore.fetchData();
             },{ deep: true });
 
             return {
                 profileStore,
                 profile,
+                itemHelper,
+                searchResults: computed(() => profileStore.searchResult),
                 name: computed(() => itemHelper.getName(profile.value)),
                 position: computed(() => itemHelper.getPosition(profile.value)),
                 keywords: computed(() => itemHelper.getKeywords(profile.value)),
@@ -99,7 +102,11 @@
             <KeywordList :model="profileStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>
         <div class="explore-related">
-            {{JSON.stringify(profile)}}
+            <h3>Explore related researchers </h3>
+            <div v-for="item in searchResults.items" :key="item">
+                <div>{{itemHelper.getName(item)}}</div>
+            </div>
+            {{JSON.stringify(searchResults.items)}}
         </div>
 
     </div>
