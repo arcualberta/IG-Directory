@@ -150,7 +150,7 @@ HOME BODY*/
     z-index: 1;
 }
 .searchbar-rectangle-explore {
-    background-color: var(--cararra);
+    background-color: #ececec;
     border-radius: 50px;
     cursor: pointer;
     height: 40px;
@@ -160,7 +160,32 @@ HOME BODY*/
     margin-top: 15px;
     padding: 12.5px;
 }
-
+.scrolling-explore {
+    overflow-x: scroll;
+    overflow-y: visible;
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+    height: 150px;
+    width: 600px;
+}
+/*EXPLORE PAGE ONLY*/
+.background-grey {
+    background-color:  #ececec;
+    border-radius: 30px;
+    height: 500px;
+    position: relative;
+    width: 600px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    overflow-y: scroll;
+}
+.filters {
+    display: inline-block;
+    vertical-align: top;
+}
 /*RESEARCHER PAGE*/
 .background-grey-researcher {
     background-color: #ececec;
@@ -208,6 +233,7 @@ HOME BODY*/
     position: relative;
     float: left;
     font-size: 18px;
+    max-width: 300px;
     font-family: Arial-Bold;
     line-height: 17px;
     margin-top: 20px;
@@ -220,6 +246,7 @@ HOME BODY*/
     font-size: 18px;
     font-family: Arial-Bold;
     line-height: 17px;
+    max-width:300px;
     margin-top: 20px;
     padding: 17px;
 }
@@ -234,6 +261,7 @@ HOME BODY*/
 }
 
 .contact {
+    display:block;
     background-color: white;
     border-radius: 50px;
     border: none;
@@ -242,6 +270,9 @@ HOME BODY*/
     margin: 20px;
     float: right;
 }
+    .contact:hover {
+        background-color: #B2AFAF;
+    }
 
 .back-to-search {
     background-color: #ececec;
@@ -252,6 +283,9 @@ HOME BODY*/
     padding: 12.5px;
     /*  margin: 20px;*/
 }
+    .back-to-search:hover {
+        background-color: #B2AFAF;
+    }
 
 .explore-related {
     display: inline-block;
@@ -261,10 +295,10 @@ HOME BODY*/
 }
 
 .related-scroll {
-    background-color: var(--cararra);
+    background-color: #ececec;
     border-radius: 30px;
     padding: 20px;
-    width: 450px;
+    width: 650px;
     height: 150px;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -291,7 +325,7 @@ HOME BODY*/
 }
 
 .related-title {
-    background-color: var(--cararra);
+    background-color: #ececec;
     font-weight: 700;
     text-decoration: underline;
     position: relative;
@@ -388,6 +422,14 @@ HOME BODY*/
 .navigationalmenu {
     float: right;
     margin-right: 100px;
+}
+.home-rectangle {
+    background-color: black;
+    color: white;
+    padding: 15px;
+    position: relative;
+    display: inline-block;
+    border-radius: 0px 0px 20px 20px;
 }
 
 xremove{

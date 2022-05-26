@@ -164,8 +164,11 @@
     <div class="input-group dir-text-search">
         <input type="text" v-model="freeTextSearchValue" @blur="runSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
     </div>
-    <div class="row keywordContainer">
+    <!--<div class="row keywordContainer">
         <span v-for="(keyword) in keywords" :key="keyword" class="dir-keyword">
+            <button @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>-->
+    <div class="scrolling-explore">
+        <span v-for="keyword in keywords" :key="keyword" class="dir-keyword">
             <button @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>
         </span>
     </div>
@@ -194,7 +197,8 @@
     .dir-keyword-button {
         position: relative;
         color: Black;
-        font-size: 0.80em;
+        font-size: 16px;
+        font-family:Arial;
         text-align: center;
         border-radius: 60px;
         padding-top: 30px;

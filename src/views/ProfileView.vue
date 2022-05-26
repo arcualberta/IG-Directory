@@ -17,6 +17,14 @@
         components: {
             KeywordList
         },
+        methods: {
+            goToExplore() {
+                this.$router.push('/explore');
+            },
+            gotoProfile(id: Guid) {
+                this.$router.push('/profile/' + id)
+            }
+        },
         setup() {
 
             const profileStore = useProfileStore();
@@ -52,7 +60,10 @@
                 additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
                 communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
+                pronouns: computed(() => itemHelper.getPronouns(profile.value)),
+                collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
                 colorList: computed(() => config.hexColorList)
+                
             }
         }
     });
@@ -62,54 +73,72 @@
     <div class="Profile">
         <div class="background-grey-researcher">
             <div class="results">
-                <img class="results-image" />
+                <img class="results-image" src="../assets/user-profile-icon.jpg"/>
                 <p class="info-1">
-                    <u>{{name}} ({{genderIdentity}})</u>
+                    <u>{{name}} <span v-if="pronouns">({{pronouns}})</span></u>
                     <br>{{position}}
                     <br>{{organization}}
                     <br>{{email}}
                 </p>
                 <p class="info-2">
                     Self-identification
-                    <br>Disability: <span>{{disability}}</span>
-                    <br>Race: {{personOfColor}}
-                    <br>Gender: 
+                    <br>Disability: <span v-if="disability">{{disability}}</span><span v-else> -</span>
+                    <br>Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span>
+                    <br>Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span>
                 </p>
             </div>
             <div class="results-content">
                 <p>
-                    <u>Research question:</u> {{researchQuestion}}
+                    <u>Research question:</u> <span v-if="researchQuestion">{{researchQuestion}}</span><span v-else> -</span>
                 </p>
                 <br>
                 <p>
-                    <u>Research keywords:</u> {{additionalKeywords}}
+                    <u>Research keywords:</u> <span v-if="additionalKeywords">{{additionalKeywords}}</span><span v-else> -</span>
                 </p>
                 <br>
                 <p>
-                    <u>Community Projects:</u> {{communityProjects}}
+                    <u>Community Projects:</u> <span v-if="communityProjects">{{communityProjects}}</span><span v-else> -</span>
                 </p>
                 <br>
                 <p>
-                    <u>Links:</u> {{externalLinks}}
+                    <u>Links:</u> <span v-if="externalLinks">{{externalLinks}}</span><span v-else> -</span>
+                </p>
+                <br>
+                <p>
+                    <u>Collaborators:</u> <span v-if="collaborators">{{collaborators}}</span><span v-else> -</span>
                 </p>
             </div>
             <div>
-                <button class="contact">Contact me!</button>
+                <!--<a class="contact" href="mailto:{{email}}">Contact me!</a>-->
+                <div class="contact" onclick="location.href ='mailto:{{email}}';">Contact me!</div>
             </div>
         </div>
         <div class="right-content-researcher">
             <div>
-                <button class="back-to-search">Back to search results</button>
+                <button class="back-to-search" @click="goToExplore()">Back to search results</button>
+                
             </div>
             <br>
             <KeywordList :model="profileStore.keywords" :custom-store="profileStore" :toggle="true" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>
         <div class="explore-related">
-            <h3>Explore related researchers </h3>
-            <div v-for="item in searchResults.items" :key="item">
-                <div>{{itemHelper.getName(item)}}</div>
+            <div class="related-title">Explore related researchers </div>
+            <div class="related-scroll">
+                <div v-for="item in searchResults.items" :key="item" class="related">
+                    <img class="related-image" src="../assets/user-profile-icon.jpg"/>
+                    <div class="related-results">
+                        <a @click="gotoProfile(item.id)">{{itemHelper.getName(item)}}</a> <span v-if=itemHelper.getPronouns(item)>({{itemHelper.getPronouns(item)}})</span>
+                        <br />
+                        <span v-if=itemHelper.getPosition(item)>{{itemHelper.getPosition(item)}}</span>
+                        <br />
+                        <span v-if=itemHelper.getOrganization(item)>{{itemHelper.getOrganization(item)}}</span>
+                        <br />
+                        <span v-if=itemHelper.getEmail(item)>{{itemHelper.getEmail(item)}}</span>
+                    </div>
+                </div>
             </div>
-            {{JSON.stringify(searchResults.items)}}
+            
+            <!--{{JSON.stringify(searchResults.items)}}-->
         </div>
 
     </div>
