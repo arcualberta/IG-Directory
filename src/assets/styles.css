@@ -333,7 +333,10 @@ HOME BODY*/
     overflow-wrap: break-word;
     display: inline-block;
 }
-
+.category-header {
+    font-weight: bold;
+    margin-top: 10px;
+}
 /*RESEARCHER PAGE*/
 .background-grey-researcher {
     background-color: #ececec;
