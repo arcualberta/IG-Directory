@@ -59,7 +59,7 @@ export const QueryCategoryValues = {
     SelfIdentification: {
         Disability: ["Deaf", "Neurodivergent", "Experiencing disability", "Not living with a disability", "Another"],
         Race: ["Indigenous", "Black", "Person of Colour", "White", "Another"],
-        Ethnicity: [],
+        Ethnicity: ["Japanese-American", "European"],
         GenderIdentity: ["Two-Spirit", "Gender non-binary", "Genderfluid", "Transgender", "Woman", "Man", "Another"]
     }
 }
