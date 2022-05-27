@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { defineComponent, computed, PropType } from "vue";
-    import { Guid } from 'guid-typescript';
+    import { defineComponent, PropType } from "vue";
 
     import { search } from '@arcualberta/catfish-ui';
     import * as itemHelper from '../helpers/itemHelper';
@@ -11,8 +10,16 @@
         props: {
             options: {
                 type: null as PropType<search.SolrQuery.ValueConstraint[]> | null,
-                required: true
+                required: false
             },
+            optionGroups: {
+                type: null as PropType<search.SolrQuery.ValueConstraint[][]> | null,
+                required: false
+            },
+            optionGroupNames: {
+                type: null as PropType<string[]> | null,
+                required: false
+            }
 
         },
         setup(p) {
@@ -32,9 +39,17 @@
 </script>
 
 <template>
-    <div class="filter-panel row">
-        <div v-for="option in options" :key="option">
+    <div class="filter-panel">
+        <div v-for="(option, index) in options" :key="index">
             <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
+        </div>
+        <div v-for="(options, index) in optionGroups" :key="index">
+            <div class="group">
+                <div>{{optionGroupNames[index]}}</div>
+                <div v-for="option in options" :key="option">
+                    <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
+                </div>
+            </div>
         </div>
     </div>
 </template>

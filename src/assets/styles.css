@@ -270,7 +270,10 @@ HOME BODY*/
 
 .filter-panel{
     border: dashed 1px #B2AFAF;
-    width: 250px;
+}
+
+.filter-panel .group {
+    margin-bottom: 10px;
 }
 
 .filter1-text {

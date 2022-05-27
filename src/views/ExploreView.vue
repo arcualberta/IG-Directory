@@ -17,13 +17,17 @@
             <ProfileListEntry v-for="item in searchResults?.items" :key="item.id" :model="item" />
         </div>
         <div class="right-content">
-            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />\
-            
+            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+
             <h3>Position</h3>
             <FilterPanel :options="positionOptions" />
 
             <h3>Faculty</h3>
             <FilterPanel :options="facultyOptions" />
+
+            <h3>Self identification</h3>
+            <FilterPanel :option-groups="[disability, genderIdentity, ethnicity]" :option-group-names="['Disability', 'Gender identity', 'Ethnicity']" class="wide-panel"/>
+
         </div> 
     </div>
 </template>
@@ -67,6 +71,9 @@
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
                 positionOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints),
                 facultyOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "faculties") as search.SolrQuery.FieldConstraint).valueConstraints),
+                disability: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:disability") as search.SolrQuery.FieldConstraint).valueConstraints),
+                genderIdentity: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:genderIdentity") as search.SolrQuery.FieldConstraint).valueConstraints),
+                ethnicity: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:ethnicity") as search.SolrQuery.FieldConstraint).valueConstraints),
                 colorList: computed(() => config.hexColorList),
             }
         }
