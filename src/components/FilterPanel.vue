@@ -45,11 +45,13 @@
                 <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
             </div>
         </div>
-        <div v-for="(options, index) in optionGroups" :key="index">
-            <div class="group">
-                <div>{{optionGroupNames[index]}}</div>
-                <div v-for="option in options" :key="option">
-                    <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
+        <div class="dropdown-content">
+            <div v-for="(options, index) in optionGroups" :key="index">
+                <div class="group">
+                    <div>{{optionGroupNames[index]}}</div>
+                    <div v-for="option in options" :key="option">
+                        <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
+                    </div>
                 </div>
             </div>
         </div>

@@ -209,6 +209,7 @@ html{
   }
 .navigation-menu-box {
     background-color: black;
+    text-decoration:none;
     object-fit: cover;
     color: white;
     padding: 15px;
