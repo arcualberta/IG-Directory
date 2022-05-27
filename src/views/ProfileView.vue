@@ -1,6 +1,6 @@
 <script lang="ts">
     import { defineComponent, computed, watch, onMounted } from 'vue';
-    import { useRoute } from 'vue-router'
+    import { useRoute, useRouter } from 'vue-router'
     import { Guid } from 'guid-typescript';
 
     import KeywordList from "../components/KeywordList.vue"
@@ -21,15 +21,14 @@
             goToExplore() {
                 this.$router.push('/explore');
             },
-            gotoProfile(id: Guid) {
-                this.$router.push('/profile/' + id)
-            }
         },
         setup() {
 
             const profileStore = useProfileStore();
 
             const route = useRoute();
+            const router = useRouter();
+
             const id = route.params.id as unknown as Guid;
             profileStore.setActiveProfile(id);
             const profile = computed(() => profileStore.activeProfile as search.ResultItem);
@@ -40,10 +39,16 @@
                 profileStore.fetchData();
             }
 
+            watch(() => route.params.id, async newId => {
+                profileStore.setActiveProfile(newId as unknown as Guid)
+                })
+            
             watch(() => profile, (oldValue, newValue) => { loadKeywords(newValue.value) }, { deep: true });
             onMounted(() => { loadKeywords(profile.value) });
 
             return {
+                id,
+                router,
                 profileStore,
                 profile,
                 itemHelper,
@@ -62,6 +67,7 @@
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
                 pronouns: computed(() => itemHelper.getPronouns(profile.value)),
                 collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
+                gotoProfile: (id: string) => router.push({ path: "/profile/" + id }),
                 colorList: computed(() => config.hexColorList)
                 
             }
@@ -116,7 +122,6 @@
         <div class="right-content-researcher">
             <div>
                 <button class="back-to-search" @click="goToExplore()">Back to search results</button>
-                
             </div>
             <br>
             <KeywordList :model="profileStore.keywords" :custom-store="profileStore" :toggle="true" :hexColorList="colorList" :className="'keywordContainerSmall'" />
@@ -127,7 +132,7 @@
                 <div v-for="item in searchResults.items" :key="item" class="related">
                     <img class="related-image" src="../assets/user-profile-icon.jpg"/>
                     <div class="related-results">
-                        <a @click="gotoProfile(item.id)">{{itemHelper.getName(item)}}</a> <span v-if=itemHelper.getPronouns(item)>({{itemHelper.getPronouns(item)}})</span>
+                        <a class="router-link" @click="gotoProfile(item.id)">{{itemHelper.getName(item)}}</a> <span v-if=itemHelper.getPronouns(item)>({{itemHelper.getPronouns(item)}})</span>
                         <br />
                         <span v-if=itemHelper.getPosition(item)>{{itemHelper.getPosition(item)}}</span>
                         <br />

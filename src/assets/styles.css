@@ -272,6 +272,7 @@ HOME BODY*/
 }
     .contact:hover {
         background-color: #B2AFAF;
+        cursor:pointer;
     }
 
 .back-to-search {
@@ -285,6 +286,7 @@ HOME BODY*/
 }
     .back-to-search:hover {
         background-color: #B2AFAF;
+        cursor:pointer;
     }
 
 .explore-related {
@@ -455,3 +457,12 @@ xremove{
     background-size: 5%;
     border: none;
 }
+
+.router-link {
+    text-decoration: underline;
+}
+
+    .router-link:hover {
+        cursor: pointer
+    }
+

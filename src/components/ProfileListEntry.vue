@@ -55,15 +55,6 @@
         width: 80%;
     }
 
-    .router-link {
-        text-decoration: underline;
-    }
-
-    .router-link :hover{
-        text-decoration: underline;
-        cursor: pointer
-    }
-
     .profileInfo {
         margin-left: 10px;
         display: inline-block;

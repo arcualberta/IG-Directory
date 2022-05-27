@@ -5,7 +5,6 @@
                 <b>Selected Keywords</b>
                
                 <div v-for="(keyword, index) in selectedKeywords" :key="keyword" >
-                   
                     <span class="selectedKeyword">{{keyword.value}}</span> 
                     <span class="xremove" @click="searchStore.unselectKeyword(index)">X</span>
                 </div>
@@ -17,8 +16,9 @@
             </div>
         </div>
         <div class="searchSection">
-            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
-
+            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />\
+            <br /> 
+            Positions: {{JSON.stringify(positionOptions)}}
         </div> 
     </div>
 </template>
@@ -48,6 +48,11 @@
 
             const searchResults = computed(() => searchStore.searchResult)
 
+            const positionOptions = (): search.SolrQuery.ValueConstraint[] => {
+                //return (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints
+                return [{ selected: false, value: "ABC" }, { selected: false, value: "ABC" }, { selected: false, value: "EFG" }, { selected: false, value: "123" }, ]
+            }
+
             onMounted(() => {
                 //console.log("ExploreView.onMounted")
                 if (searchResults.value?.items?.length === 0)
@@ -59,6 +64,7 @@
                 searchResults,
                 //keywordQueryModel,
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
+                positionOptions,
                 colorList: computed(() => config.hexColorList),
             }
         }
