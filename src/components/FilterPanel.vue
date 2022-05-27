@@ -39,9 +39,11 @@
 </script>
 
 <template>
-    <div class="filter-panel">
-        <div v-for="(option, index) in options" :key="index">
-            <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
+    <div>  
+        <div class="dropdown-content">
+            <div v-for="(option, index) in options" :key="index">
+                <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
+            </div>
         </div>
         <div v-for="(options, index) in optionGroups" :key="index">
             <div class="group">

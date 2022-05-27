@@ -2,8 +2,14 @@
      <div class="left-content">
          <button class="reset-text">RESET</button>
          <div class="filter-results-text">Filter results by:</div>
-         <div class="position-text">Position</div>
-         <div class="faculty-text">Faculty</div>
+         <div class="dropdown">
+             <button class="filter-dropdown">Position</button>
+             <FilterPanel :options="positionOptions" />
+         </div>
+         <div class="dropdown">
+             <button class="filter-dropdown">Faculty</button>
+             <FilterPanel :options="facultyOptions" />
+         </div>
          <div class="selfidentification-text"> Self Identification</div>
          <br />
          <div class="filters">
@@ -18,17 +24,10 @@
         </div>
         <div class="right-content">
             <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
+                <h3>Self identification</h3>
+                <FilterPanel :option-groups="[disability, genderIdentity, ethnicity]" :option-group-names="['Disability', 'Gender identity', 'Ethnicity']" class="wide-panel" />
 
-            <h3>Position</h3>
-            <FilterPanel :options="positionOptions" />
-
-            <h3>Faculty</h3>
-            <FilterPanel :options="facultyOptions" />
-
-            <h3>Self identification</h3>
-            <FilterPanel :option-groups="[disability, genderIdentity, ethnicity]" :option-group-names="['Disability', 'Gender identity', 'Ethnicity']" class="wide-panel"/>
-
-        </div> 
+            </div> 
     </div>
 </template>
 
