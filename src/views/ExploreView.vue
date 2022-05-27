@@ -1,22 +1,24 @@
 <template>
-     <div class="explore">
-        <div class="items">
-            <div class="selectedKeywords">
-                <b>Selected Keywords</b>
-               
-                <div v-for="(keyword, index) in selectedKeywords" :key="keyword" >
-                    <span class="selectedKeyword">{{keyword.value}}</span> 
-                    <span class="xremove" @click="searchStore.unselectKeyword(index)">X</span>
-                </div>
-               
-            </div>
-
-            <div class="background-grey">
-                <ProfileListEntry v-for="item in searchResults?.items" :key="item.id" :model="item" />
-            </div>
+     <div class="left-content">
+         <button class="reset-text">RESET</button>
+         <div class="filter-results-text">Filter results by:</div>
+         <div class="position-text">Position</div>
+         <div class="faculty-text">Faculty</div>
+         <div class="selfidentification-text"> Self Identification</div>
+         <br />
+         <div class="filters">
+             <div v-for="(keyword, index) in selectedKeywords" :key="keyword">
+                 <span class="filter1-text">{{keyword.value}}</span>
+                 <span class="xremove" @click="searchStore.unselectKeyword(index)">X</span>
+             </div>
+         </div>
+            
+        <div class="background-grey">
+            <ProfileListEntry v-for="item in searchResults?.items" :key="item.id" :model="item" />
         </div>
-        <div class="searchSection">
-            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />\
+        
+        <div class="right-content">
+            <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
             <br /> 
             Positions: {{JSON.stringify(positionOptions)}}
         </div> 
