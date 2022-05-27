@@ -186,6 +186,12 @@ HOME BODY*/
     display: inline-block;
     vertical-align: top;
 }
+
+.filter-panel{
+    border: dashed 1px #B2AFAF;
+    width: 250px;
+}
+
 /*RESEARCHER PAGE*/
 .background-grey-researcher {
     background-color: #ececec;

@@ -17,8 +17,11 @@
         </div>
         <div class="searchSection">
             <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />\
-            <br /> 
-            Positions: {{JSON.stringify(positionOptions)}}
+            <br />
+            <h3>Positions</h3>
+            <FilterPanel :model="positionOptions" />
+            <h3>Faculties</h3>
+            <FilterPanel :model="facultyOptions" />
         </div> 
     </div>
 </template>
@@ -29,6 +32,7 @@
 
     import KeywordList from "../components/KeywordList.vue"
     import ProfileListEntry from '../components/ProfileListEntry.vue'
+    import FilterPanel from '../components/FilterPanel.vue'
     import config from '../appsettings';
   
     import { search } from '@arcualberta/catfish-ui';
@@ -41,17 +45,13 @@
         },
         components: {
             KeywordList,
-            ProfileListEntry
+            ProfileListEntry,
+            FilterPanel
         },
         setup() {
             const searchStore = useSearchStore();
 
             const searchResults = computed(() => searchStore.searchResult)
-
-            const positionOptions = (): search.SolrQuery.ValueConstraint[] => {
-                //return (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints
-                return [{ selected: false, value: "ABC" }, { selected: false, value: "ABC" }, { selected: false, value: "EFG" }, { selected: false, value: "123" }, ]
-            }
 
             onMounted(() => {
                 //console.log("ExploreView.onMounted")
@@ -62,9 +62,9 @@
             return {
                 searchStore,
                 searchResults,
-                //keywordQueryModel,
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
-                positionOptions,
+                positionOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints),
+                facultyOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "faculties") as search.SolrQuery.FieldConstraint).valueConstraints),
                 colorList: computed(() => config.hexColorList),
             }
         }
