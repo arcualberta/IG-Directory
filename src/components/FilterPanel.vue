@@ -9,10 +9,11 @@
     export default defineComponent({
         name: "FilterPanel",
         props: {
-            model: {
+            options: {
                 type: null as PropType<search.SolrQuery.ValueConstraint[]> | null,
                 required: true
             },
+
         },
         setup(p) {
             const searchStore = useSearchStore();
@@ -32,7 +33,7 @@
 
 <template>
     <div class="filter-panel row">
-        <div v-for="option in model" :key="option">
+        <div v-for="option in options" :key="option">
             <input @click="toggleOption(option)" type="checkbox" /> {{option.value}}
         </div>
     </div>
