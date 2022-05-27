@@ -20,10 +20,10 @@
             <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />\
             
             <h3>Position</h3>
-            <FilterPanel :model="positionOptions" />
+            <FilterPanel :options="positionOptions" />
 
             <h3>Faculty</h3>
-            <FilterPanel :model="facultyOptions" />
+            <FilterPanel :options="facultyOptions" />
         </div> 
     </div>
 </template>
