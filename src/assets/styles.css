@@ -39,6 +39,87 @@ html{
     position: relative;
     overflow-y: scroll;
 }
+.left-content {
+    display: inline-block;
+    float: left;
+}
+
+.reset-text {
+    background-color: #ececec;
+    border-radius: 50px;
+    border:none;
+    position: relative;
+    padding: 10px;
+    margin-left: 15px;
+    margin-right: 50px;
+    overflow-wrap: break-word;
+    display: inline-block;
+}
+    .reset-text:hover {
+        background-color: #B2AFAF;
+        cursor: pointer;
+    }
+.filters {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.filter-results-text {
+    position: relative;
+    padding: 10px;
+    text-align: left;
+    font-family:Arial-Regular;
+    font-size:16px;
+    white-space: nowrap;
+    display: inline-block;
+    margin-top: 20px;
+}
+.position-text {
+    background-color: #ececec;
+    border-radius: 50px;
+    position: relative;
+    padding: 10px;
+    margin:0px 5px 0px 5px;
+    overflow-wrap: break-word;
+    display: inline-block;
+}
+
+.faculty-text {
+    background-color: #ececec;
+    border-radius: 50px;
+    position: relative;
+    padding: 10px;
+    margin: 0px 5px 0px 5px;
+    overflow-wrap: break-word;
+    display: inline-block;
+}
+
+.selfidentification-text {
+    background-color: #ececec;
+    border-radius: 50px;
+    position: relative;
+    padding: 10px;
+    margin: 0px 5px 0px 5px;
+    overflow-wrap: break-word;
+    display: inline-block;
+}
+.filter1-text {
+    background-color: var(--candlelight);
+    border-radius: 50px;
+    position: relative;
+    margin: 15px;
+    padding: 10px;
+    overflow-wrap: break-word;
+    display: inline-block;
+}
+.question-icon {
+    position: relative;
+    height: 30px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 20px;
+    /*  float: right;*/
+}
 /* accessibility dd buttons */
 
 
@@ -192,6 +273,16 @@ HOME BODY*/
     width: 250px;
 }
 
+.filter1-text {
+    background-color: #ffdc0e;
+    border-radius: 50px;
+    position: relative;
+    margin: 15px;
+    padding: 10px;
+    overflow-wrap: break-word;
+    display: inline-block;
+}
+
 /*RESEARCHER PAGE*/
 .background-grey-researcher {
     background-color: #ececec;
@@ -213,6 +304,13 @@ HOME BODY*/
     width:40%;
     margin-top: 20px;
     float: right;
+}
+.right-content {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin-left: 20px;
+    margin-top: 5px;
 }
 
 .results {

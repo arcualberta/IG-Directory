@@ -4,23 +4,19 @@
     import { Guid } from 'guid-typescript';
 
     import KeywordList from "../components/KeywordList.vue"
+    import ExploreRelatedResearchers from "../components/ExploreRelatedResearchers.vue"
     import { search } from '@arcualberta/catfish-ui';
     import { default as config, SearchResultFieldMapping } from '../appsettings';
     import { useProfileStore } from '../store'
     import * as itemHelper from '../helpers/itemHelper';
-
     export default defineComponent({
         name: 'ProfileView',
         modules: {
             search
         },
         components: {
-            KeywordList
-        },
-        methods: {
-            goToExplore() {
-                this.$router.push('/explore');
-            },
+            KeywordList,
+            ExploreRelatedResearchers
         },
         setup() {
 
@@ -68,6 +64,7 @@
                 pronouns: computed(() => itemHelper.getPronouns(profile.value)),
                 collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
                 gotoProfile: (id: string) => router.push({ path: "/profile/" + id }),
+                goToExplore: () => router.push({ path: "/explore/" }),
                 colorList: computed(() => config.hexColorList)
                 
             }
@@ -129,18 +126,7 @@
         <div class="explore-related">
             <div class="related-title">Explore related researchers </div>
             <div class="related-scroll">
-                <div v-for="item in searchResults.items" :key="item" class="related">
-                    <img class="related-image" src="../assets/user-profile-icon.jpg"/>
-                    <div class="related-results">
-                        <a class="router-link" @click="gotoProfile(item.id)">{{itemHelper.getName(item)}}</a> <span v-if=itemHelper.getPronouns(item)>({{itemHelper.getPronouns(item)}})</span>
-                        <br />
-                        <span v-if=itemHelper.getPosition(item)>{{itemHelper.getPosition(item)}}</span>
-                        <br />
-                        <span v-if=itemHelper.getOrganization(item)>{{itemHelper.getOrganization(item)}}</span>
-                        <br />
-                        <span v-if=itemHelper.getEmail(item)>{{itemHelper.getEmail(item)}}</span>
-                    </div>
-                </div>
+                    <ExploreRelatedResearchers v-for="item in searchResults.items" :key="item" :model="item" />
             </div>
             
             <!--{{JSON.stringify(searchResults.items)}}-->
