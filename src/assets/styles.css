@@ -267,6 +267,8 @@ HOME BODY*/
 }
 
 .info-rectangle {
+    font-family:Arial-Regular;
+    font-size:16px;
     background-color: black;
     color: white;
     text-align: center;
@@ -278,8 +280,15 @@ HOME BODY*/
     padding: 12.5px;
     z-index: 1;
 }
+.question-button{
+    background-color:transparent;
+    border:none;
+}
+    .question-button:hover {
+        cursor: pointer;
+    }
 .info-rectangle:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 .ui-dialog {
   background-color: black;

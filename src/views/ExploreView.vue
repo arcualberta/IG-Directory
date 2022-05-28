@@ -1,4 +1,5 @@
 <template>
+    <button class="question-button" type="button"><img class="question-icon" src="../assets/icon-awesome-question-circle@1x.png"/></button>
     <div class="left-content">
         <button class="reset-text">RESET</button>
         <div class="filter-results-text">Filter results by:</div>
