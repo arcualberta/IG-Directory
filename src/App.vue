@@ -39,21 +39,17 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed } from 'vue';
+    import { defineComponent } from 'vue';
     import { Guid } from 'guid-typescript';
 
 
     import { useSearchStore, useProfileStore } from './store'
 
-    import { common } from '@arcualberta/catfish-ui';
     import config from './appsettings';
 
 
     export default defineComponent({
         name: 'App',
-        modules: {
-            common
-        },
         setup() {
 
             const searchStore = useSearchStore();

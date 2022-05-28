@@ -1,6 +1,6 @@
 <script lang="ts">
    // import { Guid } from 'guid-typescript'
-    import { defineComponent, onMounted, computed, PropType, onUpdated, ref } from "vue";
+    import { defineComponent, onMounted, computed, PropType, onUpdated } from "vue";
     import {useRouter} from 'vue-router'
     
     import { search} from '@arcualberta/catfish-ui';

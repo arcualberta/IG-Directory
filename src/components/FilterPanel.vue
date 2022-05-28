@@ -22,7 +22,7 @@
             }
 
         },
-        setup(p) {
+        setup() {
             const searchStore = useSearchStore();
 
             const toggleOption = (option: search.SolrQuery.ValueConstraint) => {

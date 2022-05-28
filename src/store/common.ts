@@ -48,9 +48,9 @@ export const fetchQuery = (
 
     const formData = new FormData();
 
-    formData.append("templateId", templateId as any as string);
-    formData.append("collectionId", collectionId as any as string);
-    formData.append("groupId", groupId as any as string);
+    formData.append("templateId", templateId as unknown as string);
+    formData.append("collectionId", collectionId as unknown as string);
+    formData.append("groupId", groupId as unknown as string);
     formData.append("query", queryModel?.buildQueryString());
     formData.append("searchText", searchText);
 
