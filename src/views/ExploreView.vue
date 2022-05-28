@@ -1,5 +1,9 @@
 <template>
-    <button class="question-button" type="button"><img class="question-icon" src="../assets/icon-awesome-question-circle@1x.png"/></button>
+    <button class="question-button" type="button" ><img class="question-icon" @click="TogglePopup()" src="../assets/icon-awesome-question-circle@1x.png" /></button>
+    <PopupContainer v-if="questionPopupTrigger" :TogglePopup="() => TogglePopup()">
+        <div v-html="questionPopupContent"></div>
+
+    </PopupContainer>
     <div class="left-content">
         <button class="reset-text">RESET</button>
         <div class="filter-results-text">Filter results by:</div>
@@ -33,12 +37,13 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, computed, onMounted, watch } from 'vue';
+    import { defineComponent, computed, onMounted, ref } from 'vue';
     import { useSearchStore } from '../store'
 
     import KeywordList from "../components/KeywordList.vue"
     import ProfileListEntry from '../components/ProfileListEntry.vue'
     import FilterPanel from '../components/FilterPanel.vue'
+    import PopupContainer from '../components/PopupContainer.vue'
     import config from '../appsettings';
   
     import { search } from '@arcualberta/catfish-ui';
@@ -52,13 +57,14 @@
         components: {
             KeywordList,
             ProfileListEntry,
-            FilterPanel
+            FilterPanel,
+            PopupContainer
         },
         setup() {
             const searchStore = useSearchStore();
-
+            const questionPopupTrigger = ref(false);
             const searchResults = computed(() => searchStore.searchResult)
-
+            
             onMounted(() => {
                 //console.log("ExploreView.onMounted")
                 if (searchResults.value?.items?.length === 0)
@@ -68,6 +74,9 @@
             return {
                 searchStore,
                 searchResults,
+                PopupContainer,
+                questionPopupTrigger,
+                TogglePopup: () => (questionPopupTrigger.value = !questionPopupTrigger.value),
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
                 positionOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints),
                 facultyOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "faculties") as search.SolrQuery.FieldConstraint).valueConstraints),
@@ -75,6 +84,7 @@
                 genderIdentity: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:genderIdentity") as search.SolrQuery.FieldConstraint).valueConstraints),
                 ethnicity: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:ethnicity") as search.SolrQuery.FieldConstraint).valueConstraints),
                 colorList: computed(() => config.hexColorList),
+                questionPopupContent: computed(() => config.questionPopupContent)
             }
         }
     });

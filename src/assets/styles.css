@@ -280,7 +280,8 @@ HOME BODY*/
     padding: 12.5px;
     z-index: 1;
 }
-.question-button{
+
+    .question-button{
     background-color:transparent;
     border:none;
 }
@@ -303,10 +304,14 @@ HOME BODY*/
   width:250px;
 
 }
-.ui-dialog-title {
-  font-size: 125%;
-  text-decoration: underline;
-}
+    .a {
+        background-color: black;
+        color: white;
+    }
+    .ui-dialog-title {
+        font-size: 125%;
+        text-decoration: underline;
+    }
 .ui-dialog-titlebar {
   background-color: black;
   margin-bottom: 10px;

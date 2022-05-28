@@ -15,7 +15,10 @@ export default {
     },
     queryParameters: {
     },
-    hexColorList:"#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5",
+    hexColorList: "#ffdc0e, #ffc740, #fbaf41,  #65bf7f, #00b274, #00b19d, #5175a5",
+    infoPopupContent: "<p class='ui-dialog-title'>info</p> <p>Intersections of Gender is committed to using intersectional experience and excellence to build and sustain for the public good and to bring together wide - ranging initiatives to advance knowledge and inspire engaged citizenship around the world. <a href='https://www.ualberta.ca/intersections-gender/index.html'>Learn more about IG</a></p><p>This database features faculty, instructors and students at University of Alberta doing work at the intersections of gender.The database contains profiles for more than 250 researchers.</p>",
+    questionPopupContent: "<p class='ui-dialog-title'>How to search</p><p> After using the search bar or interactive keyword search, your search parameters will show up on the left hand side of the screen.You can continue to filter your search by position, faculty, and self - identification.At any point, you can exit out of any given search parameter on the left by clicking on the x.To completely reset your search parameters, click the reset button.</p>"
+
 }
 
 export enum SearchResultFieldMapping {
