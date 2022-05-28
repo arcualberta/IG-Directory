@@ -2,6 +2,7 @@
     <button class="info-rectangle" @click="TogglePopup()">Info</button>
     <PopupContainer v-if="popupTrigger" :TogglePopup ="() => TogglePopup()">
         <div>
+            <p class="ui-dialog-title">info</p>
             <p>
                 Intersections of Gender is committed to using intersectional experience and excellence to build and sustain for the public good and to bring together wide-ranging initiatives to advance knowledge and inspire engaged citizenship around the world.
                 Learn more about IG

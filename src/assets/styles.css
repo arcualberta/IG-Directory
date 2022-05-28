@@ -309,6 +309,13 @@ HOME BODY*/
   font-size: 14px;
   text-decoration: none;
 }
+.popup-close {
+    border: none;
+    color: black;
+    background-color: #ececec;
+    float:right;
+    position:relative;
+}
 
 .searchbar-rectangle-explore {
     background-color: #ececec;
