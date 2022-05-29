@@ -9,25 +9,24 @@
 <script lang="ts">
     import { defineComponent, computed, ref } from 'vue';
 
-    import { FormSubmission } from '@arcualberta/catfish-ui';
+    import { form } from '@arcualberta/catfish-ui';
+    //import { FormSubmission } from '@arcualberta/catfish-ui/src/lib-components/form/components/FormSubmission.vue';
 
     import {useFormStore} from '../store';
-    import { entity } from '@arcualberta/catfish-ui';
   
 
     export default defineComponent({
         name: 'HomeView',
         modules: {
-       //     form
+            form
         },
         components: {
-            FormSubmission
+            form.FormSubmission
         },
         setup() {
             const formStore = useFormStore()
             formStore.fetchData();
-            const popupTrigger = ref(false);
-            //const TogglePopup = (trigger) => { popupTrigger.value[trigger] = !popupTrigger.value[trigger] };
+
             return {
                 formStore,
             }
