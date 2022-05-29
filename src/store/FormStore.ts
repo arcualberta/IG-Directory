@@ -33,17 +33,15 @@ export const useFormStore = defineStore('FormStore', {
 */
 
 import { defineStore } from 'pinia';
-import { Guid } from 'guid-typescript';
+//import { Guid } from 'guid-typescript';
 
 import { search } from '@arcualberta/catfish-ui';
 import { entity } from '@arcualberta/catfish-ui';
 
-import { baseState, fetchQuery } from './common';
-import { createSearchQueryModel } from '../helpers/createSearchQueryModel';
 
 export const useFormStore = defineStore('FormStore', {
     state: () => ({
-        form: null as FieldContainer | null,
+        form: null as entity.FieldContainer | null,
         query: null as search.SolrQuery.QueryModel | null
     }),
     getters: {
