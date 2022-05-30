@@ -13,6 +13,7 @@
     import { default as TextArea } from './TextArea.vue'
     import { default as DateField } from './DateField.vue'
     import { default as DecimalField } from './DecimalField.vue'
+    import { default as EmailField } from './EmailField.vue'
 
     export default defineComponent({
         name: "FormField",
@@ -30,7 +31,8 @@
             CheckboxField,
             TextArea,
             DateField,
-            DecimalField
+            DecimalField,
+            EmailField
         },
         setup(p) {
 
@@ -56,6 +58,7 @@
         <TextField v-if="helpers.testFieldType(model, eFieldType.TextField)" :model="model" />
         <DateField v-if="helpers.testFieldType(model, eFieldType.DateField)" :model="model" />
         <DecimalField v-if="helpers.testFieldType(model, eFieldType.DecimalField)" :model="model" />
+        <EmailField v-if="helpers.testFieldType(model, eFieldType.EmailField)" :model="model" />
         <!--{{JSON.stringify(model)}}-->
     </div>
 
