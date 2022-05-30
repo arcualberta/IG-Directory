@@ -10,10 +10,19 @@
                 required: false
             },
         },
+
+        methods:{
+             getConcatenatedOptionLabels(option: any): string {
+                const concatenatedLabels = option.optionText?.values?.$values.map((txt: { value: any; }) => txt.value).join(" / ")
+                return concatenatedLabels ? concatenatedLabels : "";
+			}
+        }
     });
 </script>
 
 
 <template>
-    RadioField
+     <div v-for="option in model.options.$values" :key="option.id">
+        <input type="radio" :name="name" :id="option.id" :value="option.id" v-model="selected" /> <label :for="option.id">{{this.getConcatenatedOptionLabels(option)}}</label>
+    </div>
 </template>
