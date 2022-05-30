@@ -9,19 +9,18 @@
 <script lang="ts">
     import { defineComponent, computed, ref } from 'vue';
 
-    import { form } from '@arcualberta/catfish-ui';
-    //import { FormSubmission } from '@arcualberta/catfish-ui/src/lib-components/form/components/FormSubmission.vue';
+    import { form, FormSubmission } from '@arcualberta/catfish-ui';
 
     import {useFormStore} from '../store';
   
-
+   
     export default defineComponent({
         name: 'HomeView',
         modules: {
             form
         },
         components: {
-            form.FormSubmission
+            FormSubmission
         },
         setup() {
             const formStore = useFormStore()
