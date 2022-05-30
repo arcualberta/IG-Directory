@@ -2,7 +2,7 @@
    // import { Guid } from 'guid-typescript'
     import { defineComponent, onMounted, computed, PropType, onUpdated } from "vue";
     import {useRouter} from 'vue-router'
-    
+
     import { search} from '@arcualberta/catfish-ui';
     import { useSearchStore } from '../store'
 
@@ -13,11 +13,11 @@
         },
         props: {
             model:{
-                //type: null as PropType<search.KeywordQueryModel> | null,
                 type: null as PropType<search.SolrQuery.FieldConstraint> | null,
                 required: true
             },
             customStore: {
+                // eslint-disable-next-line  @typescript-eslint/no-explicit-any
                 type: null as PropType<any> | null,
                 required: false
             },

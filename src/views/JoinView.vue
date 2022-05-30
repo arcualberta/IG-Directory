@@ -7,7 +7,7 @@
 
 
 <script lang="ts">
-    import { defineComponent, computed, ref } from 'vue';
+    import { defineComponent } from 'vue';
 
     //import { form, FormSubmission } from '@arcualberta/catfish-ui';
     import * as form from '@/components/form'
@@ -17,7 +17,7 @@
   
    
     export default defineComponent({
-        name: 'HomeView',
+        name: 'JoinView',
         modules: {
             form
         },

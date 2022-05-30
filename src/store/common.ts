@@ -42,9 +42,7 @@ export const fetchQuery = (
     offset: number,
     pageSize: number,
     queryApiUrl: string,
-    resultCallback: any
-) => {
-
+    resultCallback: (result: search.SearchOutput) => void) => {
 
     const formData = new FormData();
 

@@ -4,7 +4,7 @@
     import * as models from '../../models'
     import * as helpers from '../../helpers'
 
-    import { default as Field } from './Field.vue'
+    import { default as FormField } from './FormField.vue'
 
     export default defineComponent({
         name: "SubmissionForm",
@@ -15,7 +15,7 @@
             },
         },
         components: {
-            Field,
+            FormField,
         },
         setup(p) {
 
@@ -28,6 +28,6 @@
 
 <template>
     <h2>{{name}}</h2>
-    <Field v-for="field in model.fields.$values" :key="field.id" :model="field" />
+    <FormField v-for="field in model?.fields.$values" :key="field.id" :model="field" />
     <!--{{JSON.stringify(model)}}-->
 </template>
