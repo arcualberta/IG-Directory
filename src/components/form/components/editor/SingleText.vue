@@ -16,6 +16,11 @@
                 type:  null as PropType<boolean> | null,
                 require: false,
                 default: false
+            },
+            fieldType:{
+                type:  null as PropType<string> | null,
+                require: false,
+                default: "text"
             }
 			
         },
@@ -28,7 +33,8 @@
         <textarea cols="30" rows="2" />
      </div>
 	<div v-else>
-        <input  type="text"  />	
+        <input v-if="fieldType == 'text'" type="text"  />	
+         <input v-else :type="fieldType"  />
     </div>
 </template>
 

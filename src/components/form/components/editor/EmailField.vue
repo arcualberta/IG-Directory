@@ -1,9 +1,12 @@
 <script lang="ts">
     import { defineComponent, PropType } from "vue";
     import * as models from '../../models'
-
+    import SingleText from './SingleText.vue'
     export default defineComponent({
         name: "EmailField",
+        components:{
+            SingleText
+        },
         props: {
             model: {
                 type: null as PropType<models.MonolingualTextField> | null,
@@ -21,9 +24,9 @@
 
 
 <template>
-    EmailField
+    
     <div v-for="val in model?.values?.$values" :key="val">
-        <Text :model="val" :is-multiline="false" :is-rich-text="false" :validation-status="validationStatus" field="email" />
-
+        <SingleText :model="val" :isMultiline="false" fieldType="email" />
+       
     </div>
 </template>
