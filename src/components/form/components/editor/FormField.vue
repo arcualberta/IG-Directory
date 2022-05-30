@@ -12,6 +12,7 @@
     import { default as CheckboxField } from './CheckboxField.vue'
     import { default as TextArea } from './TextArea.vue'
     import { default as DateField } from './DateField.vue'
+    import { default as DecimalField } from './DecimalField.vue'
 
     export default defineComponent({
         name: "FormField",
@@ -28,7 +29,8 @@
             RadioField,
             CheckboxField,
             TextArea,
-            DateField
+            DateField,
+            DecimalField
         },
         setup(p) {
 
@@ -53,7 +55,7 @@
         <TextArea v-if="helpers.testFieldType(model, eFieldType.TextArea)" :model="model" />
         <TextField v-if="helpers.testFieldType(model, eFieldType.TextField)" :model="model" />
         <DateField v-if="helpers.testFieldType(model, eFieldType.DateField)" :model="model" />
-
+        <DecimalField v-if="helpers.testFieldType(model, eFieldType.DecimalField)" :model="model" />
         <!--{{JSON.stringify(model)}}-->
     </div>
 
