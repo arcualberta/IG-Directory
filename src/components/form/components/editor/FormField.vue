@@ -11,6 +11,7 @@
     import { default as RadioField } from './RadioField.vue'
     import { default as CheckboxField } from './CheckboxField.vue'
     import { default as TextArea } from './TextArea.vue'
+    import { default as DateField } from './DateField.vue'
 
     export default defineComponent({
         name: "FormField",
@@ -26,7 +27,8 @@
             AttachmentField,
             RadioField,
             CheckboxField,
-            TextArea
+            TextArea,
+            DateField
         },
         setup(p) {
 
@@ -50,6 +52,7 @@
         <CheckboxField v-if="helpers.testFieldType(model, eFieldType.CheckboxField)" :model="model" />
         <TextArea v-if="helpers.testFieldType(model, eFieldType.TextArea)" :model="model" />
         <TextField v-if="helpers.testFieldType(model, eFieldType.TextField)" :model="model" />
+        <DateField v-if="helpers.testFieldType(model, eFieldType.DateField)" :model="model" />
 
         <!--{{JSON.stringify(model)}}-->
     </div>
