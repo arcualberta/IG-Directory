@@ -3,14 +3,20 @@
 	
 	
 	import * as models from '../../models'
-
+     
     export default defineComponent({
+  
         name: "SingleText",
         props: {
             model: {
                 type: null as PropType<models.Text> | null,
                 required: true
 			},
+            isMultiline:{
+                type:  null as PropType<boolean> | null,
+                require: false,
+                default: false
+            }
 			
         },
 	
@@ -18,6 +24,11 @@
 </script>
 
 <template>
-	<input type="text"  />	
+     <div v-if="isMultiline"  >
+        <textarea cols="30" rows="2" />
+     </div>
+	<div v-else>
+        <input  type="text"  />	
+    </div>
 </template>
 
