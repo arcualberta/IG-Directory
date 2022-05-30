@@ -1,9 +1,13 @@
 <script lang="ts">
     import { defineComponent, PropType } from "vue";
     import * as models from '../../models'
+    import SingleText from './SingleText.vue'
 
     export default defineComponent({
         name: "DateField",
+        components: {
+            SingleText
+        },
         props: {
             model: {
                 type: null as PropType<models.MonolingualTextField> | null,
@@ -21,8 +25,7 @@
 
 
 <template>
-    DateField
-    <!--<div v-for="val in model?.values?.$values">
-        <Text :model="val" :is-multiline="false" :is-rich-text="false" :validation-status="validationStatus" field="date" />
-    </div>-->
+    <div v-for="val in model?.values?.$values" :key="val">
+        <SingleText :model="val" :is-multiline="false" :is-rich-text="false" :validation-status="validationStatus" field="date" />
+    </div>
 </template>

@@ -3,9 +3,8 @@
     import * as models from '../../models'
     import SingleText from './SingleText.vue'
 
-
     export default defineComponent({
-        name: "DecimalField",
+        name: "IntegerField",
         components: {
             SingleText
         },
@@ -31,8 +30,9 @@
 
 
 <template>
-    
-    <div v-for="val in model?.values?.$values" :key="val">
-        <SingleText :model="val" :is-multiline="false"  field="decimal" />
-    </div>
+    <template>
+        <div v-for="val in model?.values?.$values" :key="val.id">
+            <SingleText :model="val" :is-multiline="false"  field="number" />
+        </div>
+    </template>
 </template>
