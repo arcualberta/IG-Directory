@@ -6,9 +6,11 @@
 
     export default defineComponent({
         name: "DecimalField",
+
         components: {
             SingleText
         },
+
         props: {
             model: {
                 type: null as PropType<models.MonolingualTextField> | null,
@@ -31,7 +33,6 @@
 
 
 <template>
-    
     <div v-for="val in model?.values?.$values" :key="val">
         <SingleText :model="val" :is-multiline="false"  field="decimal" />
     </div>
