@@ -1,6 +1,6 @@
 <script lang="ts">
     import { defineComponent, ref } from "vue";
-    import * as models from '../../models'
+    //import * as models from '../../models'
 
     export default defineComponent({
         name: "DropZone",
