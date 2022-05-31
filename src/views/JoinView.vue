@@ -2,6 +2,7 @@
     <div class="Join">
         <h1>This is join page</h1>
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
+        {{JSON.stringify(formStore.form)}}
     </div>
 </template>
 
