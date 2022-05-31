@@ -1,13 +1,14 @@
 <template>
     <div class="Join">
         <h1>This is join page</h1>
-        <FormSubmission :model="formStore.form" />
+        <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
     </div>
 </template>
 
 
 <script lang="ts">
     import { defineComponent, computed, ref } from 'vue';
+    import { getActivePinia } from 'pinia'
 
     import { form, FormSubmission } from '@arcualberta/catfish-ui';
 
@@ -26,8 +27,11 @@
             const formStore = useFormStore()
             formStore.fetchData();
 
+            const pinia = getActivePinia();
+
             return {
                 formStore,
+                pinia
             }
         }
     });
