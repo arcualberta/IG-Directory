@@ -55,14 +55,15 @@ html{
 .fieldName {
     margin: 5px 10px 5px 0;
     font-weight: bold;
-    flex: 0 0 20%;
-    max-width: 20%
+    flex: 0 0 25%;
+    max-width: 24%;
+    height: 30px;
 }
 
 .data {
     vertical-align: middle;
     margin: 0px 0px 0px 0;
-    padding: 10px;
+    padding-bottom: 10px;
     background-color: #fff;
 }
 .checkbox-container {
@@ -71,12 +72,27 @@ html{
     width: 100%;
     min-height: 1px;
     padding-right: 15px;
-    padding-left: 21%;
+    padding-left: 26%;
 }
 .page-body {
-    padding: 30px;
+    padding: 200px;
     border-radius: 15px;
     margin-top: -102px;
+}
+.required {
+    font-weight: bold;
+}
+
+    .required:after {
+        color: #e32;
+        content: ' *';
+        display: inline;
+    }
+
+.resized-textbox {
+    width: 250px;
+    height: 30px;
+    margin-bottom:10px;
 }
 .row {
     display: -webkit-box;
