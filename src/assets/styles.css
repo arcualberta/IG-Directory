@@ -55,17 +55,23 @@ html{
 .fieldName {
     margin: 5px 10px 5px 0;
     font-weight: bold;
+    flex: 0 0 20%;
+    max-width: 20%
 }
 
 .data {
     vertical-align: middle;
-    margin: 5px 10px 5px 0;
+    margin: 0px 0px 0px 0;
     padding: 10px;
     background-color: #fff;
-    border: 1px solid #ddd;
 }
-.checkbox {
+.checkbox-container {
     column-count: 2;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 21%;
 }
 .page-body {
     padding: 30px;
