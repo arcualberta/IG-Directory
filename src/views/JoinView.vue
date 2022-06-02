@@ -1,9 +1,8 @@
 <template>
     <div class="page-body">
-        <h1>This is join page</h1>
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
         <button @click="submitForm()">Submit</button>
-        {{JSON.stringify(formStore.form)}}
+        <!--{{JSON.stringify(formStore.form)}}-->
     </div>
 </template>
 
