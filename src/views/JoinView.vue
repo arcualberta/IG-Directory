@@ -1,5 +1,5 @@
 <template>
-    <div class="Join">
+    <div class="page-body">
         <h1>This is join page</h1>
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
         {{JSON.stringify(formStore.form)}}
