@@ -2,6 +2,7 @@
     <div class="page-body">
         <h1>This is join page</h1>
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
+        <button @click="submitForm()">Submit</button>
         {{JSON.stringify(formStore.form)}}
     </div>
 </template>
@@ -12,7 +13,7 @@
     import { getActivePinia } from 'pinia'
 
     import { form, FormSubmission } from '@arcualberta/catfish-ui';
-
+   
     import {useFormStore} from '../store';
   
    
@@ -30,8 +31,14 @@
 
             const pinia = getActivePinia();
 
+            const submitForm = () => {
+                if (form.helpers.validateForm(formStore.form as form.models.FieldContainer)) {
+                    console.log('Submitting form ...')
+                }
+            }
             return {
                 formStore,
+                submitForm,
                 pinia
             }
         }
