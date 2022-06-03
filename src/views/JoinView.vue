@@ -8,7 +8,7 @@
 
 
 <script lang="ts">
-    import { defineComponent, computed, ref } from 'vue';
+    import { defineComponent } from 'vue';
     import { getActivePinia } from 'pinia'
 
     import { form, FormSubmission } from '@arcualberta/catfish-ui';
@@ -34,6 +34,8 @@
                 if (form.helpers.validateForm(formStore.form as form.models.FieldContainer)) {
                     console.log('Submitting form ...')
                 }
+                else
+                    console.log('Form validation failed ...')
             }
             return {
                 formStore,
