@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
-        <button @click="submitForm()">Submit</button>
+        <button class="submit-button" @click="submitForm()">Submit</button>
         <!--{{JSON.stringify(formStore.form)}}-->
     </div>
 </template>
