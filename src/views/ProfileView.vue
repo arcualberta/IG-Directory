@@ -58,7 +58,7 @@
                 personOfColor: computed(() => itemHelper.getPersonOfColor(profile.value)),
                 genderIdentity: computed(() => itemHelper.getGenderIdentity(profile.value)),
                 researchQuestion: computed(() => itemHelper.getResearchQuestion(profile.value)),
-                additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
+                //additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
                 communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
                 pronouns: computed(() => itemHelper.getPronouns(profile.value)),
@@ -96,7 +96,7 @@
                 </p>
                 <br>
                 <p>
-                    <u>Research keywords:</u> <span v-if="additionalKeywords">{{additionalKeywords}}</span><span v-else> -</span>
+                    <u>Research keywords:</u> <span v-if="keywords?.length>0">{{keywords.join(", ")}}</span><span v-else>-</span>
                 </p>
                 <br>
                 <p>

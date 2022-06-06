@@ -5,6 +5,7 @@ import { defineStore } from 'pinia';
 import { search } from '@arcualberta/catfish-ui';
 import { form } from '@arcualberta/catfish-ui';
 
+import config from '../appsettings';
 
 export const useFormStore = defineStore('FormStore', {
     state: () => ({
@@ -16,7 +17,8 @@ export const useFormStore = defineStore('FormStore', {
     actions: {
         fetchData() {
 
-            const api = 'https://catfish-test.artsrn.ualberta.ca/applets/api/itemtemplates/bd35d406-3399-40af-bc72-c7b5813ee9b1/data-form/49a7a1d3-0194-4703-b3d8-747acbf3bbfa'
+            //const api = 'https://catfish-test.artsrn.ualberta.ca/applets/api/itemtemplates/bd35d406-3399-40af-bc72-c7b5813ee9b1/data-form/49a7a1d3-0194-4703-b3d8-747acbf3bbfa'
+            const api = `${config.dataServiceApiRoot}itemtemplates/${config.dataAttributes.templateId}/data-form/${config.dataAttributes.formId}`
 
             fetch(api, {
                 method: 'GET'
@@ -30,5 +32,6 @@ export const useFormStore = defineStore('FormStore', {
                     console.error('Item Load API Error:', error);
                 });
         },
+//        submitForm
     }
 });
