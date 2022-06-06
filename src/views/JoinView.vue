@@ -2,6 +2,7 @@
     <div class="page-body">
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
         <button class="submit-button" @click="submitForm()">Submit</button>
+        <div v-if="formStore.submissionFailed" class="alert alert-danger">Sorry, the form submission failed.</div>
         <!--{{JSON.stringify(formStore.form)}}-->
     </div>
 </template>

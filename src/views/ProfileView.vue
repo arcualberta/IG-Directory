@@ -42,6 +42,14 @@
             watch(() => profile, (oldValue, newValue) => { loadKeywords(newValue.value) }, { deep: true });
             onMounted(() => { loadKeywords(profile.value) });
 
+            const formatLinks = (content: string): string => {
+                const segments = content.split(' ').map(seg =>
+                    (seg.startsWith('http://') || seg.startsWith('https://'))
+                        ? `<a href='${seg}'>${seg}</a>`
+                        : seg)
+                return segments.join(' ')
+            }
+
             return {
                 id,
                 router,
@@ -65,8 +73,8 @@
                 collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
                 gotoProfile: (id: string) => router.push({ path: "/profile/" + id }),
                 goToExplore: () => router.push({ path: "/explore/" }),
-                colorList: computed(() => config.hexColorList)
-                
+                colorList: computed(() => config.hexColorList),
+                formatLinks,
             }
         }
     });
@@ -104,7 +112,8 @@
                 </p>
                 <br>
                 <p>
-                    <u>Links:</u> <span v-if="externalLinks">{{externalLinks}}</span><span v-else> -</span>
+                    <u>Links: </u> 
+                    <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
                 </p>
                 <br>
                 <p>

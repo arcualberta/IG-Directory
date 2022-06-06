@@ -1,18 +1,18 @@
 <template>
-<header class="header">
-    <router-link to="/">
-        <img class="ua-logo" src="./assets/ua-ig-logo.png">
-    </router-link>
-   <div class="accessibility-dropdown">
-        <button class="accessibility-ddbtn">Accessibility<br> Settings</button>
-        <div class="accessibility-ddcontent">
-            <a href="#">Increase font size</a>
-            <a href="#">Toggle Typeface</a>
-            <a href="#">High contrast</a>
-             <a href="#">Black & white</a>
+    <header class="header">
+        <router-link to="/">
+            <img class="ua-logo" src="./assets/ua-ig-logo.png">
+        </router-link>
+        <div class="accessibility-dropdown">
+            <button class="accessibility-ddbtn">Accessibility<br> Settings</button>
+            <div class="accessibility-ddcontent">
+                <a href="#">Increase font size</a>
+                <a href="#">Toggle Typeface</a>
+                <a href="#">High contrast</a>
+                <a href="#">Black & white</a>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
 <div class="background-white">
     <div>
