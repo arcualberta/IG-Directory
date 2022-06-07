@@ -641,7 +641,18 @@ HOME BODY*/
     text-decoration: underline;
     margin-top: 20px;
 }
-
+.results-description {
+    color: var(--black);
+    font-size: var(--font-size-xxs);
+    position: relative;
+    margin-top: 25px;
+    margin-right: 20px;
+    line-height: 15px;
+}
+.no-data-container{
+    width:600px;
+    height:500px;
+}
 .info-1 {
     display: inline-block;
     position: relative;

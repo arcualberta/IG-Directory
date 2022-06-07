@@ -28,8 +28,14 @@
         </div>
 
         <div class="background-grey">
-            <ProfileListEntry v-for="item in searchResults?.items" :key="item.id" :model="item" />
+            <span v-if="searchResults.count>0">
+                <ProfileListEntry v-for="item in searchResults?.items" :key="item.id" :model="item" />
+            </span >
+            <span v-else>
+                <NoDataFound />
+            </span>
         </div>
+        
         <div class="right-content">
             <KeywordList :model="searchStore.keywords" :hexColorList="colorList" :className="'keywordContainerSmall'" />
         </div>
@@ -42,6 +48,7 @@
 
     import KeywordList from "../components/KeywordList.vue"
     import ProfileListEntry from '../components/ProfileListEntry.vue'
+    import NoDataFound from '../components/NoDataFound.vue'
     import FilterPanel from '../components/FilterPanel.vue'
     import PopupContainer from '../components/PopupContainer.vue'
     import config from '../appsettings';
@@ -57,6 +64,7 @@
         components: {
             KeywordList,
             ProfileListEntry,
+            NoDataFound,
             FilterPanel,
             PopupContainer
         },
@@ -75,6 +83,7 @@
                 searchStore,
                 searchResults,
                 PopupContainer,
+                NoDataFound,
                 questionPopupTrigger,
                 TogglePopup: () => (questionPopupTrigger.value = !questionPopupTrigger.value),
                 selectedKeywords: computed(() => searchStore.selectedKeywords),

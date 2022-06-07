@@ -21,6 +21,8 @@
                 router,
                 name: computed(() => itemHelper.getName(p.model)),
                 position: computed(() => itemHelper.getPosition(p.model)),
+                pronuns: computed(() => itemHelper.getPronouns(p.model)),
+                organization: computed(() => itemHelper.getOrganization(p.model)),
                 keywords: computed(() => itemHelper.getKeywords(p.model)),
                 gotoProfile(id: Guid) {
                     router.push({ path: "/profile/" + id })
@@ -31,7 +33,20 @@
 </script>
 
 <template>
-    <div class="item row">
+    <div class="results">
+        <img class="results-image" src="../assets/user-profile-icon.jpg" />
+        <div class="results-name"><a @click="gotoProfile(model.id)">{{name}}<span v-if="pronuns">({{pronuns}})</span></a></div>
+        <br />
+        <p class="results-description">
+            {{position}}
+            <br />
+            {{organization}}
+            <br />
+            Keywords: {{keywords.join(", ")}}
+
+        </p>
+    </div>
+    <!--<div class="item row">
         <div class="itemProfile">
 
             <img class="profileImg" src="../assets/user-profile-icon.jpg" />
@@ -39,11 +54,11 @@
             <div class="profileInfo">
                 <div class="item-title router-link"><a @click="gotoProfile(model.id)">{{name}}</a></div>
                 <div>{{position}}</div>
-                <div>Keywords: {{keywords.join(", ")}}</div>
+                <div>Keywords: {{keywords.join(", ")}}</div>-->
                 <!--<div style="border:dashed 1px #808080;margin:4px;">{{JSON.stringify(model)}}</div>-->
-            </div>
+            <!--</div>
         </div>
-    </div>
+    </div>-->
 </template>
 
 <style scoped>
