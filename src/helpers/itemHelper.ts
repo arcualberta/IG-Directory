@@ -68,5 +68,23 @@ export function getPronouns(item: search.ResultItem) {
 export function getCollaborators(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.COLLABORATORS)
 }
+export function getShowPronouns(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.SHOW_PRONOUNS)
+}
+export function getShowPosition(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.SHOW_POSITION)
+}
+export function getShowDisability(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.SHOW_DISABILITY)
+}
+export function getShowRace(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.SHOW_RACE)
+}
+export function getShowGenderIdentity(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.SHOW_GENDER_IDENTITY)
+}
+export function getShowLinks(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.SHOW_EXTERNAL_LINKS)
+}
 
 

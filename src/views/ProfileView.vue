@@ -59,16 +59,22 @@
                 searchResults: computed(() => profileStore.searchResult),
                 name: computed(() => itemHelper.getName(profile.value)),
                 position: computed(() => itemHelper.getPosition(profile.value)),
+                showPosition: computed(() => itemHelper.getShowPosition(profile.value)),
                 keywords: computed(() => itemHelper.getKeywords(profile.value)),
                 organization: computed(() => itemHelper.getOrganization(profile.value)),
                 email: computed(() => itemHelper.getEmail(profile.value)),
+                showDisability: computed(() => itemHelper.getShowDisability(profile.value)),
                 disability: computed(() => itemHelper.getDisability(profile.value)),
+                showRace: computed(() => itemHelper.getShowRace(profile.value)),
                 personOfColor: computed(() => itemHelper.getPersonOfColor(profile.value)),
                 genderIdentity: computed(() => itemHelper.getGenderIdentity(profile.value)),
+                showGenderIdentity: computed(() => itemHelper.getShowGenderIdentity(profile.value)),
                 researchQuestion: computed(() => itemHelper.getResearchQuestion(profile.value)),
                 //additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
                 communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
+                showExternalLinks: computed(() => itemHelper.getShowLinks(profile.value)),
+                showPronouns: computed(() => itemHelper.getShowPronouns(profile.value)),
                 pronouns: computed(() => itemHelper.getPronouns(profile.value)),
                 collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
                 gotoProfile: (id: string) => router.push({ path: "/profile/" + id }),
@@ -86,16 +92,16 @@
             <div class="results">
                 <img class="results-image" src="../assets/user-profile-icon.jpg"/>
                 <p class="info-1">
-                    <u>{{name}} <span v-if="pronouns">({{pronouns}})</span></u>
-                    <br>{{position}}
+                    <u>{{name}}<span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
+                    <br><span v-if="ShowPosition==='Yes'">{{position}}</span>
                     <br>{{organization}}
                     <br>{{email}}
                 </p>
                 <p class="info-2">
                     Self-identification
-                    <br>Disability: <span v-if="disability">{{disability}}</span><span v-else> -</span>
-                    <br>Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span>
-                    <br>Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span>
+                    <br><span v-if="showDisability==='Yes'">Disability:  <span v-if="disability">{{disability}}</span><span v-else> -</span></span>
+                    <br><span v-if="showRace==='Yes'">Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
+                    <br><span v-if="showGenderIdentity==='Yes'">Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span></span>
                 </p>
             </div>
             <div class="results-content">
@@ -112,8 +118,10 @@
                 </p>
                 <br>
                 <p>
-                    <u>Links: </u> 
-                    <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
+                    <span v-if="showExternalLinks==='Yes'">
+                        <u>Links: </u>
+                        <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
+                    </span>
                 </p>
                 <br>
                 <p>

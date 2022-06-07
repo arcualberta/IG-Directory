@@ -44,6 +44,21 @@ export const useFormStore = defineStore('FormStore', {
             //so that it will pass on the "this.form" in this FormStore and get the response.
             //If the response is successful, redirect the user (router.push) to the JoinConfirmationView view. 
             //If the post cal failed, display "Sibmission failed" near the "Submit" button on the Join Us page.
+
+            const formData = new FormData();
+            //Setting the serialized JSON form model to the datamodel variable in formData
+            formData.append('datamodel', JSON.stringify(this.form));
+            console.log('datamodel - ' + JSON.stringify(this.form))
+            //for (const key in this.state.flattenedFileModels) {
+            //    if (store.state.flattenedFileModels[key].length > 0) {
+            //        store.state.flattenedFileModels[key].forEach(file => {
+            //            console.log("File: ", file.name)
+            //            formData.append('files', file);
+            //            formData.append('fileKeys', key);
+            //        })
+            //    }
+            //}
+
             fetch(api, {
                 method: 'POST'
             })
