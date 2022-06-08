@@ -32,12 +32,13 @@
             const pinia = getActivePinia();
 
             const submitForm = () => {
-                if (form.helpers.validateForm(formStore.form as form.models.FieldContainer)) {
-                    console.log('Submitting form ...')
-                    formStore.submitForm();
-                }
-                else
-                    console.log('Form validation failed ...')
+                formStore.submitForm();
+            //    if (form.helpers.validateForm(formStore.form as form.models.FieldContainer)) {
+            //        console.log('Submitting form ...')
+            //        formStore.submitForm();
+            //    }
+            //    else
+            //        console.log('Form validation failed ...')
             }
             return {
                 formStore,

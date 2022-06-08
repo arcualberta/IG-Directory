@@ -48,8 +48,10 @@ export const useFormStore = defineStore('FormStore', {
             const formData = new FormData();
             //Setting the serialized JSON form model to the datamodel variable in formData
             formData.append('datamodel', JSON.stringify(this.form));
-            console.log('datamodel - ' + JSON.stringify(this.form))
-            //for (const key in this.state.flattenedFileModels) {
+            console.log('datamodel - ', JSON.stringify(this.form))
+
+            ////Adding all attachments uploaded to the files variable in formData
+            //for (const key in store.state.flattenedFileModels) {
             //    if (store.state.flattenedFileModels[key].length > 0) {
             //        store.state.flattenedFileModels[key].forEach(file => {
             //            console.log("File: ", file.name)
@@ -59,15 +61,23 @@ export const useFormStore = defineStore('FormStore', {
             //    }
             //}
 
-            fetch(api, {
-                method: 'POST'
-            })
+
+
+            fetch(api,
+                {
+                    body: formData,
+                    method: "post",
+                    headers: {
+                        "encType": "multipart/form-data"
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
                     console.log(JSON.stringify(data))
-                    this.form = data;
+                    this.submissionFailed = data !== "Success";
                 })
                 .catch((error) => {
+                    this.submissionFailed = true;
                     console.error('Item Load API Error:', error);
                 });
 
