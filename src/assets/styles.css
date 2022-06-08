@@ -604,6 +604,7 @@ HOME BODY*/
     display: inline-block;
     overflow-y: scroll;
     float: left;
+    min-height:500px;
 }
 
 .right-content-researcher {
@@ -649,6 +650,21 @@ HOME BODY*/
     margin-right: 20px;
     line-height: 15px;
 }
+.alert-panel {
+    padding: 0.01em 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    height: 60px;
+    text-align:center;
+    padding-top:25px;
+}
+
+.panel-red {
+    color: #000 !important;
+    background-color: #f2dede;
+    border-color: #ebccd1
+}
+
 .no-data-container{
     width:600px;
     height:500px;

@@ -86,5 +86,8 @@ export function getShowGenderIdentity(item: search.ResultItem) {
 export function getShowLinks(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.SHOW_EXTERNAL_LINKS)
 }
+export function getConsent(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.CONSENT)
+}
 
 

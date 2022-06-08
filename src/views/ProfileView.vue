@@ -77,6 +77,7 @@
                 showPronouns: computed(() => itemHelper.getShowPronouns(profile.value)),
                 pronouns: computed(() => itemHelper.getPronouns(profile.value)),
                 collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
+                consent: computed(() => itemHelper.getConsent(profile.value)),
                 gotoProfile: (id: string) => router.push({ path: "/profile/" + id }),
                 goToExplore: () => router.push({ path: "/explore/" }),
                 colorList: computed(() => config.hexColorList),
@@ -89,49 +90,64 @@
     
     <div class="Profile">
         <div class="background-grey-researcher">
-            <div class="results">
-                <img class="results-image" src="../assets/user-profile-icon.jpg"/>
-                <p class="info-1">
-                    <u>{{name}}<span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
-                    <br><span v-if="ShowPosition==='Yes'">{{position}}</span>
-                    <br>{{organization}}
-                    <br>{{email}}
-                </p>
-                <p class="info-2">
-                    Self-identification
-                    <br><span v-if="showDisability==='Yes'">Disability:  <span v-if="disability">{{disability}}</span><span v-else> -</span></span>
-                    <br><span v-if="showRace==='Yes'">Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
-                    <br><span v-if="showGenderIdentity==='Yes'">Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span></span>
-                </p>
+            <div v-if="consent==='Yes'">
+                <div class="results">
+                    <img class="results-image" src="../assets/user-profile-icon.jpg" />
+                    <p class="info-1">
+                        <u>{{name}}<span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
+                        <br><span v-if="ShowPosition==='Yes'">{{position}}</span>
+                        <br>{{organization}}
+                        <br>{{email}}
+                    </p>
+                    <p class="info-2">
+                        Self-identification
+                        <br><span v-if="showDisability==='Yes'">Disability:  <span v-if="disability">{{disability}}</span><span v-else> -</span></span>
+                        <br><span v-if="showRace==='Yes'">Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
+                        <br><span v-if="showGenderIdentity==='Yes'">Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span></span>
+                    </p>
+                </div>
+                <div class="results-content">
+                    <p>
+                        <u>Research question:</u> <span v-if="researchQuestion">{{researchQuestion}}</span><span v-else> -</span>
+                    </p>
+                    <br>
+                    <p>
+                        <u>Research keywords:</u> <span v-if="keywords?.length>0">{{keywords.join(", ")}}</span><span v-else>-</span>
+                    </p>
+                    <br>
+                    <p>
+                        <u>Community Projects:</u> <span v-if="communityProjects">{{communityProjects}}</span><span v-else> -</span>
+                    </p>
+                    <br>
+                    <p>
+                        <span v-if="showExternalLinks==='Yes'">
+                            <u>Links: </u>
+                            <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
+                        </span>
+                    </p>
+                    <br>
+                    <p>
+                        <u>Collaborators:</u> <span v-if="collaborators">{{collaborators}}</span><span v-else> -</span>
+                    </p>
+                </div>
+                <div>
+                    <!--<a class="contact" href="mailto:{{email}}">Contact me!</a>-->
+                    <div class="contact" onclick="location.href ='mailto:{{email}}';">Contact me!</div>
+                </div>
             </div>
-            <div class="results-content">
-                <p>
-                    <u>Research question:</u> <span v-if="researchQuestion">{{researchQuestion}}</span><span v-else> -</span>
-                </p>
-                <br>
-                <p>
-                    <u>Research keywords:</u> <span v-if="keywords?.length>0">{{keywords.join(", ")}}</span><span v-else>-</span>
-                </p>
-                <br>
-                <p>
-                    <u>Community Projects:</u> <span v-if="communityProjects">{{communityProjects}}</span><span v-else> -</span>
-                </p>
-                <br>
-                <p>
-                    <span v-if="showExternalLinks==='Yes'">
-                        <u>Links: </u>
-                        <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
-                    </span>
-                </p>
-                <br>
-                <p>
-                    <u>Collaborators:</u> <span v-if="collaborators">{{collaborators}}</span><span v-else> -</span>
-                </p>
+            <div v-else >
+                <div class="results">
+                    <img class="results-image" src="../assets/user-profile-icon.jpg" />
+                    <p class="info-1">
+                    <u>{{name}}<span v-if="showPronouns === 'Yes'" /> </u>
+                    </p>
+                </div>
+                <div class="alert-panel panel-red">
+                    This directory entry is not publicly visible
+                </div>
+                
             </div>
-            <div>
-                <!--<a class="contact" href="mailto:{{email}}">Contact me!</a>-->
-                <div class="contact" onclick="location.href ='mailto:{{email}}';">Contact me!</div>
-            </div>
+
         </div>
         <div class="right-content-researcher">
             <div>
