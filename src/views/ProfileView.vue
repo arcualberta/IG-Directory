@@ -90,7 +90,7 @@
     
     <div class="Profile">
         <div class="background-grey-researcher">
-            <div v-if="consent==='Yes'">
+            <!--<div v-if="consent.toLowerCase()==='yes'">-->
                 <div class="results">
                     <img class="results-image" src="../assets/user-profile-icon.jpg" />
                     <p class="info-1">
@@ -102,7 +102,7 @@
                     <p class="info-2">
                         Self-identification
                         <br><span v-if="showDisability==='Yes'">Disability:  <span v-if="disability">{{disability}}</span><span v-else> -</span></span>
-                        <br><span v-if="showRace==='Yes'">Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
+                        <br><span v-if="showRace==='Yes'">Race:<span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
                         <br><span v-if="showGenderIdentity==='Yes'">Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span></span>
                     </p>
                 </div>
@@ -134,7 +134,7 @@
                     <!--<a class="contact" href="mailto:{{email}}">Contact me!</a>-->
                     <div class="contact" onclick="location.href ='mailto:{{email}}';">Contact me!</div>
                 </div>
-            </div>
+            <!--</div>
             <div v-else >
                 <div class="results">
                     <img class="results-image" src="../assets/user-profile-icon.jpg" />
@@ -146,7 +146,7 @@
                     This directory entry is not publicly visible
                 </div>
                 
-            </div>
+            </div>-->
 
         </div>
         <div class="right-content-researcher">
