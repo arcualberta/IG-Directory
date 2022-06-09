@@ -102,7 +102,7 @@
                     <p class="info-2">
                         Self-identification
                         <br><span v-if="showDisability==='Yes'">Disability:  <span v-if="disability">{{disability}}</span><span v-else> -</span></span>
-                        <br><span v-if="showRace==='Yes'">Race:<span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
+                        <br><span v-if="showRace==='Yes'">Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
                         <br><span v-if="showGenderIdentity==='Yes'">Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span></span>
                     </p>
                 </div>
@@ -112,7 +112,7 @@
                     </p>
                     <br>
                     <p>
-                        <u>Research keywords:</u> <span v-if="keywords?.length>0">{{keywords.join(", ")}}</span><span v-else>-</span>
+                        <u>Research keywords:</u> <span v-if="keywords?.length>0">{{keywords.join(", ")}}</span><span v-else> -</span>
                     </p>
                     <br>
                     <p>

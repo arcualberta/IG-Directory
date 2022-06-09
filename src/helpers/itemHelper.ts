@@ -45,7 +45,7 @@ export function getDisability(item: search.ResultItem) {
     return getStringArrayValue(item, SearchResultFieldMapping.DISABILITY).join(", ")
 }
 export function getPersonOfColor(item: search.ResultItem) {
-    return getStringArrayValue(item, SearchResultFieldMapping.PERSON_OF_COLOR).join(", ")
+    return getStringArrayValue(item, SearchResultFieldMapping.RACE).join(", ")
 }
 export function getGenderIdentity(item: search.ResultItem) {
     return getStringArrayValue(item, SearchResultFieldMapping.GENDER_IDENTITY).join(", ")

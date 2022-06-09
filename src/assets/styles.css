@@ -368,7 +368,7 @@ html{
     display: inline-block;
     margin-left: 20px;
     margin-top: 20px;
-    /*  float: right;*/
+      float: right;
 }
 /* accessibility dd buttons */
 
@@ -642,14 +642,17 @@ HOME BODY*/
     text-decoration: underline;
     margin-top: 20px;
 }
-.results-description {
-    color: var(--black);
-    font-size: var(--font-size-xxs);
-    position: relative;
-    margin-top: 25px;
-    margin-right: 20px;
-    line-height: 15px;
-}
+    .results-name:hover{
+        cursor:pointer;
+    }
+    .results-description {
+        color: var(--black);
+        font-size: var(--font-size-xxs);
+        position: relative;
+        margin-top: 25px;
+        margin-right: 20px;
+        line-height: 15px;
+    }
 .alert-panel {
     padding: 0.01em 16px;
     margin-top: 16px;
