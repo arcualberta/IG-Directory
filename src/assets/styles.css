@@ -679,7 +679,7 @@ HOME BODY*/
     font-size: 18px;
     max-width: 300px;
     font-family: Arial-Bold;
-    line-height: 17px;
+    line-height: 21px;
     margin-top: 20px;
 }
 
@@ -689,7 +689,7 @@ HOME BODY*/
     float: right;
     font-size: 18px;
     font-family: Arial-Bold;
-    line-height: 17px;
+    line-height: 21px;
     max-width:300px;
     margin-top: 20px;
     padding: 17px;
@@ -912,9 +912,11 @@ xremove{
     display: inline-block;
     /*margin-top: 15px;*/
     padding: 12.5px;
+    margin-right:20px !important;
     background-repeat: no-repeat;
     background-position: right;
-    background-size: 5%;
+    background-size: 7%;
+    background-position-x:95%;
     border: none;
 }
 

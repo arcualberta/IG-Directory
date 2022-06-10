@@ -90,12 +90,12 @@
     
     <div class="Profile">
         <div class="background-grey-researcher">
-            <!--<div v-if="consent.toLowerCase()==='yes'">-->
+            <div v-if="consent.toLowerCase()==='yes'">
                 <div class="results">
                     <img class="results-image" src="../assets/user-profile-icon.jpg" />
                     <p class="info-1">
                         <u>{{name}}<span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
-                        <br><span v-if="ShowPosition==='Yes'">{{position}}</span>
+                        <br><!--<span v-if="ShowPosition==='Yes'">-->{{position}}<!--</span>-->
                         <br>{{organization}}
                         <br>{{email}}
                     </p>
@@ -120,10 +120,10 @@
                     </p>
                     <br>
                     <p>
-                        <span v-if="showExternalLinks==='Yes'">
+                        <!--<span v-if="showExternalLinks==='Yes'">-->
                             <u>Links: </u>
                             <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
-                        </span>
+                        <!--</span>-->
                     </p>
                     <br>
                     <p>
@@ -134,7 +134,7 @@
                     <!--<a class="contact" href="mailto:{{email}}">Contact me!</a>-->
                     <div class="contact" onclick="location.href ='mailto:{{email}}';">Contact me!</div>
                 </div>
-            <!--</div>
+            </div>
             <div v-else >
                 <div class="results">
                     <img class="results-image" src="../assets/user-profile-icon.jpg" />
@@ -146,7 +146,7 @@
                     This directory entry is not publicly visible
                 </div>
                 
-            </div>-->
+            </div>
 
         </div>
         <div class="right-content-researcher">

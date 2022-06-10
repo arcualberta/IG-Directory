@@ -162,7 +162,7 @@
         </div>
     </div>-->
     <div class="input-group dir-text-search">
-        <input type="text" v-model="freeTextSearchValue" @blur="runSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
+        <input type="text" v-model="freeTextSearchValue" @blur="runSearch()" v-on:keyup.enter="runSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
     </div>
     <!--<div class="row keywordContainer">
         <span v-for="(keyword) in keywords" :key="keyword" class="dir-keyword">

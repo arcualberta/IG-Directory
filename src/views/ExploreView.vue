@@ -5,7 +5,7 @@
 
     </PopupContainer>
     <div class="left-content">
-        <button class="reset-text">RESET</button>
+        <button class="reset-text" @click="searchStore.clearKeywordSelection()">RESET</button>
         <div class="filter-results-text">Filter results by:</div>
         <div class="dropdown">
             <button class="filter-dropdown">Position</button>
