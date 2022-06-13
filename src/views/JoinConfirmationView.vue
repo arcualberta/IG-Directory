@@ -1,4 +1,12 @@
 <template>
-    <h3>Confirmaiton</h3>
+<div class="confirmationForm">
+    <h3>Confirmation</h3>
     Your submission to the directory is successful. Thank you.
+</div>
 </template>
+
+<style scoped>
+  .confirmationForm{
+    padding: 30px;
+  }
+</style>
