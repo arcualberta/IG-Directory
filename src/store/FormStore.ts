@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 //import { Guid } from 'guid-typescript';
-
+import router from '../router'
 import { search, form } from '@arcualberta/catfish-ui';
 
 import config from '../appsettings';
@@ -60,8 +60,9 @@ export const useFormStore = defineStore('FormStore', {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(JSON.stringify(data))
+                    //console.log(JSON.stringify(data))
                     this.submissionFailed = data !== "Success";
+                    router.push({name:'joinConfirmation'})
                 })
                 .catch((error) => {
                     this.submissionFailed = true;
