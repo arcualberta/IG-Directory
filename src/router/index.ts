@@ -24,7 +24,12 @@ const routes: Array<RouteRecordRaw> = [
         path: '/profile/:id',
         name: 'profile',
         component: () => import('../views/ProfileView.vue')
-    }
+    },
+    {
+      path: '/joinConfirmation',
+      name: 'joinConfirmation',
+      component: () => import('../views/JoinConfirmationView.vue')
+  }
 ]
 
 const router = createRouter({
