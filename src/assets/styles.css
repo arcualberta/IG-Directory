@@ -946,8 +946,21 @@ xremove{
     font-size: large;
     text-align: center;
 }
-
-.fa-plus-circle:before{
-    /*content: "\f055";*/
+.fa-plus-circle{
+    margin-top:-10px;
+    background-color:#338533;
+    color: white;
 }
+.remove-circle{
+    background-color: #c03e3e;
+    color: white;
+}
+.monoLingualField{
+    display: block;
+    width:285px;
+}
+
+.monoLingualField:not(:first-child) {
+    margin-left:150px;
+    }
 
