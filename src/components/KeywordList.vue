@@ -197,7 +197,7 @@
     .dir-keyword-button {
         position: relative;
         color: Black;
-        font-size: 16px;
+        font-size:inherit;
         font-family:Arial;
         text-align: center;
         border-radius: 60px;
@@ -273,7 +273,7 @@
    .keywordContainerSmall > .dir-keyword > .dir-keyword-button {
                 position: relative;
                 color: Black;
-                font-size: 0.80em;
+                /*font-size: 0.80em;*/
                 text-align: center;
                 border-radius: 60px;
                 padding-top: 15px;

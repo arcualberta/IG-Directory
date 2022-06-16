@@ -4,18 +4,19 @@
             <img class="ua-logo" src="./assets/ua-ig-logo.png">
         </router-link>
         <div class="accessibility-dropdown">
-            <button class="accessibility-ddbtn">Accessibility<br> Settings</button>
+            <button class="accessibility-ddbtn" >Accessibility<br> Settings</button>
             <div class="accessibility-ddcontent">
-                <a href="#">Increase font size</a>
-                <a href="#">Toggle Typeface</a>
-                <a href="#">High contrast</a>
-                <a href="#">Black & white</a>
+                <button class="accessibility-btn" @click="IncreaseFontSize()">Increase<br> font size</button>
+                <button class="accessibility-btn" @click="DecreaseFontSize()">Decrease<br> font size</button>
+                <button class="accessibility-btn">Toggle Typeface</button>
+                <button class="accessibility-btn">High <br>contrast</button>
+                <button class="accessibility-btn">Black & <br>white</button>
             </div>
         </div>
     </header>
 
-<div class="background-white">
-    <div>
+<div class="background-white" id="appContent">
+    <div >
         <nav class="navigationalmenu">
             <router-link to="/" class="navigation-menu-box">Home</router-link>
             <router-link to="/explore" class="navigation-menu-box">Explore</router-link>
@@ -61,10 +62,36 @@
 
             searchStore.queryApiUrl = profileStore.queryApiUrl = config.dataServiceApiRoot + 'keywordsearch';
 
+            //const computedFontSize = window.getComputedStyle(document.getElementById("appContent"), null).fontSize;
+            const value = document.getElementById('appContent');
+            
+
+            /*console.log("value",value);*/
             
             return {
                 searchStore,
                 profileStore,
+                value,
+                //IncreaseFontSize: () => (console.log(document.getElementById('appContent')))
+                //IncreaseFontSize: () => (console.log(document.getElementById('appContent')?.style.fontSize))
+                IncreaseFontSize: () => {
+                    const el = document.getElementById('appContent');
+                    if (el) {
+                        const style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+                        const fontSize = parseFloat(style);
+                        el.style.fontSize = (fontSize + 1) + 'px';
+                    }
+                        
+                },
+                DecreaseFontSize: () => {
+                    const el = document.getElementById('appContent');
+                    if (el) {
+                        const style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+                        const fontSize = parseFloat(style);
+                        el.style.fontSize = (fontSize - 1) + 'px';
+                    }
+
+                }
             }
         },
     });

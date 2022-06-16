@@ -12,7 +12,6 @@ html{
     margin: 10px;
     display: inline-block;
 }
-
 #app{
     background-color: var(--grey);
 }
@@ -229,6 +228,7 @@ html{
     margin-bottom: 20px;
     position: relative;
     overflow-y: scroll;
+    font-size:18px;
 }
 .left-content {
     display: inline-block;
@@ -243,7 +243,8 @@ html{
     padding: 10px;
     margin-left: 15px;
     margin-right: 50px;
-    overflow-wrap: break-word;
+    font-size  :inherit;
+    /*overflow-wrap: break-word;*/
     display: inline-block;
 }
     .reset-text:hover {
@@ -260,13 +261,14 @@ html{
     background-color: #04AA6D;
     color: white;
     padding: 16px;
-    font-size: 16px;
+    /*font-size: 16px;*/
     border: none;
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
+    font-size:inherit;
 }
 
 .dropdown-content {
@@ -305,21 +307,30 @@ html{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    /*font-size: 16px;*/
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
 }
-.filter-results-text {
-    position: relative;
-    padding: 10px;
-    text-align: left;
-    font-family:Arial-Regular;
-    font-size:16px;
-    white-space: nowrap;
-    display: inline-block;
-    margin-top: 20px;
+.accessibility-btn {
+    border: none;
+    height: 40px;
+    width: auto;
+    background-color: #e4e2e2;
+    /*font-size:14px;*/
 }
+    .accessibility-btn:hover{
+        cursor:pointer;
+    }
+    .filter-results-text {
+        position: relative;
+        padding: 10px;
+        text-align: left;
+        font-family: Arial-Regular;
+        white-space: nowrap;
+        display: inline-block;
+        margin-top: 20px;
+    }
 .filter-dropdown {
     background-color: #ececec;
     border-radius: 50px;
@@ -329,6 +340,7 @@ html{
     margin: 0px 5px 0px 5px;
     overflow-wrap: break-word;
     display: inline-block;
+    font-size:inherit;
 }
     .filter-dropdown:hover {
         background-color: #B2AFAF;
@@ -389,7 +401,7 @@ html{
     background-color: #fff;
     color:Black;
     padding: 0px;
-    font-size: 15px;
+    /*font-size: 15px;*/
     border: none;
     max-width: 100px;
   }
@@ -677,7 +689,7 @@ HOME BODY*/
     display: inline-block;
     position: relative;
     float: left;
-    font-size: 18px;
+    /*font-size: 18px;*/
     max-width: 300px;
     font-family: Arial-Bold;
     line-height: 21px;
@@ -688,7 +700,7 @@ HOME BODY*/
     display: inline-block;
     position: relative;
     float: right;
-    font-size: 18px;
+    /*font-size: 18px;*/
     font-family: Arial-Bold;
     line-height: 21px;
     max-width:300px;
@@ -699,7 +711,7 @@ HOME BODY*/
 .results-content {
     position: relative;
     display: block;
-    font-size: 18px;
+    /*font-size: 18px;*/
     font-family: Arial-Bold;
     margin-left: 20px;
     line-height: 17px;
@@ -727,6 +739,7 @@ HOME BODY*/
     position: relative;
     display: inline-block;
     padding: 12.5px;
+    font-size:inherit;  
     /*  margin: 20px;*/
 }
     .back-to-search:hover {
