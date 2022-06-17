@@ -8,9 +8,11 @@
             <div class="accessibility-ddcontent">
                 <button class="accessibility-btn" @click="IncreaseFontSize()">Increase<br> font size</button>
                 <button class="accessibility-btn" @click="DecreaseFontSize()">Decrease<br> font size</button>
-                <button class="accessibility-btn">Toggle Typeface</button>
-                <button class="accessibility-btn">High <br>contrast</button>
-                <button class="accessibility-btn">Black & <br>white</button>
+                <!--<button class="accessibility-btn">Toggle Typeface</button>-->
+                <button class="accessibility-btn" @click="HighContrast()">High <br>contrast</button>
+                <button class="accessibility-btn" @click="LowContrast()">Low <br>contrast</button>
+                <button class="accessibility-btn" @click="blackAndWhite()">Black & <br>white</button>
+                <button class="accessibility-btn" @click="reset()">Reset</button>
             </div>
         </div>
     </header>
@@ -40,7 +42,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from 'vue';
+    import { defineComponent, ref } from 'vue';
     import { Guid } from 'guid-typescript';
 
 
@@ -62,18 +64,14 @@
 
             searchStore.queryApiUrl = profileStore.queryApiUrl = config.dataServiceApiRoot + 'keywordsearch';
 
-            //const computedFontSize = window.getComputedStyle(document.getElementById("appContent"), null).fontSize;
-            const value = document.getElementById('appContent');
-            
+            const blackAndWhiteTrigger = ref(false);
+            const contrastValue = ref(1);
 
-            /*console.log("value",value);*/
-            
             return {
                 searchStore,
                 profileStore,
-                value,
-                //IncreaseFontSize: () => (console.log(document.getElementById('appContent')))
-                //IncreaseFontSize: () => (console.log(document.getElementById('appContent')?.style.fontSize))
+                blackAndWhiteTrigger,
+                contrastValue,
                 IncreaseFontSize: () => {
                     const el = document.getElementById('appContent');
                     if (el) {
@@ -81,7 +79,7 @@
                         const fontSize = parseFloat(style);
                         el.style.fontSize = (fontSize + 1) + 'px';
                     }
-                        
+
                 },
                 DecreaseFontSize: () => {
                     const el = document.getElementById('appContent');
@@ -91,7 +89,49 @@
                         el.style.fontSize = (fontSize - 1) + 'px';
                     }
 
-                }
+                },
+                HighContrast: () => {
+                    const el = document.getElementById('appContent');
+                    if (el) {
+                        const style = window.getComputedStyle(el, null).getPropertyValue('filter');
+                        contrastValue.value = contrastValue.value + 0.1;
+                        el.style.filter = 'contrast(' + contrastValue.value+')';
+                        console.log("value", contrastValue.value);
+                    }
+
+                },
+                LowContrast: () => {
+                    const el = document.getElementById('appContent');
+                    if (el) {
+                        const style = window.getComputedStyle(el, null).getPropertyValue('filter');
+                        contrastValue.value = contrastValue.value - 0.1;
+                        el.style.filter = 'contrast(' + contrastValue.value + ')';
+                        console.log("value", contrastValue.value);
+                    }
+
+                },
+                blackAndWhite: () => {
+                    const el = document.getElementById('appContent');
+                    if (el) {
+                        const style = window.getComputedStyle(el, null).getPropertyValue('filter');
+                        if (blackAndWhiteTrigger.value)
+                            el.style.filter = 'grayscale(0%)';
+                        else
+                            el.style.filter = 'grayscale(100%)';
+
+                        blackAndWhiteTrigger.value = !blackAndWhiteTrigger.value
+                    }
+
+                },
+                reset: () => {
+                    const el = document.getElementById('appContent');
+                    if (el) {
+                        el.style.fontSize = '18px';
+                        el.style.filter = 'grayscale(100%)';
+                        el.style.filter = 'contrast(1)'
+                    }
+
+                },
             }
         },
     });
