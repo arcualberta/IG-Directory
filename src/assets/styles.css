@@ -960,7 +960,7 @@ xremove{
     font-size: large;
     text-align: center;
 }
-.fa-plus-circle{
+.plus-circle{
     margin-top:-10px;
     background-color:#338533;
     color: white;
@@ -969,12 +969,11 @@ xremove{
     background-color: #c03e3e;
     color: white;
 }
-.monoLingualField{
+.monoLingualField,.multilingualField {
     display: block;
     width:285px;
 }
 
-.monoLingualField:not(:first-child) {
+.monoLingualField:not(:first-child), .multilingualField:not(:first-child) {
     margin-left:150px;
     }
-
