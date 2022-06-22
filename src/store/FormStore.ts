@@ -19,7 +19,7 @@ export const useFormStore = defineStore('FormStore', {
 
             //const api = 'https://catfish-test.artsrn.ualberta.ca/applets/api/itemtemplates/bd35d406-3399-40af-bc72-c7b5813ee9b1/data-form/49a7a1d3-0194-4703-b3d8-747acbf3bbfa'
             const api = `${config.dataServiceApiRoot}itemtemplates/${config.dataAttributes.templateId}/data-form/${config.dataAttributes.formId}`
-
+            //console.log(api)
 
             fetch(api, {
                 method: 'GET'
