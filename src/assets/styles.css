@@ -67,12 +67,12 @@ html{
     background-color: #fff;
 }
 .checkbox-container {
-    column-count: 2;
+    column-count: 1;
     position: relative;
     width: 100%;
     min-height: 1px;
     padding-right: 15px;
-    padding-left: 26%;
+    margin-left: 26%;
 }
 .page-body {
     padding: 200px;
@@ -385,6 +385,10 @@ html{
 }
 /* accessibility dd buttons */
 
+.multilingualField{
+    margin-left:25%;
+    width:100%;
+}
 
 .accessibility-dropdown {
     background-color: white;
@@ -395,7 +399,7 @@ html{
     top: 41px;
     float: right;
     margin-right: 25px;
-    font-size:inherit;
+    font-size: inherit;
     border-radius: 20px 20px 0px 0px;
 }
   .accessibility-ddbtn {
@@ -970,10 +974,36 @@ xremove{
     color: white;
 }
 .monoLingualField,.multilingualField {
-    display: block;
-    width:285px;
+    display: inline-block;
+    width:100%;
+    margin-left:25%;
 }
 
 .monoLingualField:not(:first-child), .multilingualField:not(:first-child) {
-    margin-left:150px;
+    margin-left:25%;
     }
+.added-another-list{
+    column-count: 1;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 26%;
+}
+.extended-list{
+    margin-top: -15px;
+}
+.extended-text-btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius:50%;
+    color: white;
+    text-align: center;
+    font-weight:bold;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px 5px;
+    cursor: pointer;
+}
+    
