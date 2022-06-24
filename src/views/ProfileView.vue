@@ -82,6 +82,7 @@
                 goToExplore: () => router.push({ path: "/explore/" }),
                 colorList: computed(() => config.hexColorList),
                 formatLinks,
+                imageFile: computed(() => itemHelper.getFileName(profile.value)),
                 imageSource: computed(() => config.dataServiceApiRoot + "items/" + id + "/" + profile.value.rootFormInstaceId + "/"
                     + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(profile.value))
             }
@@ -91,11 +92,11 @@
 <template>
     
     <div class="Profile">
-        {{imageSource}}
         <div class="background-grey-researcher">
             <div v-if="consent.toLowerCase()==='yes'">
                 <div class="results">
-                    <img class="results-image" :src="imageSource" />
+                    <img v-if="imageFile" class="results-image" :src="imageSource" />
+                    <img v-else class="results-image" src="../assets/user-profile-icon.jpg" />
                     <p class="info-1">
                         <u>{{name}}<span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
                         <br><!--<span v-if="ShowPosition==='Yes'">-->{{position}}<!--</span>-->

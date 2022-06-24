@@ -23,7 +23,8 @@
                 position: computed(() => itemHelper.getPosition(p.model)),
                 organization: computed(() => itemHelper.getOrganization(p.model)),
                 email: computed(() => itemHelper.getEmail(p.model)),
-                imageSource: computed(() => config.dataServiceApiRoot + "items/" + p.model.id + "/" + itemHelper.getDataItemInstanceId(p.model) + "/"
+                imageFile: computed(() => itemHelper.getFileName(p.model)),
+                imageSource: computed(() => config.dataServiceApiRoot + "items/" + p.model.id + "/" + p.model.rootFormInstaceId + "/"
                     + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(p.model)),
                 gotoProfile(id: Guid) {
                     router.push({ path: "/profile/" + id })
@@ -37,7 +38,8 @@
 
 <template>
     <div class="related">
-        <img class="related-image" :src="imageSource" />
+        <img v-if="imageFile" class="results-image" :src="imageSource" />
+        <img v-else class="results-image" src="../assets/user-profile-icon.jpg" />
         <div class="related-results">
             <a class="router-link" @click=gotoProfile(model.id)>{{name}}</a> <span v-if="pronouns">({{pronouns}})</span>
             <br />

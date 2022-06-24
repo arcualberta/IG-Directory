@@ -5,6 +5,7 @@
     
     import { search} from '@arcualberta/catfish-ui';
     import { useSearchStore } from '../store'
+    import config from '../appsettings';
 
     export default defineComponent({
         name: "KeywordList",
@@ -139,6 +140,8 @@
 
             const borderClass = (keywordSelected: boolean) => { return (p.toggle && keywordSelected) ? "highlight" : ""; }
 
+            const isViewable = (value: string) => !config.dataAttributes.excludeKeywords.includes(value);
+
             return {
                 router,
                 store,
@@ -148,6 +151,7 @@
                 runSearch,
                 keywords: computed(() => p.model),
                 borderClass,
+                isViewable
             }
         },
     });
@@ -169,7 +173,7 @@
             <button @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>-->
     <div class="scrolling-explore">
         <span v-for="keyword in keywords" :key="keyword" class="dir-keyword">
-            <button @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>
+            <button v-if="isViewable(keyword.value)" @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>
         </span>
     </div>
 

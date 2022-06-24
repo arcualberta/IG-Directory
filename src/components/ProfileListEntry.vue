@@ -24,6 +24,7 @@
                 pronuns: computed(() => itemHelper.getPronouns(p.model)),
                 organization: computed(() => itemHelper.getOrganization(p.model)),
                 keywords: computed(() => itemHelper.getKeywords(p.model)),
+                imageFile: computed(() => itemHelper.getFileName(p.model)),
                 imageSource: computed(() => config.dataServiceApiRoot + "items/" + p.model.id + "/" + p.model.rootFormInstaceId + "/"
                     + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(p.model)),
                 gotoProfile(id: Guid) {
@@ -36,7 +37,8 @@
 
 <template>
     <div class="results">
-        <img class="results-image" :src="imageSource" />
+        <img v-if="imageFile" class="results-image" :src="imageSource" />
+        <img v-else class="results-image" src="../assets/user-profile-icon.jpg" />
         <div class="results-name"><a @click="gotoProfile(model.id)">{{name}}<span v-if="pronuns">({{pronuns}})</span></a></div>
         <br />
         <p class="results-description">
