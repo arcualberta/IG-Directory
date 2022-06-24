@@ -89,5 +89,11 @@ export function getShowLinks(item: search.ResultItem) {
 export function getConsent(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.CONSENT)
 }
+export function getDataItemInstanceId(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.DATA_ITEM_INSTANCE_ID).join(", ")
+}
+export function getFileName(item: search.ResultItem) {
+    return getConcatenatedStringValue(item, SearchResultFieldMapping.FILE_NAME)
+}
 
 

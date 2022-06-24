@@ -82,6 +82,8 @@
                 goToExplore: () => router.push({ path: "/explore/" }),
                 colorList: computed(() => config.hexColorList),
                 formatLinks,
+                imageSource: computed(() => config.dataServiceApiRoot + "items/" + id + "/" + itemHelper.getDataItemInstanceId(profile.value) + "/"
+                    + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(profile.value))
             }
         }
     });
@@ -92,7 +94,7 @@
         <div class="background-grey-researcher">
             <div v-if="consent.toLowerCase()==='yes'">
                 <div class="results">
-                    <img class="results-image" src="../assets/user-profile-icon.jpg" />
+                    <img class="results-image" :src="imageSource" />
                     <p class="info-1">
                         <u>{{name}}<span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
                         <br><!--<span v-if="ShowPosition==='Yes'">-->{{position}}<!--</span>-->
