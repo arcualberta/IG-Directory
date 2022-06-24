@@ -24,7 +24,7 @@
                 pronuns: computed(() => itemHelper.getPronouns(p.model)),
                 organization: computed(() => itemHelper.getOrganization(p.model)),
                 keywords: computed(() => itemHelper.getKeywords(p.model)),
-                imageSource: computed(() => config.dataServiceApiRoot + "items/" + p.model.id + "/" + itemHelper.getDataItemInstanceId(p.model) + "/"
+                imageSource: computed(() => config.dataServiceApiRoot + "items/" + p.model.id + "/" + p.model.rootFormInstaceId + "/"
                     + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(p.model)),
                 gotoProfile(id: Guid) {
                     router.push({ path: "/profile/" + id })

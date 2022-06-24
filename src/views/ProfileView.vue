@@ -82,7 +82,7 @@
                 goToExplore: () => router.push({ path: "/explore/" }),
                 colorList: computed(() => config.hexColorList),
                 formatLinks,
-                imageSource: computed(() => config.dataServiceApiRoot + "items/" + id + "/" + itemHelper.getDataItemInstanceId(profile.value) + "/"
+                imageSource: computed(() => config.dataServiceApiRoot + "items/" + id + "/" + profile.value.rootFormInstaceId + "/"
                     + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(profile.value))
             }
         }
@@ -91,6 +91,7 @@
 <template>
     
     <div class="Profile">
+        {{imageSource}}
         <div class="background-grey-researcher">
             <div v-if="consent.toLowerCase()==='yes'">
                 <div class="results">
@@ -123,8 +124,8 @@
                     <br>
                     <p>
                         <!--<span v-if="showExternalLinks==='Yes'">-->
-                            <u>Links: </u>
-                            <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
+                        <u>Links: </u>
+                        <span style="margin-right: 5px;" v-for="(link,idx) in externalLinks" v-html="formatLinks(link)" :key="idx"></span>
                         <!--</span>-->
                     </p>
                     <br>
@@ -137,17 +138,17 @@
                     <div class="contact" onclick="location.href ='mailto:{{email}}';">Contact me!</div>
                 </div>
             </div>
-            <div v-else >
+            <div v-else>
                 <div class="results">
                     <img class="results-image" src="../assets/user-profile-icon.jpg" />
                     <p class="info-1">
-                    <u>{{name}}<span v-if="showPronouns === 'Yes'" /> </u>
+                        <u>{{name}}<span v-if="showPronouns === 'Yes'" /> </u>
                     </p>
                 </div>
                 <div class="alert-panel panel-red">
                     This directory entry is not publicly visible
                 </div>
-                
+
             </div>
 
         </div>
@@ -161,9 +162,9 @@
         <div class="explore-related">
             <div class="related-title">Explore related researchers </div>
             <div class="related-scroll">
-                    <ExploreRelatedResearchers v-for="item in searchResults.items" :key="item" :model="item" />
+                <ExploreRelatedResearchers v-for="item in searchResults.items" :key="item" :model="item" />
             </div>
-            
+
             <!--{{JSON.stringify(searchResults.items)}}-->
         </div>
 
