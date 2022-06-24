@@ -48,6 +48,8 @@ export enum SearchResultFieldMapping {
     CONSENT = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_84f22416-34ac-4451-bc59-e403bcd684fa_ts",
     COLLABORATORS = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_afb2a6b5-e6ba-406c-90b3-7c10bf4faa73_ts",
     IMAGE = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_962b6d6d-e397-4f24-8096-ed1655880af2_ts",
+    DATA_ITEM_INSTANCE_ID = "root_form_instance_id_s",
+    FILE_NAME = "data_49a7a1d3-0194-4703-b3d8-747acbf3bbfa_962b6d6d-e397-4f24-8096-ed1655880af2_filename_ss",
     KEYWORDS = "_keywords__ss",
     FREE_TEXT = "_all__ts",
     SIMILARITY_SOURCE = "_similarity_source__ts",

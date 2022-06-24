@@ -2,7 +2,7 @@
     import { defineComponent, computed, PropType } from "vue";
     import {useRouter} from 'vue-router'
     import { Guid } from 'guid-typescript';
-
+    import { default as config } from '../appsettings';
     import { search} from '@arcualberta/catfish-ui';
     import * as itemHelper from '../helpers/itemHelper';
 
@@ -23,6 +23,8 @@
                 position: computed(() => itemHelper.getPosition(p.model)),
                 organization: computed(() => itemHelper.getOrganization(p.model)),
                 email: computed(() => itemHelper.getEmail(p.model)),
+                imageSource: computed(() => config.dataServiceApiRoot + "items/" + p.model.id + "/" + itemHelper.getDataItemInstanceId(p.model) + "/"
+                    + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(p.model)),
                 gotoProfile(id: Guid) {
                     router.push({ path: "/profile/" + id })
 
@@ -35,7 +37,7 @@
 
 <template>
     <div class="related">
-        <img class="related-image" src="../assets/user-profile-icon.jpg" />
+        <img class="related-image" :src="imageSource" />
         <div class="related-results">
             <a class="router-link" @click=gotoProfile(model.id)>{{name}}</a> <span v-if="pronouns">({{pronouns}})</span>
             <br />

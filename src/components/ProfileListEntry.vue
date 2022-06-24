@@ -5,7 +5,7 @@
 
     import { search} from '@arcualberta/catfish-ui';
     import * as itemHelper from '../helpers/itemHelper';
-
+    import { default as config } from '../appsettings';
     export default defineComponent({
         name: "ProfileListEntry",
         props: {
@@ -24,6 +24,8 @@
                 pronuns: computed(() => itemHelper.getPronouns(p.model)),
                 organization: computed(() => itemHelper.getOrganization(p.model)),
                 keywords: computed(() => itemHelper.getKeywords(p.model)),
+                imageSource: computed(() => config.dataServiceApiRoot + "items/" + p.model.id + "/" + itemHelper.getDataItemInstanceId(p.model) + "/"
+                    + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(p.model)),
                 gotoProfile(id: Guid) {
                     router.push({ path: "/profile/" + id })
                 }
@@ -34,7 +36,7 @@
 
 <template>
     <div class="results">
-        <img class="results-image" src="../assets/user-profile-icon.jpg" />
+        <img class="results-image" :src="imageSource" />
         <div class="results-name"><a @click="gotoProfile(model.id)">{{name}}<span v-if="pronuns">({{pronuns}})</span></a></div>
         <br />
         <p class="results-description">
