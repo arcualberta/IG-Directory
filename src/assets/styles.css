@@ -890,7 +890,7 @@ HOME BODY*/
 .footerLink:hover{
     text-decoration: none;
 }
-#footerLoginBtn{
+.footerLoginBtn{
   float: right;
   background-color: white;
   color: black;
@@ -900,7 +900,7 @@ HOME BODY*/
   padding: 0px 20px 0 20px;
   text-decoration: none;
 }
-#footerLoginBtn:hover{
+.footerLoginBtn:hover{
   text-decoration: none;
 }
 .navigationalmenu {

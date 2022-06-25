@@ -35,14 +35,15 @@
  <footer>
      <div class="footerLinks">
          <a class="footerLink" href="https://www.ualberta.ca" target="_blank" rel="noopener">University of Alberta </a>
-        <a class="footerLink" href="https://www.ualberta.ca/privacy.html" target="_blank" rel="noopener">Privacy</a> 
-         <a href="/server/login?ret=/" id="footerLoginBtn" style="float: right;"> Login</a>
+         <a class="footerLink" href="https://www.ualberta.ca/privacy.html" target="_blank" rel="noopener">Privacy</a>
+         <a v-if="isLoggedIn" href="#" @click="profileStore.signOut()" class="footerLoginBtn" style="float: right;"> Logout</a>
+         <a v-else href="/server/login?ret=/" id="footerLoginBtn" class="footerLoginBtn" style="float: right;"> Login</a>
      </div>
  </footer>
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref } from 'vue';
+    import { defineComponent, ref, computed } from 'vue';
     import { Guid } from 'guid-typescript';
 
 
@@ -134,6 +135,7 @@
                     }
 
                 },
+                isLoggedIn: computed(() => profileStore?.userInfo?.userName?.length && (profileStore?.userInfo?.userName?.length > 0))
             }
         },
     });

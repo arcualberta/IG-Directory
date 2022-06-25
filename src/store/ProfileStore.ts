@@ -43,6 +43,21 @@ export const useProfileStore = defineStore('ProfileStore', {
                     console.error('User Info Load API Error:', error);
                 });
         },
+        signOut() {
+            const api = `${config.dataServiceApiRoot}users/logout`
+
+            fetch(api, {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(JSON.stringify(data))
+                    this.userInfo = data;
+                })
+                .catch((error) => {
+                    console.error('Logout API Error:', error);
+                });
+        },
        fetchData() {
             console.log("ProfileStore.fetchData called")
             fetchQuery(

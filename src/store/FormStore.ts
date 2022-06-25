@@ -73,8 +73,10 @@ export const useFormStore = defineStore('FormStore', {
             //Adding all attachments uploaded to the files variable in formData
             const fileReferences = form.helpers.getFileReferences(this.form as FieldContainer);
             fileReferences.forEach(fileRef => {
-                formData.append('files', fileRef.file);
-                formData.append('fileKeys', fileRef.fieldId.toString() as unknown as string);
+                if (fileRef.file) {
+                    formData.append('files', fileRef.file);
+                    formData.append('fileKeys', fileRef.fieldId.toString() as unknown as string);
+                }
            })
 
             fetch(api,
