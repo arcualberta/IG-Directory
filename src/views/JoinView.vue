@@ -1,5 +1,6 @@
 <template>
     <div class="page-body">
+        {{JSON.stringify(formStore.userInfo)}}
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
         <button class="submit-button" @click="submitForm()">Submit</button>
         <div v-if="formStore.submissionFailed" class="alert alert-danger">Sorry, the form submission failed.</div>
@@ -11,6 +12,8 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import { getActivePinia } from 'pinia'
+    import { useRoute } from 'vue-router'
+    import { Guid } from 'guid-typescript';
 
     import { form, FormSubmission } from '@arcualberta/catfish-ui';
    
@@ -27,9 +30,18 @@
         },
         setup() {
             const formStore = useFormStore()
-            formStore.fetchData();
 
             const pinia = getActivePinia();
+
+            const route = useRoute();
+            const id = route.params.id;
+
+            formStore.fetchUserInfo();
+
+            if (id)
+                formStore.fetchItem(id as unknown as Guid);
+            //else
+                formStore.fetchData();
 
             const submitForm = () => {
                 if (form.helpers.validateForm(formStore.form as form.models.FieldContainer)) {

@@ -84,13 +84,16 @@
                 formatLinks,
                 imageFile: computed(() => itemHelper.getFileName(profile.value)),
                 imageSource: computed(() => config.dataServiceApiRoot + "items/" + id + "/" + profile.value.rootFormInstaceId + "/"
-                    + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(profile.value))
+                    + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(profile.value)),
+                gotoEdit(id: Guid) {
+                    router.push({ path: "/update/" + id })
+                }
             }
         }
     });
 </script>
 <template>
-    
+    <div ><a @click="gotoEdit(profile.id)">Edit</a></div>
     <div class="Profile">
         <div class="background-grey-researcher">
             <div v-if="consent.toLowerCase()==='yes'">

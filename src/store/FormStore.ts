@@ -1,20 +1,43 @@
 import { defineStore } from 'pinia';
-//import { Guid } from 'guid-typescript';
 import router from '../router'
 import { search, form } from '@arcualberta/catfish-ui';
+import { Guid } from 'guid-typescript';
 
 import config from '../appsettings';
 import { FieldContainer } from '@arcualberta/catfish-ui/dist/types/src/lib-components/form/models';
+
+interface UserInfo {
+    userName: string | null;
+    roles: string[] | null;
+}
 
 export const useFormStore = defineStore('FormStore', {
     state: () => ({
         form: null as form.models.FieldContainer | null,
         query: null as search.SolrQuery.QueryModel | null,
-        submissionFailed: false
+        submissionFailed: false,
+        userInfo: null as UserInfo | null
     }),
     getters: {
     },
     actions: {
+        fetchUserInfo() {
+            const api = `${config.dataServiceApiRoot}users/current`
+            //console.log(api)
+
+            fetch(api, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(JSON.stringify(data))
+                    this.userInfo = data;
+                })
+                .catch((error) => {
+                    this.submissionFailed = true;
+                    console.error('User Info Load API Error:', error);
+                });
+        },
         fetchData() {
 
             //const api = 'https://catfish-test.artsrn.ualberta.ca/applets/api/itemtemplates/bd35d406-3399-40af-bc72-c7b5813ee9b1/data-form/49a7a1d3-0194-4703-b3d8-747acbf3bbfa'
@@ -28,6 +51,24 @@ export const useFormStore = defineStore('FormStore', {
                 .then(data => {
                     //console.log(JSON.stringify(data))
                     this.form = data;
+                })
+                .catch((error) => {
+                    this.submissionFailed = true;
+                    console.error('Item Load API Error:', error);
+                });
+        },
+        fetchItem(id: Guid) {
+
+            const api = `${config.dataServiceApiRoot}items/${id}`
+            console.log(api)
+
+            fetch(api, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(JSON.stringify(data))
+                    this.form = data.dataContainer.$values[0];
                 })
                 .catch((error) => {
                     this.submissionFailed = true;
