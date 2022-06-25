@@ -36,7 +36,7 @@
      <div class="footerLinks">
          <a class="footerLink" href="https://www.ualberta.ca" target="_blank" rel="noopener">University of Alberta </a>
         <a class="footerLink" href="https://www.ualberta.ca/privacy.html" target="_blank" rel="noopener">Privacy</a> 
-         <a href="/server/login?ret=/server" id="footerLoginBtn" style="float: right;"> Login</a>
+         <a href="/server/login?ret=/" id="footerLoginBtn" style="float: right;"> Login</a>
      </div>
  </footer>
 </template>
