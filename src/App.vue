@@ -58,6 +58,8 @@
             const searchStore = useSearchStore();
             const profileStore = useProfileStore();
 
+            profileStore.fetchUserInfo();
+
             searchStore.templateId = profileStore.templateId = config.dataAttributes.templateId as unknown as Guid;
             searchStore.collectionId = profileStore.collectionId = Guid.parse(config.dataAttributes.collectionId);
             searchStore.groupId = profileStore.groupId = Guid.parse(config.dataAttributes.groupId);

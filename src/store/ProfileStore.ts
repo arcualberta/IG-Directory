@@ -3,15 +3,22 @@ import { defineStore } from 'pinia';
 
 import { search } from '@arcualberta/catfish-ui';
 
+import config from '../appsettings';
 import { baseState, fetchQuery } from './common';
 import { createProfileQueryModel } from '../helpers/createProfileQueryModel';
+
+interface UserInfo {
+    userName: string | null;
+    roles: string[] | null;
+}
 
 export const useProfileStore = defineStore('ProfileStore', {
     state: () => ({
         ...baseState,
         solrQueryModel: createProfileQueryModel(),
         activeProfile: null as search.ResultItem | null,
-    }),
+        userInfo: null as UserInfo | null,
+  }),
     getters: {
         keywordFieldConstratint(): search.SolrQuery.FieldConstraint {
             return this.solrQueryModel.queryConstraints.find(qc => qc.internalId === "keywords") as search.SolrQuery.FieldConstraint;
@@ -20,7 +27,23 @@ export const useProfileStore = defineStore('ProfileStore', {
 
     },
     actions: {
-        fetchData() {
+        fetchUserInfo() {
+            const api = `${config.dataServiceApiRoot}users/current`
+            //console.log(api)
+
+            fetch(api, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(JSON.stringify(data))
+                    this.userInfo = data;
+                })
+                .catch((error) => {
+                    console.error('User Info Load API Error:', error);
+                });
+        },
+       fetchData() {
             console.log("ProfileStore.fetchData called")
             fetchQuery(
                 this.templateId as Guid,

@@ -9,6 +9,7 @@
     import { default as config, SearchResultFieldMapping } from '../appsettings';
     import { useProfileStore } from '../store'
     import * as itemHelper from '../helpers/itemHelper';
+
     export default defineComponent({
         name: 'ProfileView',
         modules: {
@@ -87,13 +88,14 @@
                     + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(profile.value)),
                 gotoEdit(id: Guid) {
                     router.push({ path: "/update/" + id })
-                }
+                },
+                allowEdits: computed(() => profileStore?.userInfo?.roles?.includes("SysAdmin") || profileStore?.userInfo?.userName === itemHelper.getEmail(profile.value)),
             }
         }
     });
 </script>
 <template>
-    <div ><a @click="gotoEdit(profile.id)">Edit</a></div>
+    <button v-if="allowEdits" class="edit-btn" @click="gotoEdit(profile.id)">Edit</button>
     <div class="Profile">
         <div class="background-grey-researcher">
             <div v-if="consent.toLowerCase()==='yes'">

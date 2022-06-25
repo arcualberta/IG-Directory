@@ -1,6 +1,7 @@
 <template>
     <div class="page-body">
-        {{JSON.stringify(formStore.userInfo)}}
+        <h2 v-if="formStore.isUpdate">Update Profile</h2>
+        <h2 v-else>Create Profile</h2>
         <FormSubmission :model="formStore.form" :pinia-instance="pinia" />
         <button class="submit-button" @click="submitForm()">Submit</button>
         <div v-if="formStore.submissionFailed" class="alert alert-danger">Sorry, the form submission failed.</div>
@@ -10,7 +11,7 @@
 
 
 <script lang="ts">
-    import { defineComponent } from 'vue';
+    import { defineComponent, watch } from 'vue';
     import { getActivePinia } from 'pinia'
     import { useRoute } from 'vue-router'
     import { Guid } from 'guid-typescript';
@@ -36,12 +37,17 @@
             const route = useRoute();
             const id = route.params.id;
 
-            formStore.fetchUserInfo();
-
             if (id)
                 formStore.fetchItem(id as unknown as Guid);
-            //else
-                formStore.fetchData();
+            else
+                formStore.fetchForm();
+
+            watch(() => route.params.id, async newId => {
+                if (newId)
+                    formStore.fetchItem(newId as unknown as Guid);
+                else
+                    formStore.fetchForm();
+            })
 
             const submitForm = () => {
                 if (form.helpers.validateForm(formStore.form as form.models.FieldContainer)) {

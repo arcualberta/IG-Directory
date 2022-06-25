@@ -1045,4 +1045,10 @@ xremove{
     width: 20px;
     padding-top:2px;
 }
-    
+
+.edit-btn {
+    margin: 10px 0 0 10px;
+    color: #fff;
+    background-color: #b13939;
+    border-color: #dc3545;
+}
