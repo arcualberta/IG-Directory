@@ -5,6 +5,7 @@ import { search } from '@arcualberta/catfish-ui';
 
 import { baseState, fetchQuery } from './common';
 import { createSearchQueryModel } from '../helpers/createSearchQueryModel';
+import { ResultItem } from '@arcualberta/catfish-ui/dist/types/src/lib-components/search';
 
 export const useSearchStore = defineStore('SearchStore', {
     state: () => ({
@@ -30,6 +31,23 @@ export const useSearchStore = defineStore('SearchStore', {
                 this.pageSize,
                 this.queryApiUrl as string,
                 (result: search.SearchOutput) => { this.searchResult = result; }
+            )
+        },
+        fetchNextPage() {
+            fetchQuery(
+                this.templateId as Guid,
+                this.collectionId as Guid,
+                this.groupId as Guid,
+                this.solrQueryModel,
+                this.searchText as string,
+                this.searchResult.last,
+                this.pageSize,
+                this.queryApiUrl as string,
+                (result: search.SearchOutput) => {
+                    this.searchResult.items = this.searchResult.items.concat(result.items);
+                    this.searchResult.last = result.last
+
+                }
             )
         },
         selectKeyword(index: number) {

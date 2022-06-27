@@ -34,6 +34,11 @@
             <span v-else>
                 <NoDataFound />
             </span>
+            <div style="text-align:center; margin:10px;">
+                {{searchResults.first}} to {{searchResults.last}} of {{searchResults.count}}
+                <a  v-if="searchResults?.last < searchResults?.count" href="#" @click="searchStore.fetchNextPage()">load more ...</a>
+            </div>
+
         </div>
         
         <div class="right-content">

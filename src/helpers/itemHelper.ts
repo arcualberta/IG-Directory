@@ -1,5 +1,6 @@
 import { search } from "@arcualberta/catfish-ui";
 import { SearchResultFieldMapping } from '../appsettings';
+import config from '../appsettings';
 
 /**
  * Returns the value of a given property from a .
@@ -23,7 +24,7 @@ export function getStringArrayValue(item: search.ResultItem, solrFieldName: stri
 }
 
 export function getConcatenatedStringValue(item: search.ResultItem, solrFieldName: string): string | null {
-    return getStringArrayValue(item, solrFieldName).join(", ");
+    return getStringArrayValue(item, solrFieldName).filter(val => !config.dataAttributes.excludeTerms.includes(val)).join(", ");
 }
 
 export function getName(item: search.ResultItem) {

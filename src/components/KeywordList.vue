@@ -140,7 +140,7 @@
 
             const borderClass = (keywordSelected: boolean) => { return (p.toggle && keywordSelected) ? "highlight" : ""; }
 
-            const isViewable = (value: string) => !config.dataAttributes.excludeKeywords.includes(value);
+            const isViewable = (value: string) => !config.dataAttributes.excludeTerms.includes(value);
 
             return {
                 router,
