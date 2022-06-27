@@ -67,7 +67,7 @@
     </div>
     <div class="related" v-if="index == (totCount -1)">
        {{profileStore.getFirstItem}} to {{profileStore.getLastSearchItem}} of {{profileStore.getTotalItems}}
-      <a href="#" @click="profileStore.fetchNextPage()" > load more ...</a>
+      <a v-if="profileStore.getLastSearchItem < profileStore.getTotalItems" href="#" @click="profileStore.fetchNextPage()" > load more ...</a>
           
      
     </div>
