@@ -5,6 +5,8 @@
     import { default as config } from '../appsettings';
     import { search} from '@arcualberta/catfish-ui';
     import * as itemHelper from '../helpers/itemHelper';
+     import { useProfileStore } from '../store'
+
 
     export default defineComponent({
         name: "ExploreRelatedResearchers",
@@ -13,9 +15,18 @@
                 type: null as PropType<search.ResultItem> | null,
                 required: true
             },
+            totCount:{
+                type: null as PropType<number> | null,
+                required: true
+            },
+            index:{
+                type: null as PropType<number> | null,
+                required: true
+            }
         },
         setup(p) {
             const router = useRouter();
+            const profileStore=useProfileStore();
             return {
                 router,
                 name: computed(() => itemHelper.getName(p.model)),
@@ -30,7 +41,11 @@
                     router.push({ path: "/profile/" + id })
 
                     
-                }
+                },
+                profileStore,
+                lastItem:computed(()=>p.totCount),
+               // totalCount: p.totCount,
+               // idx: p.index
             }
         },
     });
@@ -49,5 +64,11 @@
             <br />
             <span v-if="email">{{email}}</span>
         </div>
+    </div>
+    <div class="related" v-if="index == (totCount -1)">
+       {{profileStore.getFirstItem}} to {{profileStore.getLastSearchItem}} of {{profileStore.getTotalItems}}
+      <a href="#" @click="profileStore.fetchNextPage()" > load more ...</a>
+          
+     
     </div>
 </template>

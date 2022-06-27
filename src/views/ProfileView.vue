@@ -168,7 +168,8 @@
         <div class="explore-related">
             <div class="related-title">Explore related researchers </div>
             <div class="related-scroll">
-                <ExploreRelatedResearchers v-for="item in searchResults.items" :key="item" :model="item" />
+                <ExploreRelatedResearchers v-for="(item, idx) in searchResults.items" :key="item" :model="item" :totCount="searchResults.items.length" :index="idx" />
+              
             </div>
 
             <!--{{JSON.stringify(searchResults.items)}}-->

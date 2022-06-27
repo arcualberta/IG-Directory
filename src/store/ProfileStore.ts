@@ -25,6 +25,15 @@ export const useProfileStore = defineStore('ProfileStore', {
         },
         keywords(): search.SolrQuery.ValueConstraint[] { return this.keywordFieldConstratint.valueConstraints },
 
+        getTotalItems():number{
+            return this.searchResult.count;
+        },
+        getFirstItem():number{
+            return this.searchResult.first;
+        },
+        getLastSearchItem():number{
+            return this.searchResult.last;
+        }
     },
     actions: {
         fetchUserInfo() {
@@ -59,7 +68,7 @@ export const useProfileStore = defineStore('ProfileStore', {
                 });
         },
        fetchData() {
-            console.log("ProfileStore.fetchData called")
+            //console.log("ProfileStore.fetchData called")
             fetchQuery(
                 this.templateId as Guid,
                 this.collectionId as Guid,
@@ -70,6 +79,23 @@ export const useProfileStore = defineStore('ProfileStore', {
                 this.pageSize,
                 this.queryApiUrl as string,
                 (result: search.SearchOutput) => { this.searchResult = result; }
+            )
+        },
+        fetchNextPage() {
+            fetchQuery(
+                this.templateId as Guid,
+                this.collectionId as Guid,
+                this.groupId as Guid,
+                this.solrQueryModel,
+                this.searchText as string,
+                this.searchResult.last,
+                this.pageSize,
+                this.queryApiUrl as string,
+                (result: search.SearchOutput) => {
+                    this.searchResult = result;
+                    this.searchResult.last = result.last
+
+                }
             )
         },
         setActiveProfile(profileId: Guid) {
