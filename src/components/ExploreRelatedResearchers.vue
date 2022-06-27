@@ -5,6 +5,8 @@
     import { default as config } from '../appsettings';
     import { search} from '@arcualberta/catfish-ui';
     import * as itemHelper from '../helpers/itemHelper';
+     import { useProfileStore } from '../store'
+
 
     export default defineComponent({
         name: "ExploreRelatedResearchers",
@@ -29,7 +31,7 @@
                 gotoProfile(id: Guid) {
                     router.push({ path: "/profile/" + id })
 
-                    
+
                 }
             }
         },

@@ -67,11 +67,10 @@
                 showDisability: computed(() => itemHelper.getShowDisability(profile.value)),
                 disability: computed(() => itemHelper.getDisability(profile.value)),
                 showRace: computed(() => itemHelper.getShowRace(profile.value)),
-                personOfColor: computed(() => itemHelper.getPersonOfColor(profile.value)),
+                race: computed(() => itemHelper.getRace(profile.value)),
                 genderIdentity: computed(() => itemHelper.getGenderIdentity(profile.value)),
                 showGenderIdentity: computed(() => itemHelper.getShowGenderIdentity(profile.value)),
                 researchQuestion: computed(() => itemHelper.getResearchQuestion(profile.value)),
-                //additionalKeywords: computed(() => itemHelper.getAdditionalKeywords(profile.value)),
                 communityProjects: computed(() => itemHelper.getCommunityProjects(profile.value)),
                 externalLinks: computed(() => itemHelper.getLinks(profile.value)),
                 showExternalLinks: computed(() => itemHelper.getShowLinks(profile.value)),
@@ -79,6 +78,7 @@
                 pronouns: computed(() => itemHelper.getPronouns(profile.value)),
                 collaborators: computed(() => itemHelper.getCollaborators(profile.value)),
                 consent: computed(() => itemHelper.getConsent(profile.value)),
+                similarityTerms: computed(() => itemHelper.getSimilarityTerms(profile.value)),
                 gotoProfile: (id: string) => router.push({ path: "/profile/" + id }),
                 goToExplore: () => router.push({ path: "/explore/" }),
                 colorList: computed(() => config.hexColorList),
@@ -111,7 +111,7 @@
                     <p class="info-2">
                         Self-identification
                         <br><span v-if="showDisability==='Yes'">Disability:  <span v-if="disability">{{disability}}</span><span v-else> -</span></span>
-                        <br><span v-if="showRace==='Yes'">Race: <span v-if="personOfColor">{{personOfColor}}</span><span v-else> -</span></span>
+                        <br><span v-if="showRace==='Yes'">Race: <span v-if="race">{{race}}</span><span v-else> -</span></span>
                         <br><span v-if="showGenderIdentity==='Yes'">Gender: <span v-if="genderIdentity">{{genderIdentity}}</span><span v-else> -</span></span>
                     </p>
                 </div>
@@ -156,7 +156,6 @@
                 </div>
 
             </div>
-
         </div>
         <div class="right-content-researcher">
             <div>
@@ -169,9 +168,13 @@
             <div class="related-title">Explore related researchers </div>
             <div class="related-scroll">
                 <ExploreRelatedResearchers v-for="item in searchResults.items" :key="item" :model="item" />
+
+                <div class="related">
+                    {{searchResults.first}} to {{searchResults.last}} of {{searchResults.count}}
+                    <a v-if="searchResults?.last < searchResults?.count" href="#" @click="profileStore.fetchNextPage()">load more ...</a>
+                </div>
             </div>
 
-            <!--{{JSON.stringify(searchResults.items)}}-->
         </div>
 
     </div>
