@@ -62,6 +62,11 @@ export const useSearchStore = defineStore('SearchStore', {
         },
         clearKeywordSelection() {
             this.selectedKeywords.forEach(keyword => keyword.selected = false);
+            
+            //clear searchText
+            const fieldConstraint = (this.solrQueryModel.queryConstraints as search.SolrQuery.FieldConstraint[]).find(qc => qc.internalId === "freetext") as search.SolrQuery.FieldConstraint;
+            fieldConstraint.valueConstraints[0].value = "";
+
             this.fetchData();
         },
         ////setFreeTextSearchValue(text: string) {

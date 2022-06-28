@@ -5,7 +5,7 @@
 
     </PopupContainer>
     <div class="left-content">
-        <button class="reset-text" @click="searchStore.clearKeywordSelection()">RESET</button>
+        <button class="reset-text" @click="clearFilter(); searchStore.clearKeywordSelection()">RESET</button>
         <div class="filter-results-text">Filter results by:</div>
         <div class="dropdown">
             <button class="filter-dropdown">Position</button>
@@ -77,13 +77,47 @@
             const searchStore = useSearchStore();
             const questionPopupTrigger = ref(false);
             const searchResults = computed(() => searchStore.searchResult)
-            
+
             onMounted(() => {
                 //console.log("ExploreView.onMounted")
                 if (searchResults.value?.items?.length === 0)
                     searchStore.fetchData();
             })
 
+
+            var posOptions: search.SolrQuery.ValueConstraint[] = (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints;
+            var facOptions: search.SolrQuery.ValueConstraint[] = (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "faculties") as search.SolrQuery.FieldConstraint).valueConstraints;
+            var disabilityOptions = (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:disability") as search.SolrQuery.FieldConstraint).valueConstraints;
+            var giOptions = (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:genderIdentity") as search.SolrQuery.FieldConstraint).valueConstraints;
+            var ethnicityOptions= (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:ethnicity") as search.SolrQuery.FieldConstraint).valueConstraints;
+
+            const clearFilter= () => {
+
+                
+             //   console.log("before reset" + JSON.stringify(posOptions));
+
+                posOptions.forEach(op => op.selected = false);
+                facOptions.forEach(op => op.selected = false);
+                disabilityOptions.forEach(op => op.selected = false);
+                giOptions.forEach(op => op.selected = false);
+                ethnicityOptions.forEach(op => op.selected = false);
+
+              //  console.log("after reset" + JSON.stringify(posOptions));
+
+                //update interface
+                const chkBoxes = Array.from(document.getElementsByTagName("input"));
+                chkBoxes.forEach(chk => {
+                    if (chk.type === 'checkbox')
+                        chk.checked = false
+                 })
+               
+            }
+
+           const positionOptions = computed(() => posOptions);
+            const facultyOptions = computed(() => facOptions);
+            const disability = computed(() => disabilityOptions);
+            const genderIdentity = computed(() => giOptions);
+            const ethnicity = computed(() => ethnicityOptions);
             return {
                 searchStore,
                 searchResults,
@@ -92,13 +126,14 @@
                 questionPopupTrigger,
                 TogglePopup: () => (questionPopupTrigger.value = !questionPopupTrigger.value),
                 selectedKeywords: computed(() => searchStore.selectedKeywords),
-                positionOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints),
-                facultyOptions: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "faculties") as search.SolrQuery.FieldConstraint).valueConstraints),
-                disability: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:disability") as search.SolrQuery.FieldConstraint).valueConstraints),
-                genderIdentity: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:genderIdentity") as search.SolrQuery.FieldConstraint).valueConstraints),
-                ethnicity: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:ethnicity") as search.SolrQuery.FieldConstraint).valueConstraints),
+                positionOptions, //: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "positions") as search.SolrQuery.FieldConstraint).valueConstraints),
+                facultyOptions,//: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "faculties") as search.SolrQuery.FieldConstraint).valueConstraints),
+                disability,//: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:disability") as search.SolrQuery.FieldConstraint).valueConstraints),
+                genderIdentity,//: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:genderIdentity") as search.SolrQuery.FieldConstraint).valueConstraints),
+                ethnicity,//: computed(() => (searchStore.solrQueryModel.queryConstraints.find(qc => qc.internalId === "selfIdentification:ethnicity") as search.SolrQuery.FieldConstraint).valueConstraints),
                 colorList: computed(() => config.hexColorList),
-                questionPopupContent: computed(() => config.questionPopupContent)
+                questionPopupContent: computed(() => config.questionPopupContent),
+                clearFilter
             }
         }
     });
