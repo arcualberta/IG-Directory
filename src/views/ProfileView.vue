@@ -156,8 +156,6 @@
                 </div>
 
             </div>
-
-            {{similarityTerms}}
         </div>
         <div class="right-content-researcher">
             <div>
