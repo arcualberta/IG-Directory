@@ -68,13 +68,13 @@ export const useProfileStore = defineStore('ProfileStore', {
             let queryModel: search.SolrQuery.QueryModel | null = null;
             if (this.keywords.find(kw => kw.selected)) {
                 //At least onekeyword query constraint is enforced. Therefore, use the query model as is
-                queryModel = this.solrQueryModel;
+                queryModel = this.solrQueryModel as search.SolrQuery.QueryModel;
             }
             else {
                 //No keyword is selected in the keyword list, then we need to limit the search result to individuals who are sharing at least
                 //one keyword in the list of keywords available in the keyword list. Otherwise, we will be pulling the entire list of directory
                 //entries in the database as related researchers.
-                queryModel = this.defaultQueryModel;
+                queryModel = this.defaultQueryModel as search.SolrQuery.QueryModel;
             }
 
             fetchQuery(
@@ -94,7 +94,7 @@ export const useProfileStore = defineStore('ProfileStore', {
                 this.templateId as Guid,
                 this.collectionId as Guid,
                 this.groupId as Guid,
-                this.solrQueryModel,
+                this.solrQueryModel as search.SolrQuery.QueryModel,
                 this.searchText as string,
                 this.searchResult.last,
                 this.pageSize,
