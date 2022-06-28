@@ -88,7 +88,7 @@
                 colorList: computed(() => config.hexColorList),
                 formatLinks,
                 imageFile: computed(() => itemHelper.getFileName(profile.value)),
-                imageSource: computed(() => config.dataServiceApiRoot + "items/" + id + "/" + profile.value.rootFormInstaceId + "/"
+                imageSource: computed(() => config.dataServiceApiRoot + "items/" + profile.value.id + "/" + profile.value.rootFormInstaceId + "/"
                     + config.dataAttributes.attachmentFieldId + "/" + itemHelper.getFileName(profile.value)),
                 gotoEdit(id: Guid) {
                     router.push({ path: "/update/" + id })
