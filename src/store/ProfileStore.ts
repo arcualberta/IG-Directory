@@ -63,6 +63,9 @@ export const useProfileStore = defineStore('ProfileStore', {
                 });
         },
         fetchData() {
+            if (!this.activeProfile)
+                return;
+
             console.log("ProfileStore.fetchData called")
 
             let queryModel: search.SolrQuery.QueryModel | null = null;
@@ -76,6 +79,8 @@ export const useProfileStore = defineStore('ProfileStore', {
                 //entries in the database as related researchers.
                 queryModel = this.defaultQueryModel as search.SolrQuery.QueryModel;
             }
+
+            queryModel.excludeIds = [(this.activeProfile as search.ResultItem)?.id];
 
             fetchQuery(
                 this.templateId as Guid,
