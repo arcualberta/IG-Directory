@@ -45,7 +45,7 @@ export function getEmail(item: search.ResultItem) {
 export function getDisability(item: search.ResultItem) {
     return getStringArrayValue(item, SearchResultFieldMapping.DISABILITY).join(", ")
 }
-export function getPersonOfColor(item: search.ResultItem) {
+export function getRace(item: search.ResultItem) {
     return getStringArrayValue(item, SearchResultFieldMapping.RACE).join(", ")
 }
 export function getGenderIdentity(item: search.ResultItem) {
@@ -93,5 +93,10 @@ export function getConsent(item: search.ResultItem) {
 export function getFileName(item: search.ResultItem) {
     return getConcatenatedStringValue(item, SearchResultFieldMapping.FILE_NAME)
 }
+export function getSimilarityTerms(item: search.ResultItem) {
+    return getStringArrayValue(item, SearchResultFieldMapping.SIMILARITY_SOURCE).filter(val => !config.dataAttributes.excludeTerms.includes(val))
+}
+
+
 
 
