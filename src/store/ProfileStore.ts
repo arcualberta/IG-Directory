@@ -72,6 +72,22 @@ export const useProfileStore = defineStore('ProfileStore', {
                 (result: search.SearchOutput) => { this.searchResult = result; }
             )
         },
+        fetchNextPage() {
+            fetchQuery(
+                this.templateId as Guid,
+                this.collectionId as Guid,
+                this.groupId as Guid,
+                this.solrQueryModel,
+                this.searchText as string,
+                this.searchResult.last,
+                this.pageSize,
+                this.queryApiUrl as string,
+                (result: search.SearchOutput) => {
+                    this.searchResult.items = this.searchResult.items.concat(result.items);
+                    this.searchResult.last = result.last
+                }
+            )
+        },
         setActiveProfile(profileId: Guid) {
             this.activeProfile = this.searchResult.items.filter(item => item.id === profileId)[0];
             if (!this.activeProfile) {

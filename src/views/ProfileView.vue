@@ -169,9 +169,13 @@
             <div class="related-title">Explore related researchers </div>
             <div class="related-scroll">
                 <ExploreRelatedResearchers v-for="item in searchResults.items" :key="item" :model="item" />
+
+                <div class="related">
+                    {{searchResults.first}} to {{searchResults.last}} of {{searchResults.count}}
+                    <a v-if="searchResults?.last < searchResults?.count" href="#" @click="profileStore.fetchNextPage()">load more ...</a>
+                </div>
             </div>
 
-            <!--{{JSON.stringify(searchResults.items)}}-->
         </div>
 
     </div>
