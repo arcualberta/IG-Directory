@@ -32,7 +32,11 @@
 
             const loadKeywords = (profileEntry: search.ResultItem) => {
                 const keywordValues = itemHelper.getStringArrayValue(profileEntry, SearchResultFieldMapping.SIMILARITY_SOURCE);
-                profileStore.setKeywords(keywordValues);
+                
+
+                //Pass on the list of keyword values EXCLUDING the list of terms defined in "excludeTerms" in
+                //appsettings.ts configuration into the setKeywords method.
+                profileStore.setKeywords(keywordValues.filter(value => !config.dataAttributes.excludeTerms.includes(value)));
                 profileStore.fetchData();
             }
 

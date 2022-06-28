@@ -140,7 +140,7 @@
 
             const borderClass = (keywordSelected: boolean) => { return (p.toggle && keywordSelected) ? "highlight" : ""; }
 
-            const isViewable = (value: string) => !config.dataAttributes.excludeTerms.includes(value);
+//            const isViewable = (value: string) => !config.dataAttributes.excludeTerms.includes(value);
 
             return {
                 router,
@@ -151,29 +151,20 @@
                 runSearch,
                 keywords: computed(() => p.model),
                 borderClass,
-                isViewable
+//                isViewable
             }
         },
     });
 </script>
 
 <template>
-    <!--<div v-for="(container, cIdx) in keywordQueryModel?.containers" :key="container">
-        <div v-for="(field, fIdx) in container.fields" :key="field"   :class="className? 'row ' + className : 'row keywordContainer'">
-            <span v-for="(value, vIdx) in field.values" :key="value" class="dir-keyword">
-                <button @click="filterByKeyword(cIdx, fIdx, vIdx)" class="dir-keyword-button" ref="dirBtn">{{ value }}</button>
-            </span>
-        </div>
-    </div>-->
     <div class="input-group dir-text-search">
         <input type="text" v-model="freeTextSearchValue" @blur="runSearch()" v-on:keyup.enter="runSearch()" class="form-control rounded" placeholder="searchText" aria-label="Search" aria-describedby="search-addon">
     </div>
-    <!--<div class="row keywordContainer">
-        <span v-for="(keyword) in keywords" :key="keyword" class="dir-keyword">
-            <button @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>-->
     <div class="scrolling-explore">
         <span v-for="keyword in keywords" :key="keyword" class="dir-keyword">
-            <button v-if="isViewable(keyword.value)" @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>
+            <!--<button v-if="isViewable(keyword.value)" @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>-->
+            <button @click="onClickKeyword(keyword)" class="dir-keyword-button" ref="dirBtn" :class="borderClass(keyword.selected)">{{ keyword.value }}</button>
         </span>
     </div>
 
