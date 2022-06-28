@@ -671,8 +671,7 @@ HOME BODY*/
         position: relative;
         margin-top: 25px;
         margin-right: 20px;
-        margin-left: 120px;
-        line-height: 15px;
+        margin-left: 25%;
     }
 .alert-panel {
     padding: 0.01em 16px;
@@ -700,7 +699,6 @@ HOME BODY*/
     /*font-size: 18px;*/
     max-width: 300px;
     font-family: Arial-Bold;
-    line-height: 21px;
     margin-top: 20px;
 }
 
@@ -710,7 +708,6 @@ HOME BODY*/
     float: right;
     /*font-size: 18px;*/
     font-family: Arial-Bold;
-    line-height: 21px;
     max-width:300px;
     margin-top: 20px;
     padding: 17px;
@@ -722,7 +719,6 @@ HOME BODY*/
     /*font-size: 18px;*/
     font-family: Arial-Bold;
     margin-left: 20px;
-    line-height: 17px;
 }
 
 .contact {
