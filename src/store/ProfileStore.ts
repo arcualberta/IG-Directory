@@ -19,6 +19,7 @@ export const useProfileStore = defineStore('ProfileStore', {
         defaultQueryModel: createProfileQueryModel(search.SolrQuery.AggregationOperator.OR),
         activeProfile: null as search.ResultItem | null,
         userInfo: null as UserInfo | null,
+        profileDeleteStatus: "",
   }),
     getters: {
         keywordFieldConstratint(): search.SolrQuery.FieldConstraint {
@@ -146,6 +147,49 @@ export const useProfileStore = defineStore('ProfileStore', {
                 this.keywords[index].selected = true;
                 this.fetchData();
             }
+        },
+        deleteProfile(profileId: Guid) {
+            const api = `${config.dataServiceApiRoot}items/deleteItem/${profileId}`;
+            console.log('Item Delete API: ', api)
+            fetch(api,
+                {
+                    method: "post",
+                    headers: {
+                        //"Content-Type": "multipart/form-data"
+                        "encType": "multipart/form-data"
+                    }
+                }).then(response => {
+                    //response.json()
+                    console.log(response.status)
+                    switch (response.status) {
+                        case 200:
+                            window.location.href = "/";
+                            //alert("TODO: change me to redirect to home page.");
+                            break;
+                        case 401:
+                            this.profileDeleteStatus="Authorization failed."
+                            break;
+                        case 404:
+                            this.profileDeleteStatus ="Item not found."
+                            break;
+                        case 500:
+                            this.profileDeleteStatus ="Internal server error occurred."
+                            break;
+                        default:
+                            this.profileDeleteStatus ="Unknown error occurred."
+                            break;
+                    }
+                })
+                //.then(data => {
+                //    console.log(JSON.stringify(data));
+                //    store.commit(FlattenedFormFiledMutations.REMOVE_FIELD_CONTAINERS);
+                //    //store.commit(Mutations.SET_ITEM, data);
+
+                //})
+                .catch(error => {
+                    console.log("error", error)
+                });
+            
         },
     }
 });
