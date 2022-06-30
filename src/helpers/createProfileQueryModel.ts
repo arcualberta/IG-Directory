@@ -12,6 +12,7 @@ export const createProfileQueryModel = (keywordAggregator: search.SolrQuery.Aggr
     queryModel.appendNewFieldConstraint(
         config.SearchResultFieldMapping.SIMILARITY_SOURCE,
         [],
+        false,
         keywordAggregator,
         "keywords");
 
@@ -19,8 +20,17 @@ export const createProfileQueryModel = (keywordAggregator: search.SolrQuery.Aggr
     queryModel.appendNewFieldConstraint(
         config.SearchResultFieldMapping.FREE_TEXT,
         [],
+        false,
         search.SolrQuery.AggregationOperator.AND,
         "freetext");
+
+    //Filtering by visible status values.
+    queryModel.appendNewFieldConstraint(
+        config.SearchResultFieldMapping.STATE,
+        config.QueryCategoryValues.visibleStates,
+        true,
+        search.SolrQuery.AggregationOperator.OR,
+        "visibleStates");
 
 
     return queryModel;
