@@ -94,7 +94,10 @@
                     router.push({ path: "/update/" + id })
                 },
                 allowEdits: computed(() => profileStore?.userInfo?.roles?.includes("SysAdmin") || profileStore?.userInfo?.userName === itemHelper.getEmail(profile.value)),
-                gotoDelete: () => profileStore.deleteProfile(profile.value.id),
+                gotoDelete: () => {
+                    if (confirm("Do you really want to delete this item?"))
+                        profileStore.deleteProfile(profile.value.id)
+                },
             }
         }
     });

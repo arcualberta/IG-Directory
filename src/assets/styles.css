@@ -1084,4 +1084,9 @@ alert-box {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
+    text-align: center;
+    margin-top: 10px;
+    min-height:30px;
+    width: 49%;
+    margin-left:20px;
 }
