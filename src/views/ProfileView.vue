@@ -113,7 +113,7 @@
                     <img v-if="imageFile" class="results-image" :src="imageSource" />
                     <img v-else class="results-image" src="../assets/user-profile-icon.jpg" />
                     <p class="info-1">
-                        <u>{{name}}<span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
+                        <u>{{name}} <span v-if="showPronouns === 'Yes'"> <span v-if="pronouns">({{pronouns}})</span></span></u>
                         <br><!--<span v-if="ShowPosition==='Yes'">-->{{position}}<!--</span>-->
                         <br>{{organization}}
                         <br>{{email}}
