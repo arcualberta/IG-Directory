@@ -80,7 +80,7 @@
                     if (el) {
                         const style = window.getComputedStyle(el, null).getPropertyValue('font-size');
                         const fontSize = parseFloat(style);
-                        el.style.fontSize = (fontSize + 1) + 'px';
+                        el.style.fontSize = (fontSize + 5) + 'px';
                     }
 
                 },
@@ -89,7 +89,7 @@
                     if (el) {
                         const style = window.getComputedStyle(el, null).getPropertyValue('font-size');
                         const fontSize = parseFloat(style);
-                        el.style.fontSize = (fontSize - 1) + 'px';
+                        el.style.fontSize = (fontSize - 5) + 'px';
                     }
 
                 },
