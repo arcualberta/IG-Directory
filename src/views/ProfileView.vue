@@ -93,18 +93,30 @@
                 gotoEdit(id: Guid) {
                     router.push({ path: "/update/" + id })
                 },
+                allowApprove: computed(() => profileStore?.userInfo?.roles?.includes("SysAdmin")),
                 allowEdits: computed(() => profileStore?.userInfo?.roles?.includes("SysAdmin") || profileStore?.userInfo?.userName === itemHelper.getEmail(profile.value)),
                 gotoDelete: () => {
                     if (confirm("Do you really want to delete this item?"))
                         profileStore.deleteProfile(profile.value.id)
+                },
+                gotoApprove: () => {
+                    if (confirm("Do you really want to Approve this item?"))
+                        profileStore.changeState(profile.value.id,"Approve")
+                },
+                gotoReject: () => {
+                    if (confirm("Do you really want to Reject this item?"))
+                        profileStore.changeState(profile.value.id, "Reject")
                 },
             }
         }
     });
 </script>
 <template>
+    <button v-if="allowApprove" class="approve-btn" @click="gotoApprove(profile.id)">Approve</button>
+    <button v-if="allowApprove" class="reject-btn" @click="gotoReject()">Reject</button>
     <button v-if="allowEdits" class="edit-btn" @click="gotoEdit(profile.id)">Edit</button>
     <button v-if="allowEdits" class="delete-btn" @click="gotoDelete()">Delete</button>
+    
     <div v-if="profileStore.profileDeleteStatus" class="alert-box alert-danger">{{profileStore.profileDeleteStatus}}</div>
     <div class="Profile">
         <div class="background-grey-researcher">
