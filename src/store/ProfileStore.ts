@@ -20,6 +20,7 @@ export const useProfileStore = defineStore('ProfileStore', {
         activeProfile: null as search.ResultItem | null,
         userInfo: null as UserInfo | null,
         profileDeleteStatus: "",
+        profileStatusId:"Submitted",
   }),
     getters: {
         keywordFieldConstratint(): search.SolrQuery.FieldConstraint {
@@ -206,7 +207,7 @@ export const useProfileStore = defineStore('ProfileStore', {
                     console.log(response.status)
                     switch (response.status) {
                         case 200:
-                            window.location.href = "/";
+                            this.profileStatusId="Approved";
                             //alert("TODO: change me to redirect to home page.");
                             break;
                         case 401:

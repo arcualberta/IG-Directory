@@ -93,7 +93,7 @@
                 gotoEdit(id: Guid) {
                     router.push({ path: "/update/" + id })
                 },
-                allowApprove: computed(() => profileStore?.userInfo?.roles?.includes("SysAdmin")),
+                allowApprove: computed(() => profileStore?.userInfo?.roles?.includes("SysAdmin")) && profileStore?.profileStatusId=="Submitted",
                 allowEdits: computed(() => profileStore?.userInfo?.roles?.includes("SysAdmin") || profileStore?.userInfo?.userName === itemHelper.getEmail(profile.value)),
                 gotoDelete: () => {
                     if (confirm("Do you really want to delete this item?"))
