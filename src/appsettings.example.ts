@@ -11,7 +11,7 @@ export default {
         formId: "49a7a1d3-0194-4703-b3d8-747acbf3bbfa",
         collectionId: "79e652d7-bc9e-4a96-c76a-e8896825234a",
         groupId: "08fd74b1-2207-4f7f-9a1c-8450ebc535c9",
-        permissibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985"],
+        permissibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985", "654D0E93-0D14-4E6C-8F4A-98884BC7FB0E"],
         submittedStatus: "e952e454-73f8-4c54-92d9-d11f84ac3985",
         attachmentFieldId: "962b6d6d-e397-4f24-8096-ed1655880af2",
         defaultProfileImage: "../assets/user-profile-icon.jpg",
