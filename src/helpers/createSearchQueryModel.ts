@@ -63,12 +63,10 @@ export const createSearchQueryModel = () => {
     //Filtering by visible status values.
     queryModel.appendNewFieldConstraint(
         config.SearchResultFieldMapping.STATE,
-        config.QueryCategoryValues.visibleStates,
+        config.QueryCategoryValues.publicVisibleStates,
         true,
         search.SolrQuery.AggregationOperator.OR,
         "visibleStates");
 
-
-    
     return queryModel;
 }

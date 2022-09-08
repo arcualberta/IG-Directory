@@ -1,5 +1,6 @@
 import { Guid } from 'guid-typescript';
 
+import * as config from '../appsettings';
 import { search } from '@arcualberta/catfish-ui';
 
 export interface BaseState {
@@ -42,9 +43,17 @@ export const fetchQuery = (
     offset: number,
     pageSize: number,
     queryApiUrl: string,
-    resultCallback: any
+    resultCallback: any,
+    isAdmin: boolean
 ) => {
 
+    if (isAdmin) {
+        //Update the visibleStates property in the query model such that the admin can see
+        //both submitted and approved entries
+        const visibilityConstraint = queryModel.queryConstraints.filter(qc => qc.internalId === "visibleStates")[0] as search.SolrQuery.FieldConstraint;
+        if (visibilityConstraint)
+            visibilityConstraint.setValueConstraints(config.QueryCategoryValues.adminVisibleStates, true);
+    }
 
     const formData = new FormData();
 

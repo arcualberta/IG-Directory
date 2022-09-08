@@ -29,7 +29,9 @@ export const useProfileStore = defineStore('ProfileStore', {
         defaultQueryModelFieldConstratint(): search.SolrQuery.FieldConstraint {
             return this.defaultQueryModel.queryConstraints.find(qc => qc.internalId === "keywords") as search.SolrQuery.FieldConstraint;
         },
-
+        isAdmin(): boolean {
+            return this.userInfo?.roles?.includes("SysAdmin") ? true : false;
+        }
     },
     actions: {
         fetchUserInfo() {
@@ -92,7 +94,8 @@ export const useProfileStore = defineStore('ProfileStore', {
                 this.offset,
                 this.pageSize,
                 this.queryApiUrl as string,
-                (result: search.SearchOutput) => { this.searchResult = result; }
+                (result: search.SearchOutput) => { this.searchResult = result; },
+                this.isAdmin
             )
         },
         fetchNextPage() {
@@ -108,7 +111,8 @@ export const useProfileStore = defineStore('ProfileStore', {
                 (result: search.SearchOutput) => {
                     this.searchResult.items = this.searchResult.items.concat(result.items);
                     this.searchResult.last = result.last
-                }
+                },
+                this.isAdmin
             )
         },
         setActiveProfile(profileId: Guid) {

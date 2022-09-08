@@ -17,7 +17,7 @@ export const useSearchStore = defineStore('SearchStore', {
         resultCount: state => state.searchResult?.items?.length,
         selectedKeywords(): search.SolrQuery.ValueConstraint[] {
             return this.keywords.filter(keyword => keyword.selected)
-        },
+        }
     },
     actions: {
         fetchData() {
@@ -30,7 +30,8 @@ export const useSearchStore = defineStore('SearchStore', {
                 this.offset,
                 this.pageSize,
                 this.queryApiUrl as string,
-                (result: search.SearchOutput) => { this.searchResult = result; }
+                (result: search.SearchOutput) => { this.searchResult = result; },
+                false
             )
         },
         fetchNextPage() {
@@ -47,7 +48,8 @@ export const useSearchStore = defineStore('SearchStore', {
                     this.searchResult.items = this.searchResult.items.concat(result.items);
                     this.searchResult.last = result.last
 
-                }
+                },
+                false
             )
         },
         selectKeyword(index: number) {

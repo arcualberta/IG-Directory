@@ -1,3 +1,6 @@
+
+//  **** IMPORTANT: All letters in GUIDs must be in LOWER CASE ****
+
 export default {
     dataServiceApiRoot: "https://catfish-test.artsrn.ualberta.ca/applets/api/",
     pageServiceApiRoot: "https://catfish-test.artsrn.ualberta.ca/applets/api/",
@@ -67,7 +70,7 @@ export enum QueryCategories {
 
 export const QueryCategoryValues = {
     publicVisibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985"],
-    adminVisibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985", "654D0E93-0D14-4E6C-8F4A-98884BC7FB0E"],
+    adminVisibleStates: ["e952e454-73f8-4c54-92d9-d11f84ac3985", "654d0e93-0d14-4e6c-8f4a-98884bc7Fb0e"],
     Keywords: ["Activism", "Age", "Black studies", "Body", "Canada", "Class", "Colonialism", "Culture", " Decolonization", "Disability",
         "Diversity", "Environment", "Ethics", "Family", "Feminism", "Feminist Theory", "Film", "Gender", "Genderqueer", "Government",
         "Health", "History", "Human Rights", "Identity", "Immigration", "Indigenous", "Inequality", " International", "Intersectionality", "Language", "Law", "Literature", "Marginalized population", "Masculinities", "Media", "Mental health", " Mothering",
