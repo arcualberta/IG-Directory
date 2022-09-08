@@ -206,7 +206,7 @@ export const useProfileStore = defineStore('ProfileStore', {
                     console.log(response.status)
                     switch (response.status) {
                         case 200:
-                            this.profileDeleteStatus="";
+                            window.location.reload();
                             //alert("TODO: change me to redirect to home page.");
                             break;
                         case 401:
